@@ -13,6 +13,7 @@ class WebSheet {
     public height:number;
     public sheets:Sheet[]=[];
 
+    public static SheetTitleHeight:number=30;
 
     constructor(element:HTMLElement){
         this.element = element;
@@ -89,38 +90,38 @@ class WebSheet {
         let tabActiveStroke = '#327bcc';
 
         context.strokeStyle=tabStroke;
-        context.rect(0,this.height-30,this.width,30);
+        context.rect(0,this.height-WebSheet.SheetTitleHeight,this.width,WebSheet.SheetTitleHeight);
         context.fillStyle=tabBar;
-        context.fillRect(0,this.height-30,this.width,30);
+        context.fillRect(0,this.height-WebSheet.SheetTitleHeight,this.width,WebSheet.SheetTitleHeight);
         context.fillStyle=tabFill;
 
-        let x=30;
+        let x=WebSheet.SheetTitleHeight;
         for(let i in this.sheets){
             let sheet = this.sheets[i];
             let width = context.get_textWidth(sheet.title);
 
             context.strokeStyle = tabStroke;
             context.strokeSize=1;
-            context.rect(x,this.height-30,width + 30,25);
-            context.fillRect(x,this.height-30,width + 30,25);
+            context.rect(x,this.height-WebSheet.SheetTitleHeight,width + WebSheet.SheetTitleHeight,WebSheet.SheetTitleHeight-5);
+            context.fillRect(x,this.height-WebSheet.SheetTitleHeight,width + WebSheet.SheetTitleHeight,WebSheet.SheetTitleHeight-5);
 
             if(sheet.active){
                 sheet.render(context);
                 context.fontStyle='bold';
 
                 context.strokeStyle =tabFill;
-                context.line(x,this.height-30,width + 60,this.height-30);
+                context.line(x,this.height-WebSheet.SheetTitleHeight,width + (2*WebSheet.SheetTitleHeight),this.height-WebSheet.SheetTitleHeight);
 
                 context.strokeStyle =tabActiveStroke;
                 context.strokeSize = 2;
-                context.line(x,this.height-5,width + 60,this.height-5);
+                context.line(x,this.height-5,width + (2*WebSheet.SheetTitleHeight),this.height-5);
             }else{
                 context.fontStyle='';
             }
 
             context.textAlign=TextAlignment.Center;
-            context.fillText(sheet.title,x,this.height-26,width + 30) ;
-            x+=width + 35;
+            context.fillText(sheet.title,x,this.height-WebSheet.SheetTitleHeight+4,width + WebSheet.SheetTitleHeight) ;
+            x+=width + WebSheet.SheetTitleHeight + 5;
         }
 
 
