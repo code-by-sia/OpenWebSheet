@@ -1,0 +1,87 @@
+#wrapper {
+    position: absolute;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: solid 1px #327bcc;
+    font-family:"Segoe UI";
+    font-size: 12px;
+}
+
+#wrapper #header {
+    height: 30px;
+    background: #fafafa;
+}
+
+#wrapper #header h1{
+    font-size: 10px;
+    font-weight:normal;
+    line-height: 30px;
+    text-align: center;
+    color: #333;
+}
+
+#wrapper #toolbar {
+    border-bottom: solid thin #ccc;
+    height: 140px;
+    background: #fafafa;
+}
+
+#wrapper #toolbar .menu {
+    list-style: none;
+    border-bottom: solid thin #ccc;
+    height: 30px;
+}
+#wrapper #toolbar .menu-content {
+    background: #fff;
+    height: 109px;
+}
+#wrapper #toolbar .menu > li {
+    display: inline-block;
+    margin: 0 5px;
+    width: 120px;
+    text-align: center;
+}
+#wrapper #toolbar .menu li:first-child{
+    border:solid thin #327bcc;
+    background: #32a2cc;
+    margin: 0 0 0 5px;
+}
+#wrapper #toolbar .menu li:first-child a{
+    font-weight: bold;
+    color: #ffffff;
+}
+#wrapper #toolbar .menu li.active{
+    background: #ffffff;
+    border: solid thin #ccc;
+    border-bottom: solid thin #ffffff;
+}
+#wrapper #toolbar .menu li.active a{
+    font-weight:bold;
+}
+
+#wrapper #toolbar .menu > li a {
+    text-decoration: none;
+    color: #333;
+    line-height: 29px;
+}
+
+#wrapper #content {
+    background: #fff;
+    position: absolute;
+    bottom: 30px;
+    top:171px;
+    left: 0;
+    right: 0;
+}
+
+#wrapper #footer {
+    position: absolute;
+    left:0;
+    bottom: 0;
+    right: 0;
+    height: 30px;
+    background: #32a2cc;
+
+}
