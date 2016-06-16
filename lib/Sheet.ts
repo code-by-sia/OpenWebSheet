@@ -23,9 +23,12 @@ class Column extends Cell {
     public static DefaultWidth:number=100;
     public static HeaderHeight:number=30;
 
+    public width:number ;
+
     constructor(sheet:Sheet,id:number){
         super(sheet,id,0);
         this.value = Column.get_columnName(id);
+        this.width = Column.DefaultWidth;
     }
 
     static get_columnName(column) {
@@ -41,8 +44,15 @@ class Column extends Cell {
         return columnString;
     }
 
-    render(context:Context){
-
+    paint(context:Context,left:number){
+        context.strokeSize=1;
+        context.strokeStyle='#ccc';
+        context.fillStyle='#fafafa';
+        context.fontName='Tahoma';
+        context.fontSize=12;
+        context.rect(left,0,this.width,Column.HeaderHeight);
+        context.fillRect(left,0,this.width,Column.HeaderHeight);
+        context.fillText(this.value,left,7,this.width);
     }
 }
 
@@ -59,7 +69,7 @@ class Row extends  Cell {
         this.height = Row.DefaultHeight;
     }
 
-    render(context:Context,top:number){
+    paint(context:Context,top:number){
         context.strokeSize=1;
         context.fillStyle='#fafafa';
         context.rect(0,top,Row.HeaderWidth,this.height);
@@ -79,7 +89,7 @@ class Sheet {
     public rows:Row[]=[];
     public cells:Cell[][]=[[]];
     public top:number=1;
-    public left:number=1;
+    public left:number=0;
     private right:number;
     private bottom:number;
 
@@ -92,6 +102,15 @@ class Sheet {
             return this.rows[rowId];
         }else{
             return new Row(this,rowId);
+        }
+    }
+
+
+    getColumn(columnId:number):Column{
+        if(this.columns[columnId]){
+            return this.columns[columnId];
+        }else{
+            return new Column(this,columnId);
         }
     }
 
@@ -118,13 +137,21 @@ class Sheet {
         let bottom = this.top;
         for(let rw=this.top;cumulativeHeight<=height;rw++){
             let row = this.getRow(rw);
-            row.render(context,cumulativeHeight);
+            row.paint(context,cumulativeHeight);
             cumulativeHeight+=row.height;
         }
     }
 
     renderColumns(context:Context){
+        let width = this.websheet.width;
+        let cumulativeWidth = Row.HeaderWidth + .5;
 
+        for(let cl=this.left;cumulativeWidth<=width;cl++){
+            let column = this.getColumn(cl);
+            column.paint(context,cumulativeWidth);
+            cumulativeWidth += column.width;
+            this.right=cl;
+        }
     }
 
     renderCells(context:Context){
