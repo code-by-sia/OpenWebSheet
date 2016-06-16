@@ -65,6 +65,7 @@
     text-decoration: none;
     color: #333;
     line-height: 29px;
+    text-transform: uppercase;
 }
 
 #wrapper #content {
