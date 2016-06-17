@@ -13,7 +13,7 @@ class Cell {
     public textFill='#000';
     public textAlign=TextAlignment.Left;
 
-    constructor(private sheet:Sheet,public columnId:number, public rowId:number){
+    constructor(public sheet:Sheet,public columnId:number, public rowId:number){
 
     }
 
@@ -72,6 +72,10 @@ class Column extends Cell {
         context.fillRect(left,0,this.width,Column.HeaderHeight-1);
         context.fillText(this.value,left,7,this.width);
     }
+
+    save(){
+        this.sheet.columns[this.columnId]=this;
+    }
 }
 
 class Row extends  Cell {
@@ -97,6 +101,10 @@ class Row extends  Cell {
         context.textAlign=TextAlignment.Center;
 
         context.fillText(this.value,0,top + (Row.DefaultHeight-12)/2,Row.HeaderWidth );
+    }
+
+    save(){
+        this.sheet.rows[this.rowId]=this;
     }
 }
 
@@ -169,7 +177,8 @@ class Sheet {
         let height = this.websheet.height - Row.HeaderWidth;// - WebSheet.SheetTitleHeight;
         let cumulativeHeight = Row.DefaultHeight;
         this.bottom = this.top;
-        for(let rw=this.top;cumulativeHeight<=height;rw++){
+        let rw= this.top;
+        for(;cumulativeHeight<=height;rw++){
             let row = this.getRow(rw);
             row.paint(context,cumulativeHeight);
             cumulativeHeight+=row.height;
@@ -180,13 +189,13 @@ class Sheet {
     renderColumns(context:Context){
         let width = this.websheet.width;
         let cumulativeWidth = Row.HeaderWidth + .5;
-
-        for(let cl=this.left;cumulativeWidth<=width;cl++){
+        let cl = this.left;
+        for(cl=this.left;cumulativeWidth<=width;cl++){
             let column = this.getColumn(cl);
             column.paint(context,cumulativeWidth);
             cumulativeWidth += column.width;
-            this.right=cl;
         }
+        this.right=cl;
     }
 
     renderCells(context:Context){
@@ -195,13 +204,12 @@ class Sheet {
 
         let cellsToPaint = [];
 
-        context.strokeStyle='#fafafa';
+        context.strokeStyle='#eee';
         context.strokeSize=1;
-        for(let r=this.left;r<this.right;r++){
+        for(let r=this.left;r<=this.bottom;r++){
             let row = this.getRow(r);
             x=0;
-            for(let c=this.top;c<this.bottom;c++){
-
+            for(let c=this.left;c<=this.right;c++){
                 let column = this.getColumn(c);
                 if(this.isCellExists(c,r)){
                     let cell = this.getCell(c,r);
@@ -209,9 +217,10 @@ class Sheet {
                        x,y,cell
                     });
                 }
-                context.line(x + Row.HeaderWidth ,y+row.height,x+ Row.HeaderWidth+column.width,y+row.height);
-                context.line(x + Row.HeaderWidth +  column.width ,y,x+Row.HeaderWidth + column.width,y+row.height);
-
+                if(y>0){
+                    context.line(x + Row.HeaderWidth ,y+row.height,x+ Row.HeaderWidth+column.width,y+row.height);
+                    context.line(x + Row.HeaderWidth +  column.width ,y,x+Row.HeaderWidth + column.width,y+row.height);
+                }
                 x+= column.width;
             }
             y+=row.height;

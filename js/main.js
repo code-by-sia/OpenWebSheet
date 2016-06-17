@@ -10,6 +10,15 @@ $(document).ready(function () {
     cell.value="Test Data";
     cell.save();
 
+
+    var col_B = sheet.getColumn(1);
+    col_B.width=150;
+    col_B.save();
+
+    var row_2 = sheet.getRow(2);
+    row_2.height=40;
+    row_2.save();
+
     window.websheet = websheet;
 
 
