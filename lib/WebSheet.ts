@@ -5,7 +5,6 @@
  */
 class WebSheet {
 
-    private element:HTMLElement;
     private canvas:HTMLCanvasElement;
     private renderId:number=0;
 
@@ -15,8 +14,7 @@ class WebSheet {
 
     public static SheetTitleHeight:number=30;
 
-    constructor(element:HTMLElement){
-        this.element = element;
+    constructor(public element:HTMLElement){
         this.initialize();
     }
 
@@ -45,6 +43,14 @@ class WebSheet {
         this.element.appendChild(this.canvas);
     }
 
+    setActiveSheet(sheet:Sheet){
+        for(let i=0;i<this.sheets.length;i++){
+                this.sheets[i].active  =(this.sheets[i]==sheet)
+        }
+
+        this.render();
+    }
+
     resize() {
         let pixelRatio = window.devicePixelRatio;
         this.width = this.element.clientWidth;
@@ -57,6 +63,16 @@ class WebSheet {
         }else{
             this.canvas.width=this.width;
             this.canvas.height = this.height;
+        }
+        this.render();
+    }
+
+    getActiveSheet(){
+        for(let i=0;i<this.sheets.length;i++){
+            if(this.sheets[i].active)
+            {
+                return this.sheets[i];
+            }
         }
     }
 
@@ -100,21 +116,29 @@ class WebSheet {
             let sheet = this.sheets[i];
             let width = context.get_textWidth(sheet.title);
 
+
             context.strokeStyle = tabStroke;
             context.strokeSize=1;
-            context.rect(x,this.height-WebSheet.SheetTitleHeight,width + WebSheet.SheetTitleHeight,WebSheet.SheetTitleHeight-5);
-            context.fillRect(x,this.height-WebSheet.SheetTitleHeight,width + WebSheet.SheetTitleHeight,WebSheet.SheetTitleHeight-5);
+
+            let x1= x;
+            let y1 = this.height-WebSheet.SheetTitleHeight;
+            let rWidth = width + WebSheet.SheetTitleHeight;
+            let rHeight = WebSheet.SheetTitleHeight-5;
+
+            context.rect(x1,y1,rWidth,rHeight);
+            context.fillRect(x1,y1,rWidth,rHeight);
+
+            sheet.tabWidth = rWidth;
 
             if(sheet.active){
                 sheet.render(context);
                 context.fontStyle='bold';
-
                 context.strokeStyle =tabFill;
-                context.line(x,this.height-WebSheet.SheetTitleHeight,width + (2*WebSheet.SheetTitleHeight),this.height-WebSheet.SheetTitleHeight);
+                context.line(x1,y1,x1+rWidth,y1);
 
                 context.strokeStyle =tabActiveStroke;
                 context.strokeSize = 2;
-                context.line(x,this.height-5,width + (2*WebSheet.SheetTitleHeight),this.height-5);
+                context.line(x1,y1+rHeight,x1+rWidth,y1+rHeight);
             }else{
                 context.fontStyle='';
             }

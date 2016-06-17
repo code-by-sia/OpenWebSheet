@@ -21,5 +21,7 @@ $(document).ready(function () {
 
     window.websheet = websheet;
 
+    var uiControler = new UIHandlerControler(websheet);
+
 
 });

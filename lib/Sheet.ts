@@ -118,9 +118,30 @@ class Sheet {
     public left:number=0;
     private right:number;
     private bottom:number;
+    public tabWidth:number;
 
     constructor(private websheet:WebSheet){
 
+    }
+
+    scrollLeft(){
+        if(this.left>0){
+            this.left--;
+        }
+    }
+
+    scrollRight(){
+        this.left++;
+    }
+
+    scrollUp(){
+        if(this.top>1){
+            this.top--;
+        }
+    }
+
+    scrollDown(){
+        this.top++;
     }
 
     isCellExists(columnId:number,rowId:number){
