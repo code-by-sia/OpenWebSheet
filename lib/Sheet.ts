@@ -1,4 +1,5 @@
 ///<reference path="WebSheet.ts"/>
+import Collator = Intl.Collator;
 /**
  * Created by SiamandM on 6/16/2016.
  */
@@ -8,13 +9,30 @@ class Cell {
     public value:string;
     public rowSpan:number=1;
     public colSpan:number=1;
+    public fill= '#fff';
+    public textFill='#000';
+    public textAlign=TextAlignment.Left;
 
     constructor(private sheet:Sheet,public columnId:number, public rowId:number){
 
     }
 
-    public render(context:Context){
+    public paintCell(context:Context,x:number,y:number){
+        let column = this.sheet.getColumn(this.columnId);
+        let row = this.sheet.getRow(this.rowId);
 
+        context.fillStyle=this.fill;
+        context.strokeStyle = this.textFill;
+        context.textAlign=this.textAlign;
+        //context.rect(x+Column.HeaderHeight , y+ Row.HeaderWidth ,column.width,row.height);
+        context.fillText(this.value,x+Column.HeaderHeight + 5,y+Row.HeaderWidth + 7,column.width);
+    }
+
+    save(){
+        if(!this.sheet.cells[this.columnId]){
+            this.sheet.cells[this.columnId]=[];
+        }
+        this.sheet.cells[this.columnId][this.rowId]=this;
     }
 }
 
@@ -50,8 +68,8 @@ class Column extends Cell {
         context.fillStyle='#fafafa';
         context.fontName='Tahoma';
         context.fontSize=12;
-        context.rect(left,0,this.width,Column.HeaderHeight);
-        context.fillRect(left,0,this.width,Column.HeaderHeight);
+        context.rect(left,0,this.width,Column.HeaderHeight-1);
+        context.fillRect(left,0,this.width,Column.HeaderHeight-1);
         context.fillText(this.value,left,7,this.width);
     }
 }
@@ -97,6 +115,22 @@ class Sheet {
 
     }
 
+    isCellExists(columnId:number,rowId:number){
+        if(this.cells[columnId]){
+            if(this.cells[columnId][rowId]){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    getCell(columnId:number,rowId:number){
+        if(this.isCellExists(columnId,rowId)){
+            return this.cells[columnId][rowId];
+        }
+        return new Cell(this,columnId,rowId);
+    }
+
     getRow(rowId:number):Row{
         if(this.rows[rowId]){
             return this.rows[rowId];
@@ -134,11 +168,12 @@ class Sheet {
     renderRows(context:Context){
         let height = this.websheet.height - Row.HeaderWidth;// - WebSheet.SheetTitleHeight;
         let cumulativeHeight = Row.DefaultHeight;
-        let bottom = this.top;
+        this.bottom = this.top;
         for(let rw=this.top;cumulativeHeight<=height;rw++){
             let row = this.getRow(rw);
             row.paint(context,cumulativeHeight);
             cumulativeHeight+=row.height;
+            this.bottom = rw;
         }
     }
 
@@ -155,6 +190,37 @@ class Sheet {
     }
 
     renderCells(context:Context){
+        let x:number=0;
+        let y:number=0;
+
+        let cellsToPaint = [];
+
+        context.strokeStyle='#fafafa';
+        context.strokeSize=1;
+        for(let r=this.left;r<this.right;r++){
+            let row = this.getRow(r);
+            x=0;
+            for(let c=this.top;c<this.bottom;c++){
+
+                let column = this.getColumn(c);
+                if(this.isCellExists(c,r)){
+                    let cell = this.getCell(c,r);
+                    cellsToPaint.push({
+                       x,y,cell
+                    });
+                }
+                context.line(x + Row.HeaderWidth ,y+row.height,x+ Row.HeaderWidth+column.width,y+row.height);
+                context.line(x + Row.HeaderWidth +  column.width ,y,x+Row.HeaderWidth + column.width,y+row.height);
+
+                x+= column.width;
+            }
+            y+=row.height;
+        }
+
+        for(let i=0;i<cellsToPaint.length;i++){
+            let p = cellsToPaint[i];
+            p.cell.paintCell(context,p.x,p.y);
+        }
 
     }
 
