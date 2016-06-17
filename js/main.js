@@ -6,7 +6,7 @@ $(document).ready(function () {
     var websheet = new WebSheet(el);
     var sheet = websheet.sheets[0];
 
-    var cell = sheet.getCell(3,4);
+    var cell = sheet.getCell(1,4);
     cell.value="Test Data";
     cell.save();
 
@@ -15,7 +15,7 @@ $(document).ready(function () {
     col_B.width=150;
     col_B.save();
 
-    var row_2 = sheet.getRow(2);
+    var row_2 = sheet.getRow(5);
     row_2.height=40;
     row_2.save();
 

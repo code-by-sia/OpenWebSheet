@@ -227,7 +227,7 @@ class Sheet {
 
         context.strokeStyle='#eee';
         context.strokeSize=1;
-        for(let r=this.left;r<=this.bottom;r++){
+        for(let r=this.top-1;r<=this.bottom;r++){
             let row = this.getRow(r);
             x=0;
             for(let c=this.left;c<=this.right;c++){
