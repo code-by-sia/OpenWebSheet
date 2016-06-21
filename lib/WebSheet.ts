@@ -116,7 +116,7 @@ class WebSheet {
             let sheet = this.sheets[i];
             let width = context.get_textWidth(sheet.title);
 
-
+            context.fillStyle = tabFill;
             context.strokeStyle = tabStroke;
             context.strokeSize=1;
 

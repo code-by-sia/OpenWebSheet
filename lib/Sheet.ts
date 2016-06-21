@@ -3,28 +3,94 @@ import Collator = Intl.Collator;
 /**
  * Created by SiamandM on 6/16/2016.
  */
+enum BorderSize{
+    None,
+    Thin,
+    Thick
+}
+class TextStyle{
+    public fontName:string=null;
+    public fontSize:number=null;
+    public fill=null;
+    public textAlign:TextAlignment=null;
+}
+
+class BorderStyle {
+    public borderSize:BorderSize=null;
+    public strokeFill=null;
+}
+
 class Cell {
 
-    public fontName:string;
-    public value:string;
+    public value:string="";
     public rowSpan:number=1;
     public colSpan:number=1;
-    public fill= '#fff';
-    public textFill='#000';
-    public textAlign=TextAlignment.Left;
+
+    public textStyle:TextStyle=null;
+    public verticalBorder:BorderStyle=null;
+    public horizontalBorder:BorderStyle=null;
+    public fill=null;
 
     constructor(public sheet:Sheet,public columnId:number, public rowId:number){
 
+    }
+
+    public getColumn(){
+        return this.sheet.getColumn(this.columnId);
+    }
+
+    public getRow(){
+        return this.sheet.getRow(this.rowId);
+    }
+
+    public getFill(){
+        if(this.fill != null)return this.fill;
+        let col = this.getColumn();
+        if(col.fill!=null)return col.fill;
+        let row = this.getRow();
+        if(row.fill != null)return row.fill;
+        return this.sheet.fill;
+    }
+
+    public getTextStyle(){
+        if(this.textStyle!=null)return this.textStyle;
+        let col = this.getColumn();
+        if(col.textStyle != null)return col.textStyle;
+        let row = this.getRow();
+        if(row.textStyle != null)return row.textStyle;
+        return this.sheet.textStyle;
+    }
+
+    public getHorizontalBorderStyle(){
+        if(this.horizontalBorder!=null)return this.horizontalBorder;
+        let col = this.getColumn();
+        if(col.horizontalBorder!=null)return col.horizontalBorder;
+        let row = this.getRow();
+        if(row.horizontalBorder!=null)return row.horizontalBorder;
+        return this.sheet.horizontalBorder;
+    }
+
+    public getVerticalBorderStyle(){
+        if(this.verticalBorder!=null)return this.verticalBorder;
+        let col = this.getColumn();
+        if(col.verticalBorder!=null)return col.verticalBorder;
+        let row = this.getRow();
+        if(row.verticalBorder!=null)return row.verticalBorder;
+        return this.sheet.verticalBorder;
     }
 
     public paintCell(context:Context,x:number,y:number){
         let column = this.sheet.getColumn(this.columnId);
         let row = this.sheet.getRow(this.rowId);
 
-        context.fillStyle=this.fill;
-        context.strokeStyle = this.textFill;
-        context.textAlign=this.textAlign;
-        //context.rect(x+Column.HeaderHeight , y+ Row.HeaderWidth ,column.width,row.height);
+        let fill = this.getFill();
+        let textStyle = this.getTextStyle();
+
+        context.fillStyle=fill;
+        context.fillRect(x+Column.HeaderHeight , y+ Row.HeaderWidth ,column.width,row.height);
+        context.fillStyle = textStyle.fill;
+        context.strokeStyle = textStyle.fill;
+        context.textAlign= textStyle.textAlign;
         context.fillText(this.value,x+Column.HeaderHeight + 5,y+Row.HeaderWidth + 7,column.width);
     }
 
@@ -120,8 +186,26 @@ class Sheet {
     private bottom:number;
     public tabWidth:number;
 
-    constructor(private websheet:WebSheet){
+    public textStyle:TextStyle=null;
+    public verticalBorder:BorderStyle=null;
+    public horizontalBorder:BorderStyle=null;
+    public fill=null;
 
+    constructor(private websheet:WebSheet){
+        this.textStyle = new TextStyle();
+        this.textStyle.fill='#000';
+        this.textStyle.fontName='Tahoma';
+        this.textStyle.textAlign=TextAlignment.Left;
+
+        this.verticalBorder = new BorderStyle();
+        this.verticalBorder.borderSize=BorderSize.None;
+        this.verticalBorder.strokeFill = '#eee';
+
+        this.horizontalBorder = new BorderStyle();
+        this.horizontalBorder.borderSize=BorderSize.None;
+        this.horizontalBorder.strokeFill = '#eee';
+
+        this.fill = '#fff';
     }
 
     scrollLeft(){
@@ -232,14 +316,15 @@ class Sheet {
             x=0;
             for(let c=this.left;c<=this.right;c++){
                 let column = this.getColumn(c);
-                if(this.isCellExists(c,r)){
-                    let cell = this.getCell(c,r);
-                    cellsToPaint.push({
-                       x,y,cell
-                    });
-                }
+                let cell = this.getCell(c,r);
+
+                cell.paintCell(context,x,y);
                 if(y>0){
+                    let horStyle = cell.getHorizontalBorderStyle();
+                    let verStyle = cell.getVerticalBorderStyle();
+                    context.strokeStyle = horStyle.strokeFill;
                     context.line(x + Row.HeaderWidth ,y+row.height,x+ Row.HeaderWidth+column.width,y+row.height);
+                    context.strokeStyle = verStyle.strokeFill;
                     context.line(x + Row.HeaderWidth +  column.width ,y,x+Row.HeaderWidth + column.width,y+row.height);
                 }
                 x+= column.width;
@@ -247,10 +332,6 @@ class Sheet {
             y+=row.height;
         }
 
-        for(let i=0;i<cellsToPaint.length;i++){
-            let p = cellsToPaint[i];
-            p.cell.paintCell(context,p.x,p.y);
-        }
 
     }
 
