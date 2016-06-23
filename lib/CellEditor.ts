@@ -7,6 +7,7 @@ class CellEditor {
     websheet:WebSheet;
     editorArea:HTMLDivElement;
     selectionElement:HTMLElement;
+    editorElement:HTMLDivElement;
 
 
     constructor(public controler:UIHandlerControler){
@@ -31,12 +32,26 @@ class CellEditor {
         this.selectionElement.style.position='absolute';
         this.selectionElement.style.border='solid 2px #33f';
         this.selectionElement.style.background='rgba(0,0,0,.1)';
-
-
-
         this.editorArea.appendChild(this.selectionElement);
+
+        this.editorElement = document.createElement('div');
+        this.editorElement.contentEditable='true';
+        this.editorElement.style.zIndex='10000';
+        this.editorElement.style.position='absolute';
+        this.editorElement.style.background='#fff';
+        this.selectionElement.appendChild(this.editorElement);
     }
 
+    public save(){
+        let sheet = this.controler.websheet.getActiveSheet();
+        let cell = sheet.getCell(sheet.selection.columnId,sheet.selection.rowId);
+        let text = this.editorElement.innerText;
+        if(text != ""){
+            cell.value = text;
+            cell.save();
+            this.controler.websheet.render();
+        }
+    }
 
     public select(sheet:Sheet){
         let selection=  sheet.selection;
@@ -49,10 +64,22 @@ class CellEditor {
         let w = x2 - x1;
         let h= y2 - y1;
 
-        this.selectionElement.style.left= (x1 -1) +  'px';
-        this.selectionElement.style.top=(y1-1) + 'px';
+        this.selectionElement.style.left= (x1 -2) +  'px';
+        this.selectionElement.style.top=(y1-2) + 'px';
         this.selectionElement.style.width=(w-2) + 'px';
         this.selectionElement.style.height = (h-2) + 'px';
+
+
+        let selectedCell = sheet.getCell(selection.columnId,selection.rowId);
+        let editorY = sheet.getRowTop(selection.rowId) ;
+        let editorX = sheet.getColumnLeft(selection.columnId) ;
+
+        this.editorElement.style.left = (editorX- x1) + 'px';
+        this.editorElement.style.top= (editorY- y1) + 'px';
+        this.editorElement.style.width = (selectedCell.getWidth() -2)+ 'px';
+        this.editorElement.style.height = (selectedCell.getHeight()-2) + 'px';
+        this.editorElement.style.background = selectedCell.getFill();
+        this.editorElement.innerText = selectedCell.value;
     }
 
 }

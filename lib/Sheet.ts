@@ -43,6 +43,22 @@ class Cell {
         return this.sheet.getRow(this.rowId);
     }
 
+    public getWidth(){
+        let result = 0;
+        for(let i=0;i<this.colSpan;i++){
+            result += this.sheet.getColumnWidth(i + this.columnId);
+        }
+        return result;
+    }
+
+    public getHeight(){
+        let result = 0;
+        for(let i=0;i<this.rowSpan;i++){
+            result += this.sheet.getRowHeight(i + this.rowId);
+        }
+        return result;
+    }
+
     public getFill(){
         if(this.fill != null)return this.fill;
         let col = this.getColumn();
@@ -80,18 +96,24 @@ class Cell {
     }
 
     public paintCell(context:Context,x:number,y:number){
+        if(this.rowId<1 || this.columnId < 0){
+            return;
+        }
         let column = this.sheet.getColumn(this.columnId);
         let row = this.sheet.getRow(this.rowId);
 
         let fill = this.getFill();
         let textStyle = this.getTextStyle();
 
+        let left = x + Column.HeaderHeight + .5;
+        if(y < Row.DefaultHeight)return;
+
         context.fillStyle=fill;
-        context.fillRect(x+Column.HeaderHeight+.5, y+ Row.HeaderWidth ,column.width-.5,row.height);
+        context.fillRect(left, y ,column.width-.5,row.height);
         context.fillStyle = textStyle.fill;
         context.strokeStyle = textStyle.fill;
         context.textAlign= textStyle.textAlign;
-        context.fillText(this.value,x+Column.HeaderHeight + 5,y+Row.HeaderWidth + 7,column.width);
+        context.fillText(this.value,x+Column.HeaderHeight + 5,y+ 7,column.width);
     }
 
     save(){
@@ -179,6 +201,9 @@ class CellSelection {
     public top:number;
     public right:number;
     public bottom:number;
+
+    public rowId:number;
+    public columnId:number;
 }
 
 class Sheet {
@@ -221,6 +246,23 @@ class Sheet {
         this.selection.left=0;
         this.selection.right=0;
         this.selection.bottom=1;
+        this.selection.rowId=1;
+        this.selection.columnId=0;
+    }
+
+    getColumnWidth(columnId:number){
+        if(this.columns[columnId])
+        {
+            return this.columns[columnId].width;
+        }
+        return Column.DefaultWidth;
+    }
+
+    getRowHeight(rowId:number){
+        if(this.rows[rowId]){
+            return this.rows[rowId].height;
+        }
+        return Row.DefaultHeight;
     }
 
     getColumnLeft(columnId:number){
@@ -316,7 +358,8 @@ class Sheet {
         this.selection.bottom = this.findRowIdByY(bottom);
         this.selection.left = this.findColumnIdByX(left);
         this.selection.right = this.findColumnIdByX(right);
-
+        this.selection.rowId = this.findRowIdByY(y1);
+        this.selection.columnId= this.findColumnIdByX(x1);
     }
 
     scrollLeft(){
@@ -422,6 +465,7 @@ class Sheet {
 
         context.strokeStyle='#eee';
         context.strokeSize=1;
+
         for(let r=this.top-1;r<=this.bottom;r++){
             let row = this.getRow(r);
             x=0;

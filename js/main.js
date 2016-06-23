@@ -15,6 +15,10 @@ $(document).ready(function () {
     cell2.fill ='#ccc';
     cell2.save();
 
+    var cell3=  sheet.getCell(0,1);
+    cell3.value="0,0";
+    cell3.save();
+
 
     var col_B = sheet.getColumn(1);
     col_B.width=150;

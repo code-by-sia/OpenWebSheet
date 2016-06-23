@@ -114,12 +114,12 @@ class SheetUIHandler extends  UIHandler{
 
     mouseUp(x,y){
 
-
         let sheet= this.controler.websheet.getActiveSheet();
         let x1= this.oldX - Row.HeaderWidth;
         let y1= this.oldY - Column.HeaderHeight;
         let x2=x - Row.HeaderWidth;
         let y2=y - Column.HeaderHeight;
+        this.controler.cellEditor.save();
         sheet.selectByXY(x1,y1,x2,y2);
         this.controler.cellEditor.select(sheet);
     }
