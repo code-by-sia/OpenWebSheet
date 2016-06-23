@@ -14,7 +14,7 @@ class CellEditor {
         this.websheet = controler.websheet;
 
         this.initialize();
-        this.select(this.websheet.getActiveSheet());
+        this.select();
 
     }
 
@@ -32,6 +32,7 @@ class CellEditor {
         this.selectionElement.style.position='absolute';
         this.selectionElement.style.border='solid 2px #33f';
         this.selectionElement.style.background='rgba(0,0,0,.1)';
+        this.selectionElement.style.transitionDuration='.1s';
         this.editorArea.appendChild(this.selectionElement);
 
         this.editorElement = document.createElement('div');
@@ -39,6 +40,8 @@ class CellEditor {
         this.editorElement.style.zIndex='10000';
         this.editorElement.style.position='absolute';
         this.editorElement.style.background='#fff';
+        this.editorElement.style.lineHeight='25px';
+        this.editorElement.style.textIndent='5px';
         this.selectionElement.appendChild(this.editorElement);
     }
 
@@ -53,7 +56,8 @@ class CellEditor {
         }
     }
 
-    public select(sheet:Sheet){
+    public select(){
+        let sheet = this.controler.websheet.getActiveSheet();
         let selection=  sheet.selection;
 
         let x1 = sheet.getColumnLeft(selection.left);
@@ -80,6 +84,7 @@ class CellEditor {
         this.editorElement.style.height = (selectedCell.getHeight()-2) + 'px';
         this.editorElement.style.background = selectedCell.getFill();
         this.editorElement.innerText = selectedCell.value;
+        this.editorElement.focus();
     }
 
 }

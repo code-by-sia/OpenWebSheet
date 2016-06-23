@@ -267,7 +267,7 @@ class Sheet {
 
     getColumnLeft(columnId:number){
         let result = 0;
-        for(let i=0;i<columnId;i++){
+        for(let i=this.left;i<columnId;i++){
             if(this.columns[i]){
                 result+= this.columns[i].width;
             }else{
@@ -279,7 +279,7 @@ class Sheet {
 
     getColumnRight(columnId:number){
         let result = 0;
-        for(let i=0;i<=columnId;i++){
+        for(let i=this.left;i<=columnId;i++){
             if(this.columns[i]){
                 result+= this.columns[i].width;
             }else{
@@ -291,7 +291,7 @@ class Sheet {
 
     getRowTop(rowId:number){
         let result =0;
-        for(let i=1;i<rowId;i++){
+        for(let i=this.top;i<rowId;i++){
             if(this.rows[i]){
                 result += this.rows[i].height;
             }else{
@@ -303,7 +303,7 @@ class Sheet {
 
     getRowBottom(rowId:number){
         let result =0;
-        for(let i=1;i<=rowId;i++){
+        for(let i=this.top;i<=rowId;i++){
             if(this.rows[i]){
                 result += this.rows[i].height;
             }else{
@@ -314,28 +314,21 @@ class Sheet {
     }
 
     findColumnIdByX(x){
-        let colX=this.getColumn(0).width;
-        let colId=0;
-        while (colX < x){
-            if(this.columns[colId]){
-                colX += this.columns[colId].width;
-            }else{
-                colX += Column.DefaultWidth;
+        let colX =0;
+        for(let colId=this.left;;colId++){
+            let colW = this.getColumnWidth(colId);
+            if(x > colX && x < colX+colW){
+                return colId;
             }
-            colId++;
+            colX+=colW;
         }
-        return colId;
     }
 
     findRowIdByY(y){
-        let rowY=this.getRow(0).height;
-        let rowId=1;
+        let rowY=this.getRowHeight(this.top);
+        let rowId=this.top;
         while (rowY < y){
-            if(this.rows[rowId]){
-                rowY += this.rows[rowId].height;
-            }else{
-                rowY += Row.DefaultHeight;
-            }
+            rowY += this.getRowHeight(rowId);
             rowId++;
         }
         return rowId;

@@ -89,21 +89,22 @@ class SheetUIHandler extends  UIHandler{
         let delta = 120;
 
         if (this.wheelDeltaX > delta) {
-            sheet.scrollLeft();
+            sheet.scrollRight();
             this.wheelDeltaX = 0;
         } else if (this.wheelDeltaX < -delta) {
-            sheet.scrollRight();
+            sheet.scrollLeft();
             this.wheelDeltaX = 0;
         }
 
         if (this.wheelDeltaY > delta) {
-            sheet.scrollDown();
+            sheet.scrollUp();
             this.wheelDeltaY = 0;
         } else if (this.wheelDeltaY < -delta) {
-            sheet.scrollUp();
+            sheet.scrollDown();
             this.wheelDeltaY = 0;
         }
         websheet.render();
+        this.controler.cellEditor.select();
 
     }
 
@@ -113,7 +114,9 @@ class SheetUIHandler extends  UIHandler{
     }
 
     mouseUp(x,y){
-
+        if(y>this.controler.websheet.height - WebSheet.SheetTitleHeight){
+            return;
+        }
         let sheet= this.controler.websheet.getActiveSheet();
         let x1= this.oldX - Row.HeaderWidth;
         let y1= this.oldY - Column.HeaderHeight;
@@ -121,7 +124,7 @@ class SheetUIHandler extends  UIHandler{
         let y2=y - Column.HeaderHeight;
         this.controler.cellEditor.save();
         sheet.selectByXY(x1,y1,x2,y2);
-        this.controler.cellEditor.select(sheet);
+        this.controler.cellEditor.select();
     }
 
 }

@@ -21,12 +21,17 @@ $(document).ready(function () {
 
 
     var col_B = sheet.getColumn(1);
-    col_B.width=150;
+    //col_B.width=150;
     col_B.save();
 
-    var col_D = sheet.getColumn(2);
-    col_D.fill='#dedede';
-    col_D.save();
+    var col_C = sheet.getColumn(2);
+    col_C.fill='#dedede';
+    col_C.width=200;
+    col_C.save();
+
+    var col_E = sheet.getColumn(4);
+    col_E.width=150;
+    col_E.save();
 
     var row_2 = sheet.getRow(5);
     row_2.height=40;
@@ -35,6 +40,6 @@ $(document).ready(function () {
     window.websheet = websheet;
 
     var uiControler = new UIHandlerControler(websheet);
-
+    window.uicontroler = uiControler;
 
 });
