@@ -87,7 +87,7 @@ class Cell {
         let textStyle = this.getTextStyle();
 
         context.fillStyle=fill;
-        context.fillRect(x+Column.HeaderHeight , y+ Row.HeaderWidth ,column.width,row.height);
+        context.fillRect(x+Column.HeaderHeight+.5, y+ Row.HeaderWidth ,column.width-.5,row.height);
         context.fillStyle = textStyle.fill;
         context.strokeStyle = textStyle.fill;
         context.textAlign= textStyle.textAlign;
@@ -174,6 +174,13 @@ class Row extends  Cell {
     }
 }
 
+class CellSelection {
+    public left:number;
+    public top:number;
+    public right:number;
+    public bottom:number;
+}
+
 class Sheet {
     public title:string;
     public active:boolean=false;
@@ -191,6 +198,8 @@ class Sheet {
     public horizontalBorder:BorderStyle=null;
     public fill=null;
 
+    public selection:CellSelection;
+
     constructor(private websheet:WebSheet){
         this.textStyle = new TextStyle();
         this.textStyle.fill='#000';
@@ -206,6 +215,108 @@ class Sheet {
         this.horizontalBorder.strokeFill = '#eee';
 
         this.fill = '#fff';
+
+        this.selection = new CellSelection();
+        this.selection.top=1;
+        this.selection.left=0;
+        this.selection.right=0;
+        this.selection.bottom=1;
+    }
+
+    getColumnLeft(columnId:number){
+        let result = 0;
+        for(let i=0;i<columnId;i++){
+            if(this.columns[i]){
+                result+= this.columns[i].width;
+            }else{
+                result+= Column.DefaultWidth;
+            }
+        }
+        return result;
+    }
+
+    getColumnRight(columnId:number){
+        let result = 0;
+        for(let i=0;i<=columnId;i++){
+            if(this.columns[i]){
+                result+= this.columns[i].width;
+            }else{
+                result+= Column.DefaultWidth;
+            }
+        }
+        return result;
+    }
+
+    getRowTop(rowId:number){
+        let result =0;
+        for(let i=1;i<rowId;i++){
+            if(this.rows[i]){
+                result += this.rows[i].height;
+            }else{
+                result += Row.DefaultHeight;
+            }
+        }
+        return result;
+    }
+
+    getRowBottom(rowId:number){
+        let result =0;
+        for(let i=1;i<=rowId;i++){
+            if(this.rows[i]){
+                result += this.rows[i].height;
+            }else{
+                result += Row.DefaultHeight;
+            }
+        }
+        return result;
+    }
+
+    findColumnIdByX(x){
+        let colX=this.getColumn(0).width;
+        let colId=0;
+        while (colX < x){
+            if(this.columns[colId]){
+                colX += this.columns[colId].width;
+            }else{
+                colX += Column.DefaultWidth;
+            }
+            colId++;
+        }
+        return colId;
+    }
+
+    findRowIdByY(y){
+        let rowY=this.getRow(0).height;
+        let rowId=1;
+        while (rowY < y){
+            if(this.rows[rowId]){
+                rowY += this.rows[rowId].height;
+            }else{
+                rowY += Row.DefaultHeight;
+            }
+            rowId++;
+        }
+        return rowId;
+    }
+
+
+    findCellByXY(x,y){
+        let colId = this.findColumnIdByX(x);
+        let rowId = this.findRowIdByY(y);
+        return this.getCell(colId,rowId);
+    }
+
+    selectByXY(x1,y1,x2,y2){
+        let top = Math.min(y1,y2);
+        let left = Math.min(x1,x2);
+        let right=Math.max(x1,x2);
+        let bottom = Math.max(y1,y2);
+
+        this.selection.top = this.findRowIdByY(top);
+        this.selection.bottom = this.findRowIdByY(bottom);
+        this.selection.left = this.findColumnIdByX(left);
+        this.selection.right = this.findColumnIdByX(right);
+
     }
 
     scrollLeft(){
@@ -237,7 +348,7 @@ class Sheet {
         return false;
     }
 
-    getCell(columnId:number,rowId:number){
+    getCell(columnId:number,rowId:number):Cell{
         if(this.isCellExists(columnId,rowId)){
             return this.cells[columnId][rowId];
         }
@@ -273,7 +384,7 @@ class Sheet {
         this.renderColumns(context);
         context.unmask();
 
-        context.setMask(Column.HeaderHeight,Row.HeaderWidth,width,maskHeight - Row.HeaderWidth);
+        context.setMask(Column.HeaderHeight + .5,Row.HeaderWidth ,width,maskHeight - Row.HeaderWidth);
         this.renderCells(context);
         context.unmask();
     }

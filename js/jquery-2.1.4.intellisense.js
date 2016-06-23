@@ -921,7 +921,7 @@ intellisense.annotate(jQuery.fn, {
     /// <signature>
     ///   <summary>Matches elements that match all of the specified attribute filters.</summary>
     ///   <param name="attributeFilter1" type="String">An attribute filter.</param>
-    ///   <param name="attributeFilter2" type="String">Another attribute filter, reducing the selection even more</param>
+    ///   <param name="attributeFilter2" type="String">Another attribute filter, reducing the selectionElement even more</param>
     ///   <param name="attributeFilterN" type="String">As many more attribute filters as necessary</param>
     /// </signature>
   },

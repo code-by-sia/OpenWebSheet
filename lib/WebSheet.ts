@@ -105,10 +105,12 @@ class WebSheet {
         let tabFill = '#fff';
         let tabActiveStroke = '#327bcc';
 
-        context.strokeStyle=tabStroke;
-        context.rect(0,this.height-WebSheet.SheetTitleHeight,this.width,WebSheet.SheetTitleHeight);
+
         context.fillStyle=tabBar;
         context.fillRect(0,this.height-WebSheet.SheetTitleHeight,this.width,WebSheet.SheetTitleHeight);
+        context.strokeStyle=tabStroke;
+        context.strokeSize=1;
+        context.rect(0,this.height-(WebSheet.SheetTitleHeight-.5),this.width,WebSheet.SheetTitleHeight);
         context.fillStyle=tabFill;
 
         let x=WebSheet.SheetTitleHeight;
@@ -121,7 +123,7 @@ class WebSheet {
             context.strokeSize=1;
 
             let x1= x;
-            let y1 = this.height-WebSheet.SheetTitleHeight;
+            let y1 = this.height-WebSheet.SheetTitleHeight+.5;
             let rWidth = width + WebSheet.SheetTitleHeight;
             let rHeight = WebSheet.SheetTitleHeight-5;
 

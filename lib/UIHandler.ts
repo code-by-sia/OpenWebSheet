@@ -1,5 +1,6 @@
 ///<reference path="WebSheet.ts"/>
 ///<reference path="../js/jquery.d.ts"/>
+///<reference path="CellEditor.ts"/>
 /**
  * Created by SiamandM on 6/17/2016.
  */
@@ -75,6 +76,9 @@ class SheetUIHandler extends  UIHandler{
     private  wheelDeltaX:number=0;
     private  wheelDeltaY:number=0;
 
+    private oldX;
+    private oldY;
+
     mouseWheel(dx, dy) {
 
         this.wheelDeltaX += dx;
@@ -103,13 +107,32 @@ class SheetUIHandler extends  UIHandler{
 
     }
 
+    mouseDown(x,y){
+        this.oldX=x;
+        this.oldY=y;
+    }
+
+    mouseUp(x,y){
+
+
+        let sheet= this.controler.websheet.getActiveSheet();
+        let x1= this.oldX;
+        let y1= this.oldY;
+        let x2=x;
+        let y2=y;
+        sheet.selectByXY(x1,y1,x2,y2);
+        this.controler.cellEditor.select(sheet);
+    }
+
 }
 
 class UIHandlerControler {
 
     handlers:UIHandler[]=[];
+    cellEditor:CellEditor;
 
     constructor(public websheet:WebSheet){
+        this.cellEditor = new CellEditor(this);
         this.addHandlers();
         this.attachEvents();
     }

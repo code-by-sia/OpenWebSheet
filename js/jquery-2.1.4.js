@@ -2465,7 +2465,7 @@ compile = Sizzle.compile = function( selector, match /* Internal Use Only */ ) {
 };
 
 /**
- * A low-level selection function that works with Sizzle's compiled
+ * A low-level selectionElement function that works with Sizzle's compiled
  *  selector functions
  * @param {String|Function} selector A selector or a pre-compiled
  *  selector function built with Sizzle.compile
@@ -7569,7 +7569,7 @@ var
 	/* Transports bindings
 	 * 1) key is the dataType
 	 * 2) the catchall symbol "*" can be used
-	 * 3) selection will start with transport dataType and THEN go to "*" if needed
+	 * 3) selectionElement will start with transport dataType and THEN go to "*" if needed
 	 */
 	transports = {},
 
