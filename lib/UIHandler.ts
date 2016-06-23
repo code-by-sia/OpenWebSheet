@@ -116,10 +116,10 @@ class SheetUIHandler extends  UIHandler{
 
 
         let sheet= this.controler.websheet.getActiveSheet();
-        let x1= this.oldX;
-        let y1= this.oldY;
-        let x2=x;
-        let y2=y;
+        let x1= this.oldX - Row.HeaderWidth;
+        let y1= this.oldY - Column.HeaderHeight;
+        let x2=x - Row.HeaderWidth;
+        let y2=y - Column.HeaderHeight;
         sheet.selectByXY(x1,y1,x2,y2);
         this.controler.cellEditor.select(sheet);
     }
@@ -144,6 +144,15 @@ class UIHandlerControler {
 
     attachEvents(){
         let element = this.websheet.element;
+        let overlay = document.createElement('div');
+        overlay.style.position='absolute';
+        overlay.style.top ='0';
+        overlay.style.left ='0';
+        overlay.style.right ='0';
+        overlay.style.bottom ='0';
+        overlay.style.zIndex='9999';
+        element.appendChild(overlay);
+
         let controler = this;
 
         let getXY = function (evt) {
@@ -153,7 +162,7 @@ class UIHandlerControler {
             return {'x': x, 'y': y}
         };
 
-        $(element)
+        $(overlay)
             .mousedown(function (evt) {
                 let pos = getXY(evt);
                 controler.mouseDown( pos.x, pos.y);
