@@ -1,80 +1,84 @@
 ///<reference path="WebSheet.ts"/>
 ///<reference path="../js/jquery.d.ts"/>
 ///<reference path="CellEditor.ts"/>
+import {WebSheet} from "./WebSheet";
+import {Row,Column,Sheet} from "./Sheet";
+import {CellEditor} from "./CellEditor"
 /**
  * Created by SiamandM on 6/17/2016.
  */
-class UIHandler {
-    constructor(public controler:UIHandlerControler ){
+
+export class UIHandler {
+    constructor(public controler:UIHandlerControler) {
     }
 
-    click(){
-
-    }
-
-    dblClick(){
+    click() {
 
     }
 
-    mouseDown(x,y){
+    dblClick() {
 
     }
 
-    mouseMove(x,y){
+    mouseDown(x, y) {
 
     }
 
-    mouseUp(x,y){
+    mouseMove(x, y) {
 
     }
 
-    mouseWheel(dx,dy){
+    mouseUp(x, y) {
 
     }
 
-    keyDown(evt){
+    mouseWheel(dx, dy) {
 
     }
 
-    keyPress(evt){
+    keyDown(evt) {
 
     }
 
-    keyUp(evt){
+    keyPress(evt) {
+
+    }
+
+    keyUp(evt) {
 
     }
 }
 
-class WebSheetUIHandler  extends  UIHandler{
+export class WebSheetUIHandler extends UIHandler {
 
-    mouseUp(x,y){
-        if(y<this.controler.websheet.height - WebSheet.SheetTitleHeight){
+    mouseUp(x, y) {
+        if (y < this.controler.websheet.height - WebSheet.SheetTitleHeight) {
             return;
         }
 
-        x=x-Row.HeaderWidth;
+        x = x - Row.HeaderWidth;
 
         let sheets = this.controler.websheet.sheets;
         let tx = 0;
-        for(let i=0;i<sheets.length;i++){
+        for (let i = 0; i < sheets.length; i++) {
             let sheet = sheets[i];
             let min = tx;
             let max = tx + sheet.tabWidth + 5;
 
-            if(x > min && x< max){
+            if (x > min && x < max) {
                 this.controler.websheet.setActiveSheet(sheet);
                 break;
             }
-            tx += sheet.tabWidth ;
+            tx += sheet.tabWidth;
         }
     }
 
 }
 
-class SheetUIHandler extends  UIHandler{
+export class SheetUIHandler extends UIHandler {
 
-    private  wheelDeltaX:number=0;
-    private  wheelDeltaY:number=0;
+    private  wheelDeltaX:number = 0;
+    private  wheelDeltaY:number = 0;
 
     private oldX;
     private oldY;
@@ -85,7 +89,7 @@ class SheetUIHandler extends  UIHandler{
         this.wheelDeltaY += dy;
 
         let websheet = this.controler.websheet;
-        let sheet =websheet.getActiveSheet();
+        let sheet = websheet.getActiveSheet();
         let delta = 120;
 
         if (this.wheelDeltaX > delta) {
@@ -108,52 +112,52 @@ class SheetUIHandler extends  UIHandler{
 
     }
 
-    mouseDown(x,y){
-        this.oldX=x;
-        this.oldY=y;
+    mouseDown(x, y) {
+        this.oldX = x;
+        this.oldY = y;
     }
 
-    mouseUp(x,y){
-        if(y>this.controler.websheet.height - WebSheet.SheetTitleHeight){
+    mouseUp(x, y) {
+        if (y > this.controler.websheet.height - WebSheet.SheetTitleHeight) {
             return;
         }
-        let sheet= this.controler.websheet.getActiveSheet();
-        let x1= this.oldX - Row.HeaderWidth;
-        let y1= this.oldY - Column.HeaderHeight;
-        let x2=x - Row.HeaderWidth;
-        let y2=y - Column.HeaderHeight;
+        let sheet = this.controler.websheet.getActiveSheet();
+        let x1 = this.oldX - Row.HeaderWidth;
+        let y1 = this.oldY - Column.HeaderHeight;
+        let x2 = x - Row.HeaderWidth;
+        let y2 = y - Column.HeaderHeight;
         this.controler.cellEditor.save();
-        sheet.selectByXY(x1,y1,x2,y2);
+        sheet.selectByXY(x1, y1, x2, y2);
         this.controler.cellEditor.select();
     }
 
 }
 
-class UIHandlerControler {
+export class UIHandlerControler {
 
-    handlers:UIHandler[]=[];
+    handlers:UIHandler[] = [];
     cellEditor:CellEditor;
 
-    constructor(public websheet:WebSheet){
+    constructor(public websheet:WebSheet) {
         this.cellEditor = new CellEditor(this);
         this.addHandlers();
         this.attachEvents();
     }
 
-    addHandlers(){
+    addHandlers() {
         this.handlers.push(new WebSheetUIHandler(this));
         this.handlers.push(new SheetUIHandler(this));
     }
 
-    attachEvents(){
+    attachEvents() {
         let element = this.websheet.element;
         let overlay = document.createElement('div');
-        overlay.style.position='absolute';
-        overlay.style.top ='0';
-        overlay.style.left ='0';
-        overlay.style.right ='0';
-        overlay.style.bottom ='0';
-        overlay.style.zIndex='9999';
+        overlay.style.position = 'absolute';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.right = '0';
+        overlay.style.bottom = '0';
+        overlay.style.zIndex = '9999';
         element.appendChild(overlay);
 
         let controler = this;
@@ -168,7 +172,7 @@ class UIHandlerControler {
         $(overlay)
             .mousedown(function (evt) {
                 let pos = getXY(evt);
-                controler.mouseDown( pos.x, pos.y);
+                controler.mouseDown(pos.x, pos.y);
             })
             .mousemove(function (evt) {
                 let pos = getXY(evt);
@@ -211,56 +215,56 @@ class UIHandlerControler {
 
     }
 
-    click(){
-        for(let i=0;i<this.handlers.length;i++){
+    click() {
+        for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].click();
         }
     }
 
-    dblClick(){
-        for(let i=0;i<this.handlers.length;i++){
+    dblClick() {
+        for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].dblClick();
         }
     }
 
-    mouseDown(x,y){
-        for(let i=0;i<this.handlers.length;i++){
-            this.handlers[i].mouseDown(x,y);
+    mouseDown(x, y) {
+        for (let i = 0; i < this.handlers.length; i++) {
+            this.handlers[i].mouseDown(x, y);
         }
     }
 
-    mouseMove(x,y){
-        for(let i=0;i<this.handlers.length;i++){
-            this.handlers[i].mouseMove(x,y);
+    mouseMove(x, y) {
+        for (let i = 0; i < this.handlers.length; i++) {
+            this.handlers[i].mouseMove(x, y);
         }
     }
 
-    mouseUp(x,y){
-        for(let i=0;i<this.handlers.length;i++){
-            this.handlers[i].mouseUp(x,y);
+    mouseUp(x, y) {
+        for (let i = 0; i < this.handlers.length; i++) {
+            this.handlers[i].mouseUp(x, y);
         }
     }
 
-    mouseWheel(dx,dy){
-        for(let i=0;i<this.handlers.length;i++){
-            this.handlers[i].mouseWheel(dx,dy);
+    mouseWheel(dx, dy) {
+        for (let i = 0; i < this.handlers.length; i++) {
+            this.handlers[i].mouseWheel(dx, dy);
         }
     }
 
-    keyDown(evt){
-        for(let i=0;i<this.handlers.length;i++){
+    keyDown(evt) {
+        for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].keyDown(evt);
         }
     }
 
-    keyPress(evt){
-        for(let i=0;i<this.handlers.length;i++){
+    keyPress(evt) {
+        for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].keyPress(evt);
         }
     }
 
-    keyUp(evt){
-        for(let i=0;i<this.handlers.length;i++){
+    keyUp(evt) {
+        for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].keyUp(evt);
         }
     }

@@ -2,18 +2,18 @@
  * Created by SiamandM on 6/16/2016.
  */
 
-enum  LayoutDirection{
-    LeftToRight=1,
-    RightToLeft=2
+export enum  LayoutDirection{
+    LeftToRight = 1,
+    RightToLeft = 2
 }
 
-enum TextAlignment{
-    Left=1,
-    Center=2,
-    Right=3
+export enum TextAlignment{
+    Left = 1,
+    Center = 2,
+    Right = 3
 }
 
-class Point {
+export class Point {
 
     constructor(x:number = 0, y:number = 0) {
         this.x = x;
@@ -24,7 +24,7 @@ class Point {
     y:number;
 }
 
-class ContextMask {
+export class ContextMask {
 
     private x:number = 0;
     private y:number = 0;
@@ -100,7 +100,7 @@ class ContextMask {
 
 }
 
-class Context {
+export class Context {
 
     private context2d:CanvasRenderingContext2D;
     private width:number;
@@ -108,20 +108,20 @@ class Context {
     private currentMask:ContextMask;
     private maskStack:ContextMask[] = [];
 
-    public direction:LayoutDirection=LayoutDirection.LeftToRight;
-    public textAlign:TextAlignment=TextAlignment.Left;
-    public fillStyle='#fff';
-    public strokeStyle='#000';
-    public strokeSize=1;
-    public contentFillStyle='#000';
-    public fontStyle="";
-    public fontSize= 12;
-    public fontName="Tahoma";
+    public direction:LayoutDirection = LayoutDirection.LeftToRight;
+    public textAlign:TextAlignment = TextAlignment.Left;
+    public fillStyle = '#fff';
+    public strokeStyle = '#000';
+    public strokeSize = 1;
+    public contentFillStyle = '#000';
+    public fontStyle = "";
+    public fontSize = 12;
+    public fontName = "Tahoma";
 
-    constructor(context:CanvasRenderingContext2D ,width:number,height:number){
-        this.context2d=context;
-        this.width=width;
-        this.height=height;
+    constructor(context:CanvasRenderingContext2D, width:number, height:number) {
+        this.context2d = context;
+        this.width = width;
+        this.height = height;
     }
 
 
