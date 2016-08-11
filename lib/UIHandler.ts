@@ -120,6 +120,13 @@ export class SheetUIHandler extends UIHandler {
     }
 
     mouseUp(x, y) {
+        this.selectCell(x, y);
+    }
+
+    private selectCell(x, y) {
+        if (y < Column.HeaderHeight || x < Row.HeaderWidth) {
+            return;
+        }
         if (y > this.controler.websheet.height - WebSheet.SheetTitleHeight) {
             return;
         }
