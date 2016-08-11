@@ -51,6 +51,14 @@ export class CellEditor {
         this.selectionElement.appendChild(this.editorElement);
     }
 
+    disableAnimation() {
+        this.selectionElement.style.transitionDuration = '';
+    }
+
+    enableAnimation() {
+        this.selectionElement.style.transitionDuration = '.1s';
+    }
+
     public save() {
         let sheet = this.controler.websheet.getActiveSheet();
         let cell = sheet.getCell(sheet.selection.columnId, sheet.selection.rowId);
@@ -62,7 +70,13 @@ export class CellEditor {
         }
     }
 
-    public select() {
+    public select(animation:boolean = true) {
+        if (animation) {
+            this.enableAnimation();
+        } else {
+            this.disableAnimation();
+        }
+
         let sheet = this.controler.websheet.getActiveSheet();
         let selection = sheet.selection;
 

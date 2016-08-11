@@ -66,7 +66,9 @@ export class WebSheetUIHandler extends UIHandler {
             let max = tx + sheet.tabWidth + 5;
 
             if (x > min && x < max) {
+                this.controler.cellEditor.save();
                 this.controler.websheet.setActiveSheet(sheet);
+                this.controler.cellEditor.select(false);
                 break;
             }
             tx += sheet.tabWidth;
