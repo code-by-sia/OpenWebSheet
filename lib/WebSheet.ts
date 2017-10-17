@@ -10,7 +10,8 @@ import {Context,TextAlignment} from "./Context";
 export class WebSheet {
 
     private canvas:HTMLCanvasElement;
-    private renderId:number = 0;
+    private rendering:boolean=false;
+    private renderFrameRate:number=10;//FPS
 
     public width:number;
     public height:number;
@@ -88,18 +89,21 @@ export class WebSheet {
     }
 
     render() {
-        this.renderId = this.renderId + 1;
-        let renderId = this.renderId;
-        let webSheet = this;
+      if(this.rendering){
+        return;
+      }
 
-        setTimeout(function () {
-            if (renderId == webSheet.renderId) {
-                webSheet.doRender();
-            }
-        }, 10);
+      this.rendering = true;
+      setTimeout(()=>{
+        this.doRender();
+        this.rendering=false;
+      },1000 / this.renderFrameRate);
+
     }
 
     doRender() {
+        console.log('%cRender','color:#7cf');
+
         let context2d = this.get_context2D();
         let context = new Context(context2d, this.width, this.height);
 
@@ -153,7 +157,8 @@ export class WebSheet {
             x += width + WebSheet.SheetTitleHeight + 5;
         }
 
-
+        context = void 0;
+        context2d = void 0;
     }
 
 

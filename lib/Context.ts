@@ -38,6 +38,7 @@ export class ContextMask {
         this.height = height;
     }
 
+
     public get_left() {
         return this.x;
     }
