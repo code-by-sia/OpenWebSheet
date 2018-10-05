@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <title>Open WebSheet</title>
     <link rel="stylesheet" href="css/reset.css"  />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/main.css?v2" />
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' 
+        rel='stylesheet' type='text/css' />
+
 </head>
 <body>
     <div id="wrapper">
@@ -13,13 +16,48 @@
         </div>
         <div id="toolbar">
             <ul class="menu">
-                <li><a href="#document">Document</a></li>
-                <li class="active"><a href="#formatting">Formatting</a></li>
-                <li><a href="#formula">Formula</a></li>
-                <li><a href="#data">Data</a></li>
-                <li><a href="#info">Info</a></li>
+                <li><a href="#document"  for="document">Document</a></li>
+                <li class="active" ><a href="#formatting" class="item" for="formatting"  >Formatting</a></li>
+                <li><a href="#formula" for="formula" class="item">Formula</a></li>
+                <li><a href="#data" for="data" class="item">Data</a></li>
+                <li><a href="#info" for="info" class="item">Info</a></li>
             </ul>
-            <div class="menu-content" >
+            <div class="menu-content" id="menu-content" >
+                <div id="document" >
+                    <!-- [ document ] -->
+                </div>
+                <div id="formatting" class="active" >
+                    <div style="flex:2">
+                        <p>
+                            <label>Font Name : </label>
+                            <select>
+                                <option>Arial</option>
+                                <option>Sans</option>
+                                <option>Sans Serif</option>
+                                <option>Courier</option>
+                            </select>
+                            <button><strong>B</strong></button>
+                            <button style="font-style:italic"><strong>I</strong></button>
+                            <button style="text-decoration:underline"><strong>U</strong></button>
+                        </p>
+                        <p>
+                            <label>Color : </label>
+                            <input type="color" />
+                        </p>
+                    </div>
+                    <div style="flex:3">
+                            [ formatting ]
+                    </div>
+                </div>
+                <div id="formula" >
+                    <div> [ formula ] </div>
+                </div>
+                <div id="data" >
+                    <!-- [ data ] -->
+                </div>
+                <div id="info" >
+                    <!-- [ info ] -->
+                </div>
             </div>
         </div>
         <div id="content">
@@ -33,7 +71,6 @@
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/require.js"></script>
     <script src="js/main.js" ></script>
-
 
 </body>
 </html>

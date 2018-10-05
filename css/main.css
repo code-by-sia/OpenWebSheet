@@ -5,8 +5,38 @@
     bottom: 0;
     left: 0;
     border: solid 1px #327bcc;
-    font-family:"Segoe UI";
+    font-family: lato;
     font-size: 12px;
+}
+
+#menu-content {
+    display: flex;
+}
+
+#menu-content > div {
+    display: none;
+    flex: 1;
+}
+
+#menu-content > div.active {
+    display: flex;
+    padding: 10px;
+}
+
+#menu-content > div.active > div {
+    flex:1;
+    padding: 10px;
+    box-shadow: 0 0 2px #ccc;
+    background: #fff;
+}
+#menu-content > div.active > div p {
+    padding: 2px;
+    vertical-align: middle;
+}
+#menu-content > div.active > div label{
+    display: inline-block;
+    min-width: 80px;
+    font-weight: bold;
 }
 
 #wrapper #header {
@@ -42,7 +72,12 @@
     margin: 0 5px;
     width: 120px;
     text-align: center;
+    box-sizing: border-box;
 }
+#wrapper #toolbar .menu > li:hover {
+    background:#efefef;
+    border: solid thin #ccc;
+} 
 #wrapper #toolbar .menu li:first-child{
     border:solid thin #327bcc;
     background: #32a2cc;

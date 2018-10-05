@@ -3,6 +3,7 @@
 
 import {Sheet} from "./Sheet";
 import {Context,TextAlignment} from "./Context";
+import {Command} from './Command';
 /**
  * Created by SiamandM on 6/16/2016.
  */
@@ -41,6 +42,10 @@ export class WebSheet {
 
         this.sheets.push(sheet1);
         this.sheets.push(sheet2);
+    }
+
+    doCommand(cmd:Command) {
+        console.log(this.doCommand);
     }
 
     createElements() {
