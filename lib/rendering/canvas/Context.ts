@@ -1,3 +1,5 @@
+import { TextAlign } from "../../core/Appearance";
+
 /**
  * Created by SiamandM on 6/16/2016.
  */
@@ -5,12 +7,6 @@
 export enum  LayoutDirection{
     LeftToRight = 1,
     RightToLeft = 2
-}
-
-export enum TextAlignment{
-    Left = 1,
-    Center = 2,
-    Right = 3
 }
 
 export class Point {
@@ -110,7 +106,7 @@ export class Context {
     private maskStack:ContextMask[] = [];
 
     public direction:LayoutDirection = LayoutDirection.LeftToRight;
-    public textAlign:TextAlignment = TextAlignment.Left;
+    public textAlign:TextAlign = TextAlign.Left;
     public fillStyle = '#fff';
     public strokeStyle = '#000';
     public strokeSize = 1;
@@ -285,22 +281,19 @@ export class Context {
     }
 
     fillText(text:string, x:number, y:number, width:number) {
-
         x = this.get_directed_x(x, width);
-
         this.save();
-        this.applyContent();
-
+        this.applyContent();         
         let delta = 0;
         let textWidth = this.get_textWidth(text);
-        if (this.textAlign == TextAlignment.Center) {
+        if (this.textAlign == TextAlign.Center) {
             delta = (width - textWidth) / 2;
-        } else if (this.textAlign == TextAlignment.Right) {
+        } else if (this.textAlign == TextAlign.Right) {
             delta = width - textWidth;
-        }
+        }       
+
         this.context2d.fillText(text, x + delta, y + this.fontSize);
         this.restore();
-        return textWidth;
     }
 
 }
