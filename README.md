@@ -7,6 +7,6 @@ OpenSource Web based spreadsheet
 * [ ] merge and split
 * [ ] formula and expressions
 * [ ] import/export
-* [ ] advance ui features
+* [ ] advanced ui features
 
 <img src="screenshot.png" />
