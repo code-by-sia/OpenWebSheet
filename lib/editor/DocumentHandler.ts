@@ -19,7 +19,7 @@ export class WebSheetUIHandler extends UIHandler {
             let max = tx + SheetTitleWidth + 5;
 
             if (x > min && x < max) {
-                this.controller.cellEditor.save();
+                this.controller.cellEditor.deselect();
                 this.controller.websheet.ActiveSheetIndex = i;
                 this.controller.cellEditor.select(false);
                 break;

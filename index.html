@@ -12,53 +12,29 @@
 <body>
     <div id="wrapper">
         <div id="header">
-            <h1>Open WebSheet</h1>
-        </div>
-        <div id="toolbar">
+            <h1 class="title">Open WebSheet</h1>
             <ul class="menu">
-                <li><a href="#document"  for="document">Document</a></li>
-                <li class="active" ><a href="#formatting" class="item" for="formatting"  >Formatting</a></li>
-                <li><a href="#formula" for="formula" class="item">Formula</a></li>
-                <li><a href="#data" for="data" class="item">Data</a></li>
-                <li><a href="#info" for="info" class="item">Info</a></li>
+                <li class="active" data-for="formatting">Home</li>
+                <li data-for="formulas">Formulas</li>
+                <li data-for="data">Data</li>
+                <li data-for="view">View</li>
+                <li data-for="about">About</li>
             </ul>
-            <div class="menu-content" id="menu-content" >
-                <div id="document" >
-                    <!-- [ document ] -->
-                </div>
-                <div id="formatting" class="active" >
-                    <div style="flex:2">
-                        <p>
-                            <label>Font Name : </label>
-                            <select>
-                                <option>Arial</option>
-                                <option>Sans</option>
-                                <option>Sans Serif</option>
-                                <option>Courier</option>
-                            </select>
-                            <button><strong>B</strong></button>
-                            <button style="font-style:italic"><strong>I</strong></button>
-                            <button style="text-decoration:underline"><strong>U</strong></button>
-                        </p>
-                        <p>
-                            <label>Color : </label>
-                            <input type="color" />
-                        </p>
-                    </div>
-                    <div style="flex:3">
-                            [ formatting ]
-                    </div>
-                </div>
-                <div id="formula" >
-                    <div> [ formula ] </div>
-                </div>
-                <div id="data" >
-                    <!-- [ data ] -->
-                </div>
-                <div id="info" >
-                    <!-- [ info ] -->
+            <div class="menu-content" >
+                <div class="formatting-menu active">Formatting</div>
+                <div class="formulas-menu">formulas</div>
+                <div class="data-menu">data</div>
+                <div class="view-menu">view</div>
+                <div class="about-menu" >
+                    Designed and developed by <strong>Siamand Ma'roufi</strong><br />
+                    <a href="http://jsglobe.com">Developer's site</a><br/>
+                    <a href="https://github.com/SiamandMaroufi/OpenWebSheet">Source Code</a>
                 </div>
             </div>
+            <div class="formula-bar">
+                [Formula bar will be here..]
+            </div>
+            
         </div>
         <div id="content">
 

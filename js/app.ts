@@ -12,21 +12,16 @@ $(document).ready(()=> {
     let el = document.getElementById('content');
     let ui = new UI(el);
     
-    // var websheet = new WebSheet(el);
-    // var sheet = websheet.sheets[0];
-    // let win:any = window;
-    // var uiControler = new UIHandlerControler(websheet);
-    // win.uicontroler = uiControler;
-    // win.websheet = websheet;
 
-    let items= document.querySelectorAll("#toolbar > .menu a.item");
+    let items = document.querySelectorAll("#header > .menu > li");
     for(let i=0;i<items.length;i++){        
         items.item(i).addEventListener('click',function (evt:any) {
-            let el:HTMLAnchorElement = evt.target;
-            document.querySelector("#toolbar > .menu li.active")['className'] = '';
-            document.querySelector("#menu-content > div.active")['className'] = '';
-            el.parentElement.className ='active';
-            document.getElementById(el.getAttribute('for')).className="active";
+            let el:HTMLElement = evt.target;
+            let tg = `${el.getAttribute('data-for')}-menu`;
+            document.querySelector("#header > .menu > li.active")['className'] = '';
+            document.querySelector(`#header > .menu-content > .active`).classList.remove('active');
+            document.querySelector(`#header > .menu-content > .${tg}`).classList.add('active');
+            el.className ='active';
         });
     }
     

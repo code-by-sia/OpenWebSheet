@@ -4,120 +4,90 @@
     right: 0;
     bottom: 0;
     left: 0;
-    border: solid 1px #327bcc;
     font-family: lato;
     font-size: 12px;
-}
-
-#menu-content {
     display: flex;
+    flex-direction: column;
 }
 
-#menu-content > div {
-    display: none;
-    flex: 1;
-}
-
-#menu-content > div.active {
-    display: flex;
-    padding: 10px;
-}
-
-#menu-content > div.active > div {
-    flex:1;
-    padding: 10px;
-    box-shadow: 0 0 2px #ccc;
-    background: #fff;
-}
-#menu-content > div.active > div p {
-    padding: 2px;
-    vertical-align: middle;
-}
-#menu-content > div.active > div label{
-    display: inline-block;
-    min-width: 80px;
-    font-weight: bold;
-}
-
-#wrapper #header {
-    height: 30px;
-    background: #fafafa;
-}
-
-#wrapper #header h1{
+#wrapper #header h1.title{
     font-size: 10px;
     font-weight:normal;
     line-height: 30px;
     text-align: center;
-    color: #333;
+    color: #fff;
+    background: #004d40;
 }
 
-#wrapper #toolbar {
-    border-bottom: solid thin #ccc;
-    height: 140px;
-    background: #fafafa;
-}
-
-#wrapper #toolbar .menu {
+#wrapper #header .menu {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
     list-style: none;
-    border-bottom: solid thin #ccc;
-    height: 30px;
+    background: #004d40;
+    box-shadow: inset 0 -1px 0px 0 #001d10;
 }
-#wrapper #toolbar .menu-content {
-    background: #fff;
-    height: 109px;
+#wrapper #header .menu li:first-child {
+    margin-left: 20px;
 }
-#wrapper #toolbar .menu > li {
-    display: inline-block;
+#wrapper #header .menu li {
+    padding: 5px 10px;
     margin: 0 5px;
-    width: 120px;
-    text-align: center;
-    box-sizing: border-box;
-}
-#wrapper #toolbar .menu > li:hover {
-    background:#efefef;
-    border: solid thin #ccc;
-} 
-#wrapper #toolbar .menu li:first-child{
-    border:solid thin #327bcc;
-    background: #32a2cc;
-    margin: 0 0 0 5px;
-}
-#wrapper #toolbar .menu li:first-child a{
-    font-weight: bold;
-    color: #ffffff;
-}
-#wrapper #toolbar .menu li.active{
-    background: #ffffff;
-    border: solid thin #ccc;
-    border-bottom: solid thin #ffffff;
-}
-#wrapper #toolbar .menu li.active a{
-    font-weight:bold;
+    color: #ccc;
+    font-weight: bolder;
+    text-shadow: none;
+    cursor: pointer;
 }
 
-#wrapper #toolbar .menu > li a {
-    text-decoration: none;
-    color: #333;
-    line-height: 29px;
-    text-transform: uppercase;
+#wrapper #header .menu li:hover {
+    color: #fff;
+}
+#wrapper #header .menu li.active {
+    border-radius: 2px 2px 0 0;
+    background: #fff;
+    color: #004d40;
+    border-bottom: solid thin #fff;
+    box-shadow: 0 -1px 0 1px #001d10;
+}
+
+#wrapper #header .menu-content {
+    padding: 5px 10px;
+    height: 80px;
+    flex-direction: row;
+    background: #ece9e6;
+    background: -webkit-linear-gradient(to top, #ece9e6, #ffffff);
+    background: linear-gradient(to top, #ece9e6, #ffffff);
+}
+#wrapper #header .menu-content > div { display: none; }
+#wrapper #header .menu-content > div.active { display:block; }
+
+#wrapper #header .formula-bar{
+    padding: 5px 10px;
+    font-style: italic;
+    color:#777;
+    border-top:solid thin #dcdcdc;
+    border-bottom:solid thin #dcdcdc;
+    margin-bottom:2px;
 }
 
 #wrapper #content {
+    position: relative;
     background: #fff;
-    position: absolute;
-    bottom: 30px;
-    top:171px;
-    left: 0;
-    right: 0;
+    border-top: solid thin #ccc;
+    flex: 1;
 }
 
 #wrapper #footer {
-    position: absolute;
-    left:0;
-    bottom: 0;
-    right: 0;
     height: 30px;
-    background: #32a2cc;
+    background: #ececec;
 
+}
+
+
+
+.about-menu {
+    text-align: center;
+    padding-top: 15px;
+    font-style: italic;
 }

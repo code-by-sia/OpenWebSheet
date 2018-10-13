@@ -17,7 +17,7 @@ export class CellSelection {
     }
 }
 
-export class Sheet {
+export class Sheet { 
 
     private data:any[] = [];
     public defaultAppearance:Appearance = new Appearance();

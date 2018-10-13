@@ -2,11 +2,13 @@ import {
     RowDefaultHeight,
     ColumnHeaderHeight,
     RowHeaderWidth,
-    SheetTitleHeight
+    SheetTitleHeight,
+    COLOR_3,
+    COLOR_1
 } from '../../common/constants'
 import { DocumentRenderer } from "../DocumentRenderer";
 import { OpenDocument } from "../../core/Document";
-import { Context } from './Context';
+import { Context, Point } from './Context';
 import { TextAlign } from "../../core/Appearance";
 import { Sheet } from "../../core/Sheet";
 
@@ -77,8 +79,12 @@ export class CanvasRenderer implements DocumentRenderer {
 
     }
 
+    getSheetWidth(sheet) {
+        return this.context.get_textWidth(sheet.title) + 10;
+    }
+
     doRender() {
-        console.log('%cRender','color:#a60000');
+        console.log('%cRender',`color:${COLOR_1}`);
 
         let context2d = this.get_context2D();
         this.context = new Context(context2d, this.width, this.height);
@@ -86,7 +92,7 @@ export class CanvasRenderer implements DocumentRenderer {
         let tabStroke = '#ccc';
         let tabBar = '#eee';
         let tabFill = '#fff';
-        let tabActiveStroke = '#327bcc';
+        let tabActiveStroke = COLOR_3;
 
         let context = this.context;
 
@@ -100,8 +106,7 @@ export class CanvasRenderer implements DocumentRenderer {
         let x = SheetTitleHeight;
         for (let i in this.document.Sheets) {
             let sheet = this.document.Sheets[i];
-            let width = context.get_textWidth(sheet.title);
-
+            let width = this.getSheetWidth(sheet);
             context.fillStyle = tabFill;
             context.strokeStyle = tabStroke;
             context.strokeSize = 1;
@@ -113,6 +118,9 @@ export class CanvasRenderer implements DocumentRenderer {
 
             context.rect(x1, y1, rWidth, rHeight);
             context.fillRect(x1, y1, rWidth, rHeight);
+            context.fillStyle = '#ececec';
+            const cornerWidth = RowHeaderWidth - 2;
+            context.fillClosePath(new Point(2,cornerWidth),new Point(cornerWidth,cornerWidth), new Point(cornerWidth,1));
 
             if (this.document.ActiveSheetIndex == parseInt(i)) {
                 this.renderSheet();
@@ -122,7 +130,7 @@ export class CanvasRenderer implements DocumentRenderer {
                 context.line(x1, y1, x1 + rWidth, y1);
 
                 context.strokeStyle = tabActiveStroke;
-                context.strokeSize = 2;
+                context.strokeSize = 3;
                 context.line(x1, y1 + rHeight, x1 + rWidth, y1 + rHeight);
             } else {
                 context.fontStyle = '';

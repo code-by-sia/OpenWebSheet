@@ -1,6 +1,6 @@
 import { OpenDocument } from "../core/Document";
 import { UIHandlerController } from "./UIHandlerControler";
-import { ColumnHeaderHeight, RowHeaderWidth, SheetTitleHeight } from "../common/constants";
+import { ColumnHeaderHeight, RowHeaderWidth, SheetTitleHeight, COLOR_1, COLOR_2 } from "../common/constants";
 import { Cell } from "../core/Cell";
 
 /**
@@ -8,13 +8,13 @@ import { Cell } from "../core/Cell";
  */
 ///<reference path="UIHandler.ts"/>
 
-
 export class CellEditor {
 
     private websheet:OpenDocument;
     private editorArea:HTMLDivElement;
     private selectionElement:HTMLElement;
     private editorElement:HTMLInputElement;
+    private anchorElement:HTMLSpanElement;
 
 
     constructor(public controler:UIHandlerController) {
@@ -37,7 +37,7 @@ export class CellEditor {
 
         this.selectionElement = document.createElement('div');
         this.selectionElement.style.position = 'absolute';
-        this.selectionElement.style.border = 'solid 2px #33f';
+        this.selectionElement.style.border = `solid 2px ${COLOR_1}`;
         this.selectionElement.style.overflow = 'hidden';
         this.selectionElement.style.background = 'rgba(0,0,0,.1)';
         this.selectionElement.style.transitionDuration = '.1s';
@@ -49,11 +49,25 @@ export class CellEditor {
         this.editorElement.style.position = 'absolute';
         this.editorElement.style.background = '#fff';
         this.editorElement.style.lineHeight = '25px';
-        this.editorElement.style.textIndent = '0';
+        this.editorElement.style.textIndent = '3px';
         this.editorElement.style.border = 'none';
         this.editorElement.addEventListener('keypress',(evt) => this.onKeyPress(evt));
         this.editorElement.addEventListener('keydown',(evt) => this.onKeyDown(evt));
         this.selectionElement.appendChild(this.editorElement);
+
+        this.anchorElement = document.createElement('span');
+        this.anchorElement.style.position='absolute';
+        this.anchorElement.style.right='0';
+        this.anchorElement.style.bottom='0';
+        this.anchorElement.style.width='6px';
+        this.anchorElement.style.height='6px';
+        this.anchorElement.style.borderRadius='2px';
+        this.anchorElement.style.border='solid 1px #fff';
+        this.anchorElement.style.background= COLOR_2;
+        this.anchorElement.style.zIndex='10000';
+        this.anchorElement.style.cursor='cell';
+        this.editorArea.appendChild(this.anchorElement);
+
     }
 
     private onKeyDown(evt:KeyboardEvent) {
@@ -83,10 +97,12 @@ export class CellEditor {
 
     disableAnimation() {
         this.selectionElement.style.transitionDuration = '';
+        this.anchorElement.style.transitionDuration = '';
     }
 
     enableAnimation() {
         this.selectionElement.style.transitionDuration = '.1s';
+        this.anchorElement.style.transitionDuration = '.1s';
     }
 
     
@@ -149,6 +165,9 @@ export class CellEditor {
         this.editorElement.style.background = sheet.getApperance(selectedCell.columnId,selectedCell.rowId).background;
         this.editorElement.value = selectedCell.value;
         this.editorElement.focus();
+
+        this.anchorElement.style.left = `${x2-5}px`;
+        this.anchorElement.style.top = `${y2-5}px`;
     }
 
 }
