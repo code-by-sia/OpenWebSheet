@@ -9,4 +9,4 @@ OpenSource Web based spreadsheet
 * [ ] import/export
 * [ ] advanced ui features
 
-<img src="screenshot.png" />
+<img src="demo/Screenshot.png" />
