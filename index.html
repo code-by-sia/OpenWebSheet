@@ -21,7 +21,45 @@
                 <li data-for="about">About</li>
             </ul>
             <div class="menu-content" >
-                <div class="formatting-menu active">Formatting</div>
+                <div class="formatting-menu active">
+                    <fieldset>
+                        <legend>Font</legend>
+                        <p>
+                            <label>Name: <label>
+                            <select id="font-name" >
+                                <option selected value="lato">Lato</option>
+                                <option value="courier">Courier</option>
+                                <option value="sans">Sans</option>
+                            </select>
+                            <select id="font-size">
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option selected value="12">12</option>
+                                <option value="14">14</option>
+                                <option value="16">16</option>
+                                <option value="18">18</option>
+                                <option value="20">20</option>
+                                <option value="22">22</option>
+                                <option value="24">24</option>
+                                <option value="26">26</option>
+                                <option value="28">28</option>
+                                <option value="36">36</option>
+                                <option value="48">48</option>
+                                <option value="72">72</option>
+                            </select>
+                            
+                        </p>
+                        <p>
+                            <button id="bold-action" style="font-weight:bolder">B</button>
+                            <button id="italic-action" style="font-style:italic;font-weight:bold">I</button>
+                            <button id="underline-action"style="text-decoration:underline;font-weight:bold">U</button>
+                        </p>
+                        
+                    </fieldset>
+                </div>
                 <div class="formulas-menu">formulas</div>
                 <div class="data-menu">data</div>
                 <div class="view-menu">view</div>

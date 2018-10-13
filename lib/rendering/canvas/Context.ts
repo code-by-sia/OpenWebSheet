@@ -133,10 +133,9 @@ export class Context {
 
     private applyContent() {
         this.context2d.fillStyle = this.contentFillStyle;
-        this.context2d.font = (this.fontStyle + "  " + this.fontSize + 'px ' + this.fontName).trim();
+        this.context2d.font = (`${this.fontStyle} ${this.fontSize}px ${this.fontName}`).trim();
         this.context2d.textAlign = 'left';
     }
-
 
     get_directed_x(x:number, width:number = 0) {
         if (this.direction == LayoutDirection.LeftToRight)

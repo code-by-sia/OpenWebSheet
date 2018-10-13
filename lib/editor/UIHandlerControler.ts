@@ -16,6 +16,7 @@ export class UIHandlerController {
         this.cellEditor = new CellEditor(this);
         this.addHandlers();
         this.attachEvents();
+        websheet.addOnChange(() => this.cellEditor.updateEitorAppearance());
     }
 
     addHandlers() {

@@ -12,19 +12,20 @@ $(document).ready(()=> {
     let el = document.getElementById('content');
     let ui = new UI(el);
     
+    $('#bold-action').click(() => ui.execCmd('bold'));
+    $('#font-size').change(() =>  ui.execCmd('fontSize',$('#font-size').val()));
+    $('#font-name').change(()=>ui.execCmd('fontName',$('#font-name').val()));
 
-    let items = document.querySelectorAll("#header > .menu > li");
-    for(let i=0;i<items.length;i++){        
-        items.item(i).addEventListener('click',function (evt:any) {
-            let el:HTMLElement = evt.target;
-            let tg = `${el.getAttribute('data-for')}-menu`;
-            document.querySelector("#header > .menu > li.active")['className'] = '';
-            document.querySelector(`#header > .menu-content > .active`).classList.remove('active');
-            document.querySelector(`#header > .menu-content > .${tg}`).classList.add('active');
-            el.className ='active';
-        });
-    }
+    $("#header > .menu > li").click((evt) => {
+        let el = evt.target;
+        let tg = `${el.getAttribute('data-for')}-menu`;
+        $("#header > .menu > li.active").removeClass('active');
+        $(`#header > .menu-content > .active`).removeClass('active');
+        $(`#header > .menu-content > .${tg}`).addClass('active');
+        el.className ='active';
+    })
     
+ 
     //demo(sheet);
 
 });

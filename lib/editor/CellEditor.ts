@@ -2,6 +2,8 @@ import { OpenDocument } from "../core/Document";
 import { UIHandlerController } from "./UIHandlerControler";
 import { ColumnHeaderHeight, RowHeaderWidth, SheetTitleHeight, COLOR_1, COLOR_2 } from "../common/constants";
 import { Cell } from "../core/Cell";
+import { Sheet } from "../core/Sheet";
+import { TextAlign } from "../core/Appearance";
 
 /**
  * Created by SiamandM on 6/23/2016.
@@ -16,13 +18,11 @@ export class CellEditor {
     private editorElement:HTMLInputElement;
     private anchorElement:HTMLSpanElement;
 
-
     constructor(public controler:UIHandlerController) {
         this.websheet = controler.websheet;
 
         this.initialize();
         this.select();
-
     }
 
     initialize() {
@@ -120,7 +120,6 @@ export class CellEditor {
         if(this.IsDirty) {
             cell.value = this.Value;
             this.controler.websheet.ActiveSheet.setCell(cell.columnId,cell.rowId,cell);
-            this.controler.renderer.render();
         }
     }
 
@@ -130,12 +129,54 @@ export class CellEditor {
         return sheet.getCell(selection.columnId, selection.rowId) || new Cell(selection.columnId,selection.rowId); 
     }
 
+    private getCurrentAppearance(){
+        let sheet = this.controler.websheet.ActiveSheet;
+        let selection = sheet.selection;
+        return sheet.getApperance(selection.columnId, selection.rowId);
+    }
+
+
+    private getFontStyle(value:string){
+        let ret ='';
+        if(!value) return ret;
+        if(value.indexOf('italic')) ret += ' italic ';
+        if(value.indexOf('underline')) ret += ' underline ';
+        return ret;
+    }
+
+    private getFontWeight(value:string) {
+        let ret ='';
+        if(!value) return ret;
+        if(value.indexOf('bold')) ret += ' bold ';
+        if(value.indexOf('bolder')) ret += ' bolder ';
+        return ret;
+    }
+
+    private getTextAlign(textAlign:TextAlign) {
+        if(textAlign==TextAlign.Center) return 'center';
+        if(textAlign==TextAlign.Left) return 'left';
+        if(textAlign==TextAlign.Right) return 'right';
+        return '';
+    }
+
+    public updateEitorAppearance (){
+        let app = this.getCurrentAppearance();
+        this.editorElement.style.textAlign = this.getTextAlign(app.textAlign);
+        this.editorElement.style.fontStyle = this.getFontStyle(app.textStyle);
+        this.editorElement.style.fontWeight = this.getFontWeight(app.textStyle);
+        this.editorElement.style.background = app.background;
+        this.editorElement.style.fontFamily = app.fontName;
+        this.editorElement.style.fontSize = `${app.fontSize}px`;
+    }
+
     public select(animation:boolean = true) {
         if (animation) {
             this.enableAnimation();
         } else {
             this.disableAnimation();
         }
+
+        this.updateEitorAppearance();
 
         let sheet = this.controler.websheet.ActiveSheet;
         let selection = sheet.selection;
@@ -157,12 +198,11 @@ export class CellEditor {
 
         let editorY = sheet.getRowTop(selection.rowId);
         let editorX = sheet.getColumnLeft(selection.columnId);
-
+        
         this.editorElement.style.left = (editorX - x1) + 'px';
         this.editorElement.style.top = (editorY - y1) + 'px';
         this.editorElement.style.width = (sheet.getCellWidth(selectedCell) - 3) + 'px';
         this.editorElement.style.height = (sheet.getCellHeight(selectedCell) - 3) + 'px';
-        this.editorElement.style.background = sheet.getApperance(selectedCell.columnId,selectedCell.rowId).background;
         this.editorElement.value = selectedCell.value;
         this.editorElement.focus();
 

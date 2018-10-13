@@ -25,6 +25,7 @@ export class CanvasRenderer implements DocumentRenderer {
     
     public constructor(private container:HTMLElement,private document:OpenDocument){
         this.initialize();
+        document.addOnChange(() => this.render());
     }
 
     initialize() {
@@ -72,10 +73,10 @@ export class CanvasRenderer implements DocumentRenderer {
       }
 
       this.rendering = true;
-      setTimeout(()=>{
+      setTimeout(() => {
         this.doRender();
         this.rendering=false;
-      },1000 / this.renderFrameRate);
+      }, 1000 / this.renderFrameRate);
 
     }
 
@@ -119,13 +120,14 @@ export class CanvasRenderer implements DocumentRenderer {
             context.rect(x1, y1, rWidth, rHeight);
             context.fillRect(x1, y1, rWidth, rHeight);
             context.fillStyle = '#ececec';
+            context.fontSize = 12;
             const cornerWidth = RowHeaderWidth - 2;
             context.fillClosePath(new Point(2,cornerWidth),new Point(cornerWidth,cornerWidth), new Point(cornerWidth,1));
 
             if (this.document.ActiveSheetIndex == parseInt(i)) {
                 this.renderSheet();
-
-                context.fontStyle = 'bold';
+                context.fontSize = 13;
+                context.fontStyle = ' bold ';
                 context.strokeStyle = tabFill;
                 context.line(x1, y1, x1 + rWidth, y1);
 
@@ -232,6 +234,7 @@ export class CanvasRenderer implements DocumentRenderer {
                 let columnWidth = sheet.getColumnWidth(c);
                 let cell = sheet.getCell(c, r);
                 let appearance = sheet.getApperance(c,r);
+                context.fillStyle = appearance.text;
                 this.paintCell(c,r,x, y);
                 if (y > 0) {
                     let horStyle = appearance.horisontalBorder;
@@ -253,23 +256,23 @@ export class CanvasRenderer implements DocumentRenderer {
         let cell = sheet.getCell(columnId, rowId);
         if(cell == null) return;
 
-        let appearance = sheet.getApperance(x,y);
-
-
+        let appearance = sheet.getApperance(columnId, rowId);
         let left = x + ColumnHeaderHeight + .5;
         if (y < RowDefaultHeight) return;
 
         context.fillStyle = appearance.background;
-        if(appearance.fontSize) context.fontSize = appearance.fontSize;
+        if(appearance.fontSize) context.fontSize = parseInt(appearance.fontSize);
         if(appearance.fontName) context.fontName = appearance.fontName;
         let columnWidth = sheet.getColumnWidth(columnId);
         let rowHeight = sheet.getRowHeight(rowId);
         context.setMask(left, y, columnWidth - .5, rowHeight);
         context.fillRect(left, y, columnWidth - .5, rowHeight);
-        context.fillStyle = appearance.text;
-        context.strokeStyle = appearance.text;
-        context.textAlign = appearance.textAlign;
-        context.fillText(cell.label, x + ColumnHeaderHeight + 5, y + 7, columnWidth);
+        if(cell.label) {
+            context.fillStyle = appearance.text;
+            context.strokeStyle = appearance.text;
+            context.textAlign = appearance.textAlign;
+            context.fillText(cell.label, x + ColumnHeaderHeight + 5, y + 7, columnWidth);
+        }
         context.unmask();
     }
     

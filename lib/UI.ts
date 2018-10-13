@@ -12,6 +12,12 @@ export class UI {
         this.render = new CanvasRenderer(element,this.document);
         this.uiController = new UIHandlerController(this.document,this.render);
         this.render.render();
+
+        element['openDocument'] = this.document;
+    }
+
+    public execCmd(cmd,...args){
+        this.document.execCommand(cmd,...args);
     }
 
 }

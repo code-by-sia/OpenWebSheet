@@ -31,6 +31,7 @@ export class Sheet {
     private scrollX:number = 0;
     private scrollY:number = 0;
     public selection: CellSelection ;
+    private change_listeners =[];
 
 
     constructor(public title:string){
@@ -43,11 +44,11 @@ export class Sheet {
 
 
         this.selection = new CellSelection();
-        this.selection.top = 1;
+        this.selection.top = 0;
         this.selection.left = 0;
         this.selection.right = 0;
-        this.selection.bottom = 1;
-        this.selection.rowId = 1;
+        this.selection.bottom = 0;
+        this.selection.rowId = 0;
         this.selection.columnId = 0;
     }
     selectNextColumnCell() {
@@ -244,6 +245,8 @@ export class Sheet {
 
         this.scrollX = columnId;
         this.scrollY = rowId;
+
+        this.onChange();
     }
 
     public merge(columnId:number, rowId:number, width:number, height:number){
@@ -255,6 +258,7 @@ export class Sheet {
                 this.setCell(columnId, rowId, cell);
             }
         }
+        this.onChange();
     }
 
     public unmerge(columnId:number, rowId:number){
@@ -271,6 +275,7 @@ export class Sheet {
 
         cell.rowSpan = 0;
         cell.colSpan = 0;
+        this.onChange();
 
     }
 
@@ -306,6 +311,7 @@ export class Sheet {
         }
 
         this.data[columnId][rowId] = cell;
+        this.onChange();
     }
 
 
@@ -331,14 +337,17 @@ export class Sheet {
         }
 
         this.appearance[columnId][rowId] = appearance;
+        this.onChange();
     }
 
     public setColumApperance(columnId:number, apperance:Appearance) {
         this.columnAppearance[columnId] = apperance;
+        this.onChange();
     }
 
     public setRowAppearance(rowId:number, apperance:Appearance) {
         this.rowAppearance[rowId] = apperance;
+        this.onChange();
     }
 
     public getRowHeight(rowId):number {
@@ -381,6 +390,21 @@ export class Sheet {
             columnNumber = (columnNumber - (currentLetterNumber + 1)) / 26;
         }
         return columnString;
+    }
+
+    private onChange() {
+        this.change_listeners.forEach(m => m());
+    }
+
+    public addOnChange(handler:()=>void) {
+        this.change_listeners.push (handler);
+    }
+
+    public removeOnChange(handler:()=>void) {
+        let ix =this.change_listeners.indexOf(handler);
+        if (ix >= 0) {
+            this.change_listeners.splice(ix,1);
+        }
     }
 
 }
