@@ -12,4 +12,4 @@ OpenSource Web based spreadsheet
 * [ ] advanced ui features
 
 <img src="demo/Screenshot.jpeg" />
-<img src="demo/Screenshot_Formula.jpeg" />
+<img src="demo/Screenshot_Formula.png" />
