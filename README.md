@@ -6,6 +6,8 @@ OpenSource Web based spreadsheet
 * [x] basic content editor
 * [ ] merge and split
 * [ ] formula and expressions
+  * [x] Basic Support
+  * [ ] Advanced features
 * [ ] import/export
 * [ ] advanced ui features
 

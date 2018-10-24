@@ -118,8 +118,7 @@ export class CellEditor {
     public deselect() {
         let cell = this.getCurrentCell();
         if(this.IsDirty) {
-            cell.value = this.Value;
-            this.controler.websheet.ActiveSheet.setCell(cell.columnId,cell.rowId,cell);
+            this.controler.websheet.ActiveSheet.setCellValue(cell.columnId,cell.rowId,this.Value);
         }
     }
 

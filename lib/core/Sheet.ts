@@ -1,6 +1,7 @@
 import { Cell } from "./Cell";
 import { Appearance, Border } from "./Appearance";
 import { ColumnDefaultWidth, RowDefaultHeight } from "../common/constants";
+import { Evaluator, IDateProvider } from "./formula/Evaluator";
 
 
 export class CellSelection {
@@ -17,7 +18,7 @@ export class CellSelection {
     }
 }
 
-export class Sheet { 
+export class Sheet implements IDateProvider{
 
     private data:any[] = [];
     public defaultAppearance:Appearance = new Appearance();
@@ -126,6 +127,66 @@ export class Sheet {
         }
     }
 
+    getEvaluatedValue(exp) {
+        if(exp.indexOf(':')!= -1) {
+            return []
+        }
+        const regex  = /([a-zA-z]+)([0-9]+)/g;
+        const pos = regex.exec(exp);
+        const columnId = this.getColumnIndex(pos[1]);
+        const rowId = parseInt(pos[2]) - 1;
+        return this.getCellEvaluatedValue(columnId, rowId);
+    }
+
+    private getColumnIndex(name) {
+        let sum = 0;
+        let pwr = 1;
+        let st  = 65;
+        for(let i = name.length -1;i >=0;i--){
+            const ch = name.charCodeAt(i) - st;
+            sum += ch * pwr;
+            pwr *= 26;
+            st = 64;
+        }
+        return sum;
+    }
+
+    private getCellEvaluatedValue(columnId, rowId){
+        console.log(columnId,rowId);
+        const cell = this.getCell(columnId, rowId);
+        if(cell == null) {
+            return null;
+        }
+        return Evaluator.Eval(this, cell.value);//TODO: should be cached and check cycles
+    }
+
+    setCellValue(columnId: number, rowId: number, value): any {
+        let cell = this.forceGetCell(columnId, rowId);
+        if (value.startsWith('=')) {
+            let evaluatedValue = Evaluator.Eval(this, value);
+            cell.update(value, evaluatedValue);
+        } else {
+            cell.value = value;
+        }
+
+        this.updateDependees(columnId, rowId);
+        this.onChange()
+    } 
+
+    private updateDependees (columnId: number, rowId: number){
+        //TODO: check cyclic dependencies!!!!
+        let cellName = `${Sheet.get_columnName(columnId)}${rowId + 1}`;
+        for(let d of this.data){
+            if (!d) continue; 
+            for(let c of d){
+                if(!c) continue;
+                if(c.value.indexOf(cellName) != -1)
+                {
+                    this.setCellValue(c.columnId, c.rowId, c.value)
+                }
+            }
+        }
+    }
 
     getColumnLeft(columnId:number) {
         let result = 0;

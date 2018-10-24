@@ -1,13 +1,9 @@
-import { Expression } from "./Expression";
-
 export class Cell {
-
     public colSpan:number = 1;
-    public rowSpan:number = 1;
-    public expression:Expression = null;
-    
+    public rowSpan:number = 1;    
 
     private formattedValue:string;
+    private evaluatedValue;
     private _columnId:number;
     private _rowId:number;
     private _value:any = null;
@@ -34,8 +30,17 @@ export class Cell {
     }
 
     public set value(newValue) {
-        this._value =newValue;
-        this.formattedValue = newValue;//TODO:change that after adding formula 
+        this.update(newValue, newValue);
+    }
+
+    public update(newValue, evaluated):void {
+        this._value = newValue;
+        this.evaluatedValue = evaluated;
+        this.format();
+    }
+
+    private format(){
+        this.formattedValue = this.evaluatedValue;
     }
 
 }
