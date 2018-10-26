@@ -13,6 +13,8 @@ $(document).ready(()=> {
     let ui = new UI(el);
     
     $('#bold-action').click(() => ui.execCmd('bold'));
+    $('#italic-action').click(() => ui.execCmd('italic'));
+    $('#underline-action').click(() => ui.execCmd('underline'));
     $('#font-size').change(() =>  ui.execCmd('fontSize',$('#font-size').val()));
     $('#font-name').change(()=>ui.execCmd('fontName',$('#font-name').val()));
 

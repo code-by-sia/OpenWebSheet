@@ -263,6 +263,8 @@ export class CanvasRenderer implements DocumentRenderer {
         context.fillStyle = appearance.background;
         if(appearance.fontSize) context.fontSize = parseInt(appearance.fontSize);
         if(appearance.fontName) context.fontName = appearance.fontName;
+        context.fontStyle = (appearance.textStyle) ? appearance.textStyle : '';
+
         let columnWidth = sheet.getColumnWidth(columnId);
         let rowHeight = sheet.getRowHeight(rowId);
         context.setMask(left, y, columnWidth - .5, rowHeight);

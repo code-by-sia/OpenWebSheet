@@ -11,6 +11,7 @@ export class Commander {
     public constructor(private doc:OpenDocument) {
         this.commands['bold']= () => this.bold();
         this.commands['italic']= () => this.italic();
+        this.commands['underline']= () => this.underline();
         this.commands['fontSize']= (size) => this.fontSize(size);
         this.commands['fontName']= (size) => this.fontName(size);
     }
@@ -52,11 +53,20 @@ export class Commander {
         this.history.push(historyItem);
     }
 
+
+    private toggle(str,t) {
+        str = str || '';
+        if(str.indexOf(t) != -1) {
+            return str.replace(t, '')
+        }
+        return `${str} ${t}`;
+    }
+
     private bold () {
         this.logAppearanceOnlyCommnand();
         let sel = this.Selection;
         let app = this.SelectedAppearance || new Appearance();
-        app.textStyle = (app.textStyle==='bold')?'':'bold';
+        app.textStyle = this.toggle(app.textStyle, ' bold');
         this.ActiveSheet.setCellAppearance(sel.columnId, sel.rowId, app);
     }
 
@@ -64,9 +74,18 @@ export class Commander {
         this.logAppearanceOnlyCommnand();
         let sel = this.Selection;
         let app = this.SelectedAppearance || new Appearance();
-        app.textStyle = (app.textStyle==='italic')?'':'italic';
+        app.textStyle = this.toggle(app.textStyle, ' italic');
         this.ActiveSheet.setCellAppearance(sel.columnId, sel.rowId, app);
     }
+
+    private underline () {
+        this.logAppearanceOnlyCommnand();
+        let sel = this.Selection;
+        let app = this.SelectedAppearance || new Appearance();
+        app.textStyle = this.toggle(app.textStyle, ' underline');
+        this.ActiveSheet.setCellAppearance(sel.columnId, sel.rowId, app);
+    }
+
 
     private fontSize(size) {
         this.logAppearanceOnlyCommnand();
