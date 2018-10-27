@@ -40,6 +40,7 @@ export class OpenDocument {
         }
         
         this.activeSheetIndex = index;
+        this.onChange();
     }
 
     public get Sheets(): Sheet[] {

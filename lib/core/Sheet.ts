@@ -1,6 +1,6 @@
 import { Cell } from "./Cell";
 import { Appearance, Border } from "./Appearance";
-import { ColumnDefaultWidth, RowDefaultHeight } from "../common/constants";
+import {ColumnDefaultWidth, RowDefaultHeight, SheetTitleWidth} from "../common/constants";
 import { Evaluator, IDateProvider } from "./formula/Evaluator";
 
 
@@ -466,6 +466,11 @@ export class Sheet implements IDateProvider{
         if (ix >= 0) {
             this.change_listeners.splice(ix,1);
         }
+    }
+
+    public getWidth(measure:(text:string) => number) {
+        return SheetTitleWidth;
+        //return Math.max(SheetTitleWidth, measure(this.title) + 10); TODO: use this
     }
 
 }

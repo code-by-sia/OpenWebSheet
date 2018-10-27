@@ -4,7 +4,9 @@ import {
     RowHeaderWidth,
     SheetTitleHeight,
     COLOR_3,
-    COLOR_1
+    COLOR_1,
+    COLOR_LIGHT,
+    COLOR_CREAM
 } from '../../common/constants'
 import { DocumentRenderer } from "../DocumentRenderer";
 import { OpenDocument } from "../../core/Document";
@@ -80,74 +82,62 @@ export class CanvasRenderer implements DocumentRenderer {
 
     }
 
-    getSheetWidth(sheet) {
-        return this.context.get_textWidth(sheet.title) + 10;
-    }
-
     doRender() {
         console.log('%cRender',`color:${COLOR_1}`);
-
         let context2d = this.get_context2D();
         this.context = new Context(context2d, this.width, this.height);
-
-        let tabStroke = '#ccc';
-        let tabBar = '#eee';
-        let tabFill = '#fff';
-        let tabActiveStroke = COLOR_3;
-
-        let context = this.context;
-
-        context.fillStyle = tabBar;
-        context.fillRect(0, this.height - SheetTitleHeight, this.width,SheetTitleHeight);
-        context.strokeStyle = tabStroke;
-        context.strokeSize = 1;
-        context.rect(0, this.height - (SheetTitleHeight - .5), this.width, SheetTitleHeight);
-        context.fillStyle = tabFill;
-
-        let x = SheetTitleHeight;
-        for (let i in this.document.Sheets) {
-            let sheet = this.document.Sheets[i];
-            let width = this.getSheetWidth(sheet);
-            context.fillStyle = tabFill;
-            context.strokeStyle = tabStroke;
-            context.strokeSize = 1;
-
-            let x1 = x;
-            let y1 = this.height - SheetTitleHeight + .5;
-            let rWidth = width + SheetTitleHeight;
-            let rHeight = SheetTitleHeight - 5;
-
-            context.rect(x1, y1, rWidth, rHeight);
-            context.fillRect(x1, y1, rWidth, rHeight);
-            context.fillStyle = '#ececec';
-            context.fontSize = 12;
-            const cornerWidth = RowHeaderWidth - 2;
-            context.fillClosePath(new Point(2,cornerWidth),new Point(cornerWidth,cornerWidth), new Point(cornerWidth,1));
-
-            if (this.document.ActiveSheetIndex == parseInt(i)) {
-                this.renderSheet();
-                context.fontSize = 13;
-                context.fontStyle = ' bold ';
-                context.strokeStyle = tabFill;
-                context.line(x1, y1, x1 + rWidth, y1);
-
-                context.strokeStyle = tabActiveStroke;
-                context.strokeSize = 3;
-                context.line(x1, y1 + rHeight, x1 + rWidth, y1 + rHeight);
-            } else {
-                context.fontStyle = '';
-            }
-
-            context.textAlign = TextAlign.Center;
-            context.fillText(sheet.title, x, this.height - SheetTitleHeight + 4, width + SheetTitleHeight);
-            x += width + SheetTitleHeight + 5;
-        }
-
-        context = void 0;
-        context2d = void 0;
+        this.renderSheetTitles();
+        this.renderSheet();
     }
 
-    private renderSheet () {
+    private renderTopCorner() {
+        this.context.fillStyle = '#ececec';
+        this.context.fontSize = 12;
+        const cornerWidth = RowHeaderWidth - 2;
+        this.context.fillClosePath(new Point(2,cornerWidth),new Point(cornerWidth,cornerWidth), new Point(cornerWidth,1));
+
+    }
+
+    private renderSheetTitles(){
+        this.renderTopCorner();
+
+        this.context.strokeSize = 1;
+        let x1 = 0;
+        let y1 = this.height - SheetTitleHeight - .5;
+        let rHeight = SheetTitleHeight + 5;
+        let h = this.height - SheetTitleHeight - 0.5;
+        this.context.rect(x1, y1, this.width, rHeight);
+        this.context.fillStyle = this.context.createGradient(0,h,0,SheetTitleHeight/3,[0,'#f0f0f0'], [1,'#fff']);
+        this.context.fillRect(x1, y1, this.width, rHeight);
+        this.context.textAlign = TextAlign.Center;
+
+        let x = RowHeaderWidth;
+        let active = this.document.ActiveSheet;
+        const delta = 5;
+        for(let sh of this.document.Sheets) {
+            let sheetWidth = sh.getWidth(str => this.context.get_textWidth(str));
+            this.context.strokeStyle = '#aaa';
+            this.context.fillStyle = '#fafafa';
+            this.context.fontStyle = 'italic';
+            if(sh === active){
+                this.context.fillStyle = '#fff';
+                this.context.fontStyle = 'bold';
+            }
+            this.context.rect(x,h,sheetWidth,SheetTitleHeight - delta);
+            this.context.fillText(sh.title, x,h + delta, sheetWidth)
+            if(sh === active ) {
+                this.context.fillStyle =  COLOR_3;
+                this.context.fillRect(x, h + SheetTitleHeight - delta,sheetWidth,2);
+                this.context.strokeStyle = COLOR_LIGHT;
+            }
+            this.context.line(x, h,x + sheetWidth, h);
+
+            x += sheetWidth + delta;
+        }
+        this.context.fontStyle ='';
+    }
+
+    private renderSheet() {
         let width = this.width;
         let height = this.height;
 
@@ -160,7 +150,7 @@ export class CanvasRenderer implements DocumentRenderer {
         let lastColumn = this.renderColumns();
         context.unmask();
 
-        context.setMask(ColumnHeaderHeight + .5, RowHeaderWidth, width, maskHeight - RowHeaderWidth);
+        context.setMask(ColumnHeaderHeight + .5, RowHeaderWidth, width, maskHeight - RowHeaderWidth - .5);
         this.renderCells(lastColumn, lastRow);
         context.unmask();
     }
@@ -182,13 +172,16 @@ export class CanvasRenderer implements DocumentRenderer {
     }
     private paintRow(top: number,label:string): any {
         let context = this.context;
+        context.save();
         context.strokeSize = 1;
+        context.strokeStyle = '#ccc';
         context.fillStyle = '#fafafa';
         context.rect(0, top, RowHeaderWidth, this.height);
         context.fillRect(0, top, RowHeaderWidth, this.height);
         context.fontSize = 12;
         context.textAlign = TextAlign.Center;
         context.fillText(label, 0, top + (RowDefaultHeight - 12) / 2, RowHeaderWidth);
+        context.restore();
     }
 
     private renderColumns () {

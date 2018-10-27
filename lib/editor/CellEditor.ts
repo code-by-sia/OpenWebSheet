@@ -151,6 +151,13 @@ export class CellEditor {
         return ret;
     }
 
+    private getTextDecoration(value:String) {
+        if(!value) return '';
+        if(value.indexOf('underline') != -1) return 'underline';
+        if(value.indexOf('stroke') != -1) return 'stroke';
+        return '';
+    }
+
     private getTextAlign(textAlign:TextAlign) {
         if(textAlign==TextAlign.Center) return 'center';
         if(textAlign==TextAlign.Left) return 'left';
@@ -166,6 +173,7 @@ export class CellEditor {
         this.editorElement.style.background = app.background;
         this.editorElement.style.fontFamily = app.fontName;
         this.editorElement.style.fontSize = `${app.fontSize}px`;
+        this.editorElement.style.textDecoration = this.getTextDecoration(app.textStyle);
     }
 
     public select(animation:boolean = true) {

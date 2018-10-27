@@ -107,7 +107,7 @@ export class Context {
 
     public direction:LayoutDirection = LayoutDirection.LeftToRight;
     public textAlign:TextAlign = TextAlign.Left;
-    public fillStyle = '#fff';
+    public fillStyle:any = '#fff';
     public strokeStyle = '#000';
     public strokeSize = 1;
     public contentFillStyle = '#000';
@@ -132,6 +132,7 @@ export class Context {
     }
 
     private applyContent() {
+        const style = this.fontStyle.replace('underline','');
         this.context2d.fillStyle = this.contentFillStyle;
         this.context2d.font = (`${this.fontStyle} ${this.fontSize}px ${this.fontName}`).trim();
         this.context2d.textAlign = 'left';
@@ -289,10 +290,20 @@ export class Context {
             delta = (width - textWidth) / 2;
         } else if (this.textAlign == TextAlign.Right) {
             delta = width - textWidth;
-        }       
+        }
+        if(this.fontStyle && this.fontStyle.indexOf('underline') != -1) {
+            this.rect(x, y + this.fontSize + 2,this.context2d.measureText(text).width,0 );
+        }
 
         this.context2d.fillText(text, x + delta, y + this.fontSize);
         this.restore();
     }
 
+    createGradient(x,y,w,h, ...stops) {
+        let grd = this.context2d.createLinearGradient(x,y,x+w,y+h);
+        for(let n of stops) {
+            grd.addColorStop(n[0],n[1]);
+        }
+        return grd;
+    }
 }

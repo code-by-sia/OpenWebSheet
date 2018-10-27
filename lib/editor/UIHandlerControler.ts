@@ -142,4 +142,9 @@ export class UIHandlerController {
         }
     }
 
+    changeActiveSheet(index: number) {
+        this.cellEditor.deselect();
+        this.websheet.ActiveSheetIndex = index;
+        this.cellEditor.select(false);
+    }
 }
