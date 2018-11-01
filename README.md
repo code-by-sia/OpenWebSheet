@@ -11,5 +11,6 @@ OpenSource Web based spreadsheet
 * [ ] import/export
 * [ ] advanced ui features
 
+<img src="demo/demo.jpg" />
 <img src="demo/Screenshot.jpeg" />
 <img src="demo/Screenshot_Formula.png" />

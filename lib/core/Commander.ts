@@ -14,6 +14,7 @@ export class Commander {
         this.commands['underline']= () => this.underline();
         this.commands['fontSize']= (size) => this.fontSize(size);
         this.commands['fontName']= (size) => this.fontName(size);
+        this.commands['bgcolor'] = (color) => this.bgColor(color);
     }
 
     private has(commandName){
@@ -86,6 +87,14 @@ export class Commander {
         this.ActiveSheet.setCellAppearance(sel.columnId, sel.rowId, app);
     }
 
+    private bgColor (color) {
+        console.log('color is: ',color)
+        this.logAppearanceOnlyCommnand();
+        let sel = this.Selection;
+        let app = this.SelectedAppearance || new Appearance();
+        app.background = color;
+        this.ActiveSheet.setCellAppearance(sel.columnId, sel.rowId, app);
+    }
 
     private fontSize(size) {
         this.logAppearanceOnlyCommnand();

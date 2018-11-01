@@ -253,7 +253,6 @@ export class CanvasRenderer implements DocumentRenderer {
         let left = x + ColumnHeaderHeight + .5;
         if (y < RowDefaultHeight) return;
 
-        context.fillStyle = appearance.background;
         if(appearance.fontSize) context.fontSize = parseInt(appearance.fontSize);
         if(appearance.fontName) context.fontName = appearance.fontName;
         context.fontStyle = (appearance.textStyle) ? appearance.textStyle : '';
@@ -261,6 +260,7 @@ export class CanvasRenderer implements DocumentRenderer {
         let columnWidth = sheet.getColumnWidth(columnId);
         let rowHeight = sheet.getRowHeight(rowId);
         context.setMask(left, y, columnWidth - .5, rowHeight);
+        context.fillStyle = appearance.background;
         context.fillRect(left, y, columnWidth - .5, rowHeight);
         if(cell.label) {
             context.fillStyle = appearance.text;

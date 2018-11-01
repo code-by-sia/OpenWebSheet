@@ -16,7 +16,8 @@ $(document).ready(()=> {
     $('#italic-action').click(() => ui.execCmd('italic'));
     $('#underline-action').click(() => ui.execCmd('underline'));
     $('#font-size').change(() =>  ui.execCmd('fontSize',$('#font-size').val()));
-    $('#font-name').change(()=>ui.execCmd('fontName',$('#font-name').val()));
+    $('#font-name').change(() => ui.execCmd('fontName',$('#font-name').val()));
+    $('#bg-color').change(() => ui.execCmd('bgcolor',$('#bg-color').val()))
 
     $("#header > .menu > li").click((evt) => {
         let el = evt.target;

@@ -11,6 +11,7 @@ define(["require", "exports", '../lib/UI'], function (require, exports, UI_1) {
         $('#underline-action').click(function () { return ui.execCmd('underline'); });
         $('#font-size').change(function () { return ui.execCmd('fontSize', $('#font-size').val()); });
         $('#font-name').change(function () { return ui.execCmd('fontName', $('#font-name').val()); });
+        $('#bg-color').change(function () { return ui.execCmd('bgcolor', $('#bg-color').val()); });
         $("#header > .menu > li").click(function (evt) {
             var el = evt.target;
             var tg = el.getAttribute('data-for') + "-menu";
