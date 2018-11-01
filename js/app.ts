@@ -24,7 +24,7 @@ $(document).ready(()=> {
         $("#header > .menu > li.active").removeClass('active');
         $(`#header > .menu-content > .active`).removeClass('active');
         $(`#header > .menu-content > .${tg}`).addClass('active');
-        el.className ='active';
+        $(el).addClass('active');
     })
     
  
