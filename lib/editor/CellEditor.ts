@@ -187,7 +187,7 @@ export class CellEditor {
         this.editorElement.style.textDecoration = this.getTextDecoration(app.textStyle);
     }
 
-    public select(animation:boolean = true) {
+    public select(animation = true) {
         if (animation) {
             this.enableAnimation();
         } else {

@@ -157,12 +157,12 @@ export class CanvasRenderer implements DocumentRenderer {
 
     private renderRows () {
         let context = this.context;
-        let height = this.height - RowHeaderWidth;// - WebSheet.SheetTitleHeight;
+        let height = this.height - RowHeaderWidth - SheetTitleHeight;
         let cumulativeHeight =  RowDefaultHeight;
         let sheet = this.document.ActiveSheet;
 
         let rw = sheet.scrollRow;
-        for (; cumulativeHeight <= height; rw++) {
+        for (; cumulativeHeight < height; rw++) {
             let rowHeight = sheet.getRowHeight(rw);
             this.paintRow(cumulativeHeight,(rw + 1).toString());
             cumulativeHeight += rowHeight;
@@ -219,8 +219,7 @@ export class CanvasRenderer implements DocumentRenderer {
         let context = this.context;
         context.strokeStyle = '#eee';
         context.strokeSize = 1;
-
-        for (let r = sheet.scrollRow - 1; r <= lastRow; r++) {
+        for (let r = sheet.scrollRow - 1; r < lastRow; r++) {
             let rowHeight = sheet.getRowHeight(r);
             x = 0;
             for (let c = sheet.scrollColumn; c <= lastColumn; c++) {
