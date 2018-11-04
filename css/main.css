@@ -86,13 +86,48 @@
     padding: 0 10px;
 }
 
-#wrapper #header .formula-bar{
-    padding: 5px 10px;
-    font-style: italic;
-    color:#777;
+#wrapper #header .formula-bar {
     border-top:solid thin #dcdcdc;
     border-bottom:solid thin #dcdcdc;
     margin-bottom:2px;
+    display: flex;
+}
+
+#wrapper #header .formula-bar .side {
+    padding: 5px 10px;
+    font-weight: bolder;
+    font-size: 16px;
+    line-height: 18px;
+    border-left: solid thin #ccc;
+}
+#wrapper #header .formula-bar input.cell-name {
+    width: 80px;
+    text-align: center;
+    border:none;
+}
+#wrapper #header .formula-bar .side .actions {
+    font-size: 12px;
+    color: gray;
+}
+#wrapper #header .formula-bar .side .actions i {
+    margin: 0 3px;
+}
+#wrapper #header .formula-bar .arrow {
+    line-height: 30px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color: lightgray;
+}
+#wrapper #header .formula-bar .arrow:hover {
+    color:gray;
+}
+#wrapper #header .formula-bar input.formula {
+    flex:1;
+    border: none;
+    border-left:  solid thin lightgray;
+    text-indent: 5px;
+    margin: 4px 0;
 }
 
 #wrapper #content {
