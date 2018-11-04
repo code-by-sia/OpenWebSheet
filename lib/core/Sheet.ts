@@ -74,6 +74,8 @@ export class Sheet implements IDateProvider{
             }
             
         }
+
+        if(this.invalidSelection) this.selectNextColumnCell();
     }
 
     selectPreviousColumnCell() {
@@ -93,9 +95,20 @@ export class Sheet implements IDateProvider{
                 this.selectPreviousRowCell();
             }
         }
+
+        if(this.invalidSelection) this.selectPreviousColumnCell();
+    }
+
+    get selectedCell() {
+        return this.getCell(this.selection.columnId, this.selection.rowId);
+    }
+
+    private get invalidSelection(){
+        return this.selectedCell && this.selectedCell.isMerged;
     }
 
     selectNextRowCell() {
+        
         this.selection.rowId++;
         if(this.selection.single){
             this.selection.top = this.selection.rowId;
@@ -111,7 +124,10 @@ export class Sheet implements IDateProvider{
                 this.selectNextColumnCell();
             }
         }
+
+        if(this.invalidSelection) this.selectNextRowCell();
     }
+
     selectPreviousRowCell() {
         this.selection.rowId--;
 
@@ -129,6 +145,8 @@ export class Sheet implements IDateProvider{
                 this.selectPreviousColumnCell();
             }
         }
+
+        if(this.invalidSelection) this.selectPreviousRowCell();
     }
 
     getEvaluatedValue(exp) {
