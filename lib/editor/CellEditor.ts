@@ -192,7 +192,7 @@ export class CellEditor {
         let y1 = sheet.getRowTop(selection.top);
         let x2 = sheet.getColumnRight(selection.right);
         let y2 = sheet.getRowBottom(selection.bottom);
-
+        
         let w = x2 - x1;
         let h = y2 - y1;
 

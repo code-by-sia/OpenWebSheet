@@ -289,7 +289,7 @@ export class Context {
         if (this.textAlign == TextAlign.Center) {
             delta = (width - textWidth) / 2;
         } else if (this.textAlign == TextAlign.Right) {
-            delta = width - textWidth;
+            delta = width - textWidth - 10;//TODO: fix that constant value [indent]
         }
         if(this.fontStyle && this.fontStyle.indexOf('underline') != -1) {
             this.rect(x, y + this.fontSize + 2,this.context2d.measureText(text).width,0 );

@@ -13,6 +13,13 @@ export class Cell {
         this._rowId = rowId;
     }
 
+    // merged cell has following value
+    public reference:Cell = null;
+
+    public get isMerged() {
+        return this.reference !== null;
+    }
+
     public get columnId() {
         return this._columnId;
     }
@@ -31,6 +38,38 @@ export class Cell {
 
     public set value(newValue) {
         this.update(newValue, newValue);
+    }
+
+    public get top() {
+        if(this.isMerged) {
+            return this.reference.top
+        }
+
+        return this.rowId;
+    }
+
+    public get left() {
+        if(this.isMerged) {
+            return this.reference.left
+        }
+
+        return this.columnId
+    }
+
+    public get bottom() {
+        if(this.isMerged) {
+            return this.reference.bottom
+        }
+
+        return this.rowId + this.rowSpan
+    }
+
+    public get right() {
+        if(this.isMerged) {
+            return this.reference.right
+        }
+
+        return this.columnId + this.colSpan
     }
 
     public update(newValue, evaluated):void {

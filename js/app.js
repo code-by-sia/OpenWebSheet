@@ -12,6 +12,11 @@ define(["require", "exports", '../lib/UI'], function (require, exports, UI_1) {
         $('#font-size').change(function () { return ui.execCmd('fontSize', $('#font-size').val()); });
         $('#font-name').change(function () { return ui.execCmd('fontName', $('#font-name').val()); });
         $('#bg-color').change(function () { return ui.execCmd('bgcolor', $('#bg-color').val()); });
+        $('#merge-action').click(function () { return ui.execCmd('merge'); });
+        $('#unmerge-action').click(function () { return ui.execCmd('unmerge'); });
+        $('#left-action').click(function () { return ui.execCmd('align', 'left'); });
+        $('#center-action').click(function () { return ui.execCmd('align', 'center'); });
+        $('#right-action').click(function () { return ui.execCmd('align', 'right'); });
         $("#header > .menu > li").click(function (evt) {
             var el = evt.target;
             var tg = el.getAttribute('data-for') + "-menu";

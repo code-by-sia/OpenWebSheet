@@ -16,6 +16,10 @@ export class CellSelection {
     public get single(){
         return this.right == this.left && this.top == this.bottom
     }
+
+    public toString() {
+        return `${this.top} ${this.left} - ${this.bottom} ${this.right}`;
+    }
 }
 
 export class Sheet implements IDateProvider{
@@ -152,7 +156,6 @@ export class Sheet implements IDateProvider{
     }
 
     private getCellEvaluatedValue(columnId, rowId){
-        console.log(columnId,rowId);
         const cell = this.getCell(columnId, rowId);
         if(cell == null) {
             return null;
@@ -179,7 +182,7 @@ export class Sheet implements IDateProvider{
         for(let d of this.data){
             if (!d) continue; 
             for(let c of d){
-                if(!c) continue;
+                if(!c || !c.value) continue;
                 if(c.value.indexOf(cellName) != -1)
                 {
                     this.setCellValue(c.columnId, c.rowId, c.value)
@@ -249,12 +252,42 @@ export class Sheet implements IDateProvider{
         let right = Math.max(x1, x2);
         let bottom = Math.max(y1, y2);
 
-        this.selection.top = this.findRowIdByY(top);
-        this.selection.bottom = this.findRowIdByY(bottom);
-        this.selection.left = this.findColumnIdByX(left);
-        this.selection.right = this.findColumnIdByX(right);
-        this.selection.rowId = this.findRowIdByY(y1);
-        this.selection.columnId = this.findColumnIdByX(x1);
+        let stop = this.findRowIdByY(top);
+        let sbottom = this.findRowIdByY(bottom);
+        let sleft = this.findColumnIdByX(left);
+        let sright = this.findColumnIdByX(right);
+        let rowId = this.findRowIdByY(y1);
+        let columnId = this.findColumnIdByX(x1);
+        let selectedCell = this.getCell(columnId, rowId);
+        if(selectedCell && selectedCell.isMerged) {
+            rowId = selectedCell.reference.rowId;
+            columnId = selectedCell.reference.columnId;
+        }
+        
+        let ftop = stop;
+        let fbottom = sbottom + 1;
+        let fleft = sleft;
+        let fright = sright + 1;
+
+        for(let x=sleft;x<=sright;x++){
+            for(let y=stop;y<=sbottom;y++){
+                let cell = this.getCell(x,y);
+                if(cell) {
+                    ftop = Math.min(ftop, cell.top)
+                    fleft = Math.min(fleft, cell.left)
+                    fbottom = Math.max(fbottom, cell.bottom)
+                    fright = Math.max(fright, cell.right)
+                }
+            }
+        }
+
+        this.selection.top = ftop;
+        this.selection.left = fleft;
+        this.selection.right = fright - 1;
+        this.selection.bottom = fbottom - 1;
+        this.selection.rowId = rowId;
+        this.selection.columnId = columnId;
+        
     }   
 
     public scrollDown(): any {
@@ -314,11 +347,18 @@ export class Sheet implements IDateProvider{
         let cell = this.forceGetCell(columnId, rowId);
         cell.colSpan = width;
         cell.rowSpan = height;
+        this.setCell(columnId, rowId, cell);
+
         for(let x = columnId; x < columnId + width; x++){
             for(let y=rowId; y < rowId + height; y++){
-                this.setCell(columnId, rowId, cell);
+                if(y != rowId || x != columnId) {
+                    let xcell = this.forceGetCell(x,y);
+                    xcell.reference = cell;
+                    this.setCell(x, y, xcell);
+                }
             }
         }
+        
         this.onChange();
     }
 

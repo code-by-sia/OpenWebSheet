@@ -53,7 +53,7 @@
 
 #wrapper #header .menu-content {
     padding: 5px 10px;
-    height: 80px;
+    height: 100px;
     flex-direction: row;
     background: #ece9e6;
     background: -webkit-linear-gradient(to top, #ece9e6, #ffffff);
@@ -61,6 +61,30 @@
 }
 #wrapper #header .menu-content > div { display: none; }
 #wrapper #header .menu-content > div.active { display:block; }
+#wrapper #header .menu-content fieldset {
+    display: block;
+    float: left;
+    background:#fff;
+    box-shadow: 2px 2px 0 #ccc;
+    border-top: thin solid #ccc;
+    border-left: thin dashed #ccc;
+    height: 90px;
+    padding:5px 10px;
+}
+#wrapper #header .menu-content fieldset:first-child {
+    border-radius: 3px 0 0 3px;
+    border-style: solid;
+}
+
+#wrapper #header .menu-content fieldset:last-child {
+    border-radius: 0 3px 3px 0;
+}
+#wrapper #header .menu-content fieldset legend {
+    font-size: xx-small;
+    color: #fff;
+    background: #333;
+    padding: 0 10px;
+}
 
 #wrapper #header .formula-bar{
     padding: 5px 10px;
@@ -81,13 +105,55 @@
 #wrapper #footer {
     height: 30px;
     background: #ececec;
-
 }
-
-
 
 .about-menu {
     text-align: center;
     padding-top: 15px;
     font-style: italic;
+}
+
+input[type=color] {
+    border: none;
+    padding: 0px;
+    width: 20px;
+}
+
+.menu-content fieldset p {
+    margin-bottom: 5px;
+}
+.menu-content button {
+    border: solid thin #ccc;
+    font-size: x-small;
+    border-radius: 2px;
+}
+
+.menu-content .button-group {
+    display: flex;
+}
+.menu-content .button-group button {
+    border-radius: 0;
+    border-right-style: none;
+    cursor: pointer;
+}
+.menu-content .button-group button:hover {
+    text-decoration: underline;
+    background: #ffffa0;/* TODO: style it */
+}
+.menu-content .button-group button:disabled {
+    color: #ccc;
+    background: #fefefe;
+    cursor: not-allowed;
+    text-decoration: none !important;
+}
+.menu-content .button-group button:first-child {
+    border-radius: 3px 0 0 3px;
+}
+.menu-content .button-group button:last-child {
+    border-right-style: solid;
+    border-radius: 0 3px 3px 0;
+}
+
+.menu-content label {
+    font-size: x-small;
 }

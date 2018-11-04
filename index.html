@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/main.css?v2" />
     <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' 
         rel='stylesheet' type='text/css' />
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
 </head>
 <body>
     <div id="wrapper">
@@ -53,14 +53,47 @@
                             
                         </p>
                         <p>
-                            <button id="bold-action" style="font-weight:bolder">B</button>
-                            <button id="italic-action" style="font-style:italic;font-weight:bold">I</button>
-                            <button id="underline-action"style="text-decoration:underline;font-weight:bold">U</button>
+                            <span class="button-group">
+                                <button id="bold-action">
+                                    <i class="fa fa-bold"></i>
+                                </button>
+                                <button id="italic-action">
+                                    <i class="fa fa-italic"></i>
+                                </button>
+                                <button id="underline-action">
+                                    <i class="fa fa-underline"></i>
+                                </button>
+                            </span>
                         </p>
                         <p>
-                            <input type="color" value="#ffffff" id="bg-color" />
+                            <span class="button-group">
+                                <button id="left-action">
+                                    <i class="fa fa-align-left"></i>
+                                </button>
+                                <button id="center-action">
+                                    <i class="fa fa-align-center"></i>
+                                </button>
+                                <button id="right-action">
+                                    <i class="fa fa-align-right"></i>
+                                </button>
+                            </span>
                         </p>
                         
+                    </fieldset>
+                    <fieldset>
+                        <legend>Merge</legend>
+                        <p>
+                            <span class="button-group">
+                                <button id="merge-action">Merge</button>
+                                <button disabled id="unmerge-action">Unmerge</button>
+                            </span>
+                        </p>
+                        <p>
+                            <label>
+                                Fill Color <i class="fa fa-fill"></i>
+                            </label>
+                            <input type="color" value="#ffffff" id="bg-color" />
+                        </p>
                     </fieldset>
                 </div>
                 <div class="formulas-menu">formulas</div>
@@ -73,6 +106,9 @@
                 </div>
             </div>
             <div class="formula-bar">
+                <span class="side">
+                    <i class="fas fa-function"></i>
+                </span>
                 [Formula bar will be here..]
             </div>
             

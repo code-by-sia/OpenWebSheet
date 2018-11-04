@@ -18,6 +18,11 @@ $(document).ready(()=> {
     $('#font-size').change(() =>  ui.execCmd('fontSize',$('#font-size').val()));
     $('#font-name').change(() => ui.execCmd('fontName',$('#font-name').val()));
     $('#bg-color').change(() => ui.execCmd('bgcolor',$('#bg-color').val()))
+    $('#merge-action').click(() => ui.execCmd('merge'));
+    $('#unmerge-action').click(() => ui.execCmd('unmerge'));
+    $('#left-action').click(() => ui.execCmd('align','left'));
+    $('#center-action').click(() => ui.execCmd('align','center'));
+    $('#right-action').click(() => ui.execCmd('align','right'));
 
     $("#header > .menu > li").click((evt) => {
         let el = evt.target;
