@@ -226,6 +226,7 @@ export class CellEditor {
 
         this.anchorElement.style.left = `${x2-5}px`;
         this.anchorElement.style.top = `${y2-5}px`;
+        
     }
 
 }

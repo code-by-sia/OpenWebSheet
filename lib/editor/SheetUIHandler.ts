@@ -65,7 +65,7 @@ export class SheetUIHandler extends UIHandler {
         let y2 = y - ColumnHeaderHeight;
         this.controller.cellEditor.deselect();
         sheet.selectByXY(x1, y1, x2, y2);
-        this.controller.cellEditor.select(false);
+        this.controller.cellEditor.select(true);
     }
 
 }
