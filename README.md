@@ -12,3 +12,7 @@ OpenSource Web based spreadsheet
 * [ ] advanced ui features
 
 <img src="demo/demo.png" />
+
+new ui:
+
+<img src="demo/demo-new-ui.png" />

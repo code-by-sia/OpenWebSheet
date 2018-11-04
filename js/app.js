@@ -25,6 +25,13 @@ define(["require", "exports", '../lib/UI'], function (require, exports, UI_1) {
             $("#header > .menu-content > ." + tg).addClass('active');
             $(el).addClass('active');
         });
-        //demo(sheet);
+        ui.addOnChangeEventListener(function (doc) {
+            $('#selection-input').val(ui.SelectedCellLabel);
+            $('#formula-input').val(ui.SelectedValue);
+        });
+        $('#formula-input').focus(function () { return $('#formula-bar').addClass('active'); });
+        $('#formula-input').blur(function () { return $('#formula-bar').removeClass('active'); });
+        $('#formula-bar .commit').click(function () { return ui.execCmd('change-value', null, null, $('#formula-input').val()); });
+        $('#formula-bar .cancel').click(function () { return $('#formula-input').val(ui.SelectedValue); });
     });
 });

@@ -34,7 +34,8 @@
 #wrapper #header .menu li {
     padding: 5px 10px;
     margin: 0 5px;
-    color: #ccc;
+    color: #fff;
+    text-shadow: 1px 1px 0 #333;
     font-weight: bolder;
     text-shadow: none;
     cursor: pointer;
@@ -52,8 +53,8 @@
 }
 
 #wrapper #header .menu-content {
-    padding: 5px 10px;
-    height: 100px;
+    padding:10px 5px;
+    height: 90px;
     flex-direction: row;
     background: #ece9e6;
     background: -webkit-linear-gradient(to top, #ece9e6, #ffffff);
@@ -65,27 +66,48 @@
     display: block;
     float: left;
     background:#fff;
-    box-shadow: 2px 2px 0 #ccc;
+    box-shadow: 2px 2px 0 #cecece;
     border-top: thin solid #ccc;
-    border-left: thin dashed #ccc;
-    height: 90px;
-    padding:5px 10px;
+    border-left: thin dotted #ccc;
+    height: 70px;
+    padding:10px;
+    position: relative;
+    overflow: hidden;
 }
-#wrapper #header .menu-content fieldset:first-child {
-    border-radius: 3px 0 0 3px;
+#wrapper #header .menu-content fieldset:first-child,
+#wrapper #header .menu-content fieldset.independent {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
     border-style: solid;
 }
+#wrapper #header .menu-content fieldset.independent {
+    margin-left: 7px;
+}
 
-#wrapper #header .menu-content fieldset:last-child {
-    border-radius: 0 3px 3px 0;
+#wrapper #header .menu-content fieldset:last-child,
+#wrapper #header .menu-content fieldset.last {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 #wrapper #header .menu-content fieldset legend {
+    position: absolute;
     font-size: xx-small;
-    color: #fff;
-    background: #333;
-    padding: 0 10px;
+    color: #aaa;
+    font-weight: bold;
+    background: -webkit-linear-gradient(to top, #ece9e6, #ffffff);
+    background: linear-gradient(to top, #ece9e6, #ffffff);
+    padding-bottom: 3px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 #fff;
+    left:0;
+    right: 0;
+    bottom:0;
+    text-align: center;
 }
-
+#wrapper #header .menu-content select {
+    border:solid thin #ccc;
+    border-radius: 0;
+}
 #wrapper #header .formula-bar {
     border-top:solid thin #dcdcdc;
     border-bottom:solid thin #dcdcdc;
@@ -108,7 +130,10 @@
 #wrapper #header .formula-bar .side .actions {
     font-size: 12px;
     color: gray;
+    cursor: pointer;
 }
+#formula-bar.active .actions .cancel { color:#a80000; }
+#formula-bar.active .actions .commit { color:#00a800; }
 #wrapper #header .formula-bar .side .actions i {
     margin: 0 3px;
 }
@@ -170,6 +195,9 @@ input[type=color] {
     border-radius: 0;
     border-right-style: none;
     cursor: pointer;
+    min-width: 25px;
+    padding: 4px;
+    text-align: center;
 }
 .menu-content .button-group button:hover {
     text-decoration: underline;

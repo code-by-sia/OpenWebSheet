@@ -68,6 +68,14 @@ export class CellEditor {
         this.anchorElement.style.cursor='cell';
         this.editorArea.appendChild(this.anchorElement);
 
+        this.websheet.addOnChange(() => {
+             const value= this.websheet.ActiveSheet.SelectedValue;
+             if(value != this.Value) {
+                 this.Value = value
+             }
+
+        })
+
     }
 
     private onKeyDown(evt:KeyboardEvent) {
@@ -105,9 +113,12 @@ export class CellEditor {
         this.anchorElement.style.transitionDuration = '.1s';
     }
 
-    
     public get Value(){
         return this.editorElement.value;
+    }
+
+    public set Value(newValue){
+        this.editorElement.value = newValue;
     }
 
     public get IsDirty(){
@@ -118,7 +129,7 @@ export class CellEditor {
     public deselect() {
         let cell = this.getCurrentCell();
         if(this.IsDirty) {
-            this.controler.websheet.ActiveSheet.setCellValue(cell.columnId,cell.rowId,this.Value);
+            this.controler.websheet.execCommand('change-value', cell.columnId, cell.rowId, this.Value)
         }
     }
 

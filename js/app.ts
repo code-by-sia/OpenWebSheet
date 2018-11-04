@@ -1,7 +1,8 @@
 // import {WebSheet}  from '../lib/WebSheet';
 // import {UIHandlerControler} from "../lib/UIHandler";
-//import {demo} from './demo';
+// import {demo} from './demo';
 import {UI} from '../lib/UI';
+import { OpenDocument } from '../lib/core/Document';
 /**
  * Created by SiamandM on 7/21/2016.
  */
@@ -31,10 +32,17 @@ $(document).ready(()=> {
         $(`#header > .menu-content > .active`).removeClass('active');
         $(`#header > .menu-content > .${tg}`).addClass('active');
         $(el).addClass('active');
-    })
+    });
     
- 
-    //demo(sheet);
+    ui.addOnChangeEventListener((doc) => {
+        $('#selection-input').val(ui.SelectedCellLabel);
+        $('#formula-input').val(ui.SelectedValue)
+    });
+
+    $('#formula-input').focus(() => $('#formula-bar').addClass('active'));
+    $('#formula-input').blur(() => $('#formula-bar').removeClass('active'));
+    $('#formula-bar .commit').click(() => ui.execCmd('change-value',null,null,$('#formula-input').val()));
+    $('#formula-bar .cancel').click(() => $('#formula-input').val(ui.SelectedValue))
 
 });
 

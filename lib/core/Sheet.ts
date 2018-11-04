@@ -38,7 +38,6 @@ export class Sheet implements IDateProvider{
     public selection: CellSelection ;
     private change_listeners =[];
 
-
     constructor(public title:string){
         this.defaultAppearance.background = '#fff';
         this.defaultAppearance.fontName = 'lato';
@@ -62,6 +61,7 @@ export class Sheet implements IDateProvider{
         if(this.selection.single){
             this.selection.right = this.selection.columnId;
             this.selection.left = this.selection.columnId;
+            this.onChange();
             return;
         }
         
@@ -76,14 +76,29 @@ export class Sheet implements IDateProvider{
         }
 
         if(this.invalidSelection) this.selectNextColumnCell();
+        this.onChange();
+    }
+
+    private getCellName(columnId, rowId) {
+        return `${Sheet.get_columnName(columnId)}${ rowId + 1 }`;
+    }
+
+    public get SelectionLabel() {
+        return this.getCellName(this.selection.columnId, this.selection.rowId);
+    }
+
+    public get SelectedValue() {
+        return this.selectedCell && this.selectedCell.value; 
     }
 
     selectPreviousColumnCell() {
+        if(this.selection.columnId == 0) return;
         this.selection.columnId--;
 
         if(this.selection.single){
             this.selection.right = this.selection.columnId;
             this.selection.left = this.selection.columnId;
+            this.onChange();
             return;
         }
         
@@ -97,6 +112,7 @@ export class Sheet implements IDateProvider{
         }
 
         if(this.invalidSelection) this.selectPreviousColumnCell();
+        this.onChange();
     }
 
     get selectedCell() {
@@ -113,6 +129,7 @@ export class Sheet implements IDateProvider{
         if(this.selection.single){
             this.selection.top = this.selection.rowId;
             this.selection.bottom = this.selection.rowId;
+            this.onChange();
             return;
         }
         
@@ -126,14 +143,16 @@ export class Sheet implements IDateProvider{
         }
 
         if(this.invalidSelection) this.selectNextRowCell();
+        this.onChange();
     }
 
     selectPreviousRowCell() {
+        if(this.selection.rowId == 0) return;
         this.selection.rowId--;
-
         if(this.selection.single){
             this.selection.top = this.selection.rowId;
             this.selection.bottom = this.selection.rowId;
+            this.onChange();
             return;
         }
         
@@ -147,6 +166,7 @@ export class Sheet implements IDateProvider{
         }
 
         if(this.invalidSelection) this.selectPreviousRowCell();
+        this.onChange();
     }
 
     getEvaluatedValue(exp) {
@@ -305,7 +325,7 @@ export class Sheet implements IDateProvider{
         this.selection.bottom = fbottom - 1;
         this.selection.rowId = rowId;
         this.selection.columnId = columnId;
-        
+        this.onChange();        
     }   
 
     public scrollDown(): any {

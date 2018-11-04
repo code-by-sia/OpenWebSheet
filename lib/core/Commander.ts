@@ -18,6 +18,7 @@ export class Commander {
         this.commands['merge'] = () => this.merge();
         this.commands['unmerge'] = () => this.unmerge();
         this.commands['align'] = (value) => this.align(value);
+        this.commands['change-value'] = (columnId, rowId, value) => this.changeValue(columnId, rowId, value);
     }
 
     private has (commandName){
@@ -82,6 +83,13 @@ export class Commander {
         this.history.push(historyItem);
     }
 
+    private changeValue(columnId, rowId, value) {
+        this.logDataOnlyCommand();
+        if(columnId == null) columnId = this.Selection.columnId;
+        if(rowId == null) rowId = this.Selection.rowId;
+        this.ActiveSheet.setCellValue(columnId, rowId, value);
+    }
+
     private merge () {
         this.logDataOnlyCommand();
         let sel = this.Selection;
@@ -143,7 +151,6 @@ export class Commander {
     }
 
     private bgColor (color) {
-        console.log('color is: ',color)
         this.logAppearanceOnlyCommnand();
         let sel = this.Selection;
         let app = this.SelectedAppearance || new Appearance();

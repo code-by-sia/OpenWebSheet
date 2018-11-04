@@ -270,7 +270,6 @@ export class CanvasRenderer implements DocumentRenderer {
             context.fillStyle = appearance.text;
             context.strokeStyle = appearance.text;
             context.textAlign = appearance.textAlign;
-            console.log(appearance.textAlign)
             context.fillText(cell.label, x + ColumnHeaderHeight + 5, y + 7, cellWidth);
         }
         context.unmask();

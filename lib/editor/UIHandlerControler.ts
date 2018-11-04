@@ -4,7 +4,6 @@ import { Sheet } from "../core/Sheet";
 import { WebSheetUIHandler } from "./DocumentHandler";
 import { SheetUIHandler } from "./SheetUIHandler";
 import { OpenDocument } from "../core/Document";
-import { CanvasRenderer } from "../rendering/canvas/CanvasRendering";
 import { DocumentRenderer } from "../rendering/DocumentRenderer";
 
 export class UIHandlerController {
@@ -19,7 +18,7 @@ export class UIHandlerController {
         websheet.addOnChange(() => this.cellEditor.updateEitorAppearance());
     }
 
-    addHandlers() {
+    private addHandlers() {
         this.handlers.push(new WebSheetUIHandler(this));
         this.handlers.push(new SheetUIHandler(this));
     }
