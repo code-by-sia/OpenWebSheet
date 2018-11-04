@@ -39,12 +39,12 @@ export class Sheet implements IDateProvider{
     private change_listeners =[];
 
     constructor(public title:string){
-        this.defaultAppearance.background = '#fff';
+        this.defaultAppearance.background = '#ffffff';
         this.defaultAppearance.fontName = 'lato';
         this.defaultAppearance.fontSize= 12;
-        this.defaultAppearance.horisontalBorder = new Border('#eee');
-        this.defaultAppearance.verticalBorder = new Border('#eee');
-        this.defaultAppearance.text = '#444';
+        this.defaultAppearance.horisontalBorder = new Border('#eeeeee');
+        this.defaultAppearance.verticalBorder = new Border('#eeeeee');
+        this.defaultAppearance.text = '#444444';
 
 
         this.selection = new CellSelection();
@@ -89,6 +89,10 @@ export class Sheet implements IDateProvider{
 
     public get SelectedValue() {
         return this.selectedCell && this.selectedCell.value; 
+    }
+
+    public get SelectedAppearance() {
+        return this.getApperance(this.selection.columnId, this.selection.rowId);
     }
 
     selectPreviousColumnCell() {
@@ -270,8 +274,8 @@ export class Sheet implements IDateProvider{
         let rowY = this.getRowHeight(this.scrollRow);
         let rowId = this.scrollRow;
         while (rowY < y) {
-            rowY += this.getRowHeight(rowId);
             rowId++;
+            rowY += this.getRowHeight(rowId);
         }
         return rowId;
     }
@@ -402,18 +406,20 @@ export class Sheet implements IDateProvider{
 
     public unmerge(columnId:number, rowId:number){
         let cell = this.getCell(columnId, rowId);
-        if(!cell || (cell.rowSpan != 0 && cell.colSpan != 0)) return;
-        for(let x = columnId; x < columnId + cell.colSpan; x++)
-        {
-            for(let y = rowId; y < rowId + cell.rowSpan; y++){
-                if(x!=columnId && y != rowId) {
-                    this.data[columnId][rowId] = undefined;
-                }
+        if(!cell || (cell.rowSpan == 1 && cell.colSpan == 1)) return;
+        
+        for(let i=0;i<cell.colSpan;i++){
+            for(let j=0;j<cell.rowSpan;j++){
+                let cx = this.getCell(i + columnId, j + rowId);
+                if(!cx) continue;
+                cx.reference = null;
+                this.setCell(i + columnId, j + rowId, cx, true);
             }
         }
 
-        cell.rowSpan = 0;
-        cell.colSpan = 0;
+        cell.rowSpan = 1;
+        cell.colSpan = 1;
+        this.setCell(columnId, rowId, cell, true)
         this.onChange();
 
     }
@@ -444,13 +450,13 @@ export class Sheet implements IDateProvider{
         return this.data[columnId][rowId];
     }
 
-    public setCell(columnId:number, rowId:number, cell:Cell) {
+    public setCell(columnId:number, rowId:number, cell:Cell, silent=false) {
         if(!this.data[columnId]) {
             this.data[columnId] = []
         }
 
         this.data[columnId][rowId] = cell;
-        this.onChange();
+        if(!silent) this.onChange();
     }
 
 
@@ -493,11 +499,21 @@ export class Sheet implements IDateProvider{
         return this.rowHeight[rowId] || this.defaultRowHeight;
     }
 
+    public setRowHeight(row, height) {
+        this.rowHeight[row] = height;
+        this.onChange();
+    }
+
     public getColumnWidth(columnId):number {
         return this.columnWidth[columnId] || this.defaultColumnWidth;
     }
+    
+    public setColumnWidth(column, width): any {
+        this.columnWidth[column] = width;
+        this.onChange();
+    }
 
-    public getApperance(columnId:number,rowId:number){
+    public getApperance(columnId:number,rowId:number):Appearance {
         let appearance = new Appearance();
         
         let cell = this.getCellApperance(columnId, rowId);

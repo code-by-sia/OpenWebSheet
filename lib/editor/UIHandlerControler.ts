@@ -5,10 +5,12 @@ import { WebSheetUIHandler } from "./DocumentHandler";
 import { SheetUIHandler } from "./SheetUIHandler";
 import { OpenDocument } from "../core/Document";
 import { DocumentRenderer } from "../rendering/DocumentRenderer";
+import { ResizeHandler } from "./ResizeHandler";
 
 export class UIHandlerController {
 
     private handlers:UIHandler[] = [];
+    private lockedOn:UIHandler = null;
     cellEditor:CellEditor;
 
     constructor(public websheet:OpenDocument,public renderer:DocumentRenderer) {
@@ -21,6 +23,35 @@ export class UIHandlerController {
     private addHandlers() {
         this.handlers.push(new WebSheetUIHandler(this));
         this.handlers.push(new SheetUIHandler(this));
+        this.handlers.push(new ResizeHandler(this));
+    }
+
+    public alterColumn(columnId, delta:number) {
+        this.websheet.execCommand('alter-column', columnId, delta);
+    }
+
+    public alterRow(rowId, delta:number) {
+        this.websheet.execCommand('alter-row', rowId, delta);
+    }
+
+    get locked() {
+        return !!this.lockedOn ;
+    }
+
+    public lock(uiHandler:UIHandler) {
+        this.lockedOn = uiHandler;
+    }
+
+    public unlock() {
+        this.lockedOn = null;
+    }
+
+    public resetCursor() {
+        this.renderer.Element.style.cursor = '';
+    }
+
+    public changeCursor(cursor: string){
+        this.renderer.Element.style.cursor = cursor;
     }
 
     attachEvents() {
@@ -88,54 +119,99 @@ export class UIHandlerController {
     }
 
     click() {
+        if(this.lockedOn) {
+            this.lockedOn.click();
+            return;
+        }
+
         for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].click();
         }
     }
 
     dblClick() {
+        if(this.lockedOn) {
+            this.lockedOn.dblClick();
+            return;
+        }
+        
         for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].dblClick();
         }
     }
 
     mouseDown(x, y) {
+        if(this.lockedOn) {
+            this.lockedOn.mouseDown(x, y);
+            return;
+        }
+        
         for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].mouseDown(x, y);
         }
     }
 
     mouseMove(x, y) {
+        if(this.lockedOn) {
+            this.lockedOn.mouseMove(x, y);
+            return;
+        }
+
         for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].mouseMove(x, y);
         }
     }
 
     mouseUp(x, y) {
+        if(this.lockedOn) {
+            this.lockedOn.mouseUp(x, y);
+            return;
+        }
+
         for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].mouseUp(x, y);
         }
     }
 
     mouseWheel(dx, dy) {
+        if(this.lockedOn) {
+            this.lockedOn.mouseWheel(dx, dy);
+            return;
+        }
+
         for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].mouseWheel(dx, dy);
         }
     }
 
     keyDown(evt) {
+        if(this.lockedOn) {
+            this.lockedOn.keyDown(evt);
+            return;
+        }
+
         for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].keyDown(evt);
         }
     }
 
     keyPress(evt) {
+        if(this.lockedOn) {
+            this.lockedOn.keyPress(evt);
+            return;
+        }
+
         for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].keyPress(evt);
         }
     }
 
     keyUp(evt) {
+        if(this.lockedOn) {
+            this.lockedOn.keyUp(evt);
+            return;
+        }
+
         for (let i = 0; i < this.handlers.length; i++) {
             this.handlers[i].keyUp(evt);
         }

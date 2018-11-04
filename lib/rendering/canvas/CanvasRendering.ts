@@ -266,7 +266,7 @@ export class CanvasRenderer implements DocumentRenderer {
         context.fillStyle = appearance.background;
         context.fillRect(left, y, cellWidth - .5, cellHeight);
         if(cell.label) {
-            context.fillStyle = appearance.text;
+            context.contentFillStyle = appearance.text;
             context.strokeStyle = appearance.text;
             context.textAlign = appearance.textAlign;
             context.fillText(cell.label, x + ColumnHeaderHeight + 5, y + 7, cellWidth);

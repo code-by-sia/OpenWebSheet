@@ -12,13 +12,16 @@ export class Commander {
         this.commands['bold']= () => this.bold();
         this.commands['italic']= () => this.italic();
         this.commands['underline']= () => this.underline();
-        this.commands['fontSize']= (size) => this.fontSize(size);
-        this.commands['fontName']= (size) => this.fontName(size);
-        this.commands['bgcolor'] = (color) => this.bgColor(color);
+        this.commands['font-size']= (size) => this.fontSize(size);
+        this.commands['font-name']= (size) => this.fontName(size);
+        this.commands['bg-color'] = (color) => this.bgColor(color);
+        this.commands['fg-color'] = (color) => this.fgColor(color);
         this.commands['merge'] = () => this.merge();
         this.commands['unmerge'] = () => this.unmerge();
         this.commands['align'] = (value) => this.align(value);
         this.commands['change-value'] = (columnId, rowId, value) => this.changeValue(columnId, rowId, value);
+        this.commands['alter-column'] = (columnId, delta) => this.alterColumn(columnId, delta);
+        this.commands['alter-row'] = (rowId, delta) => this.alterRow(rowId, delta);
     }
 
     private has (commandName){
@@ -81,6 +84,28 @@ export class Commander {
         };
 
         this.history.push(historyItem);
+    }
+
+    private alterColumn(column, delta) {
+        const w = this.doc.ActiveSheet.getColumnWidth(column);
+        this.history.push({
+            selection:column,
+            data: w,
+            meta: 'COLUMN'
+        });
+
+        this.doc.ActiveSheet.setColumnWidth(column, w + delta);
+    }
+
+    private alterRow(row, delta) {
+        const h = this.doc.ActiveSheet.getRowHeight(row);
+        this.history.push({
+            selection:row,
+            data: h,
+            meta: 'ROW'
+        });
+
+        this.doc.ActiveSheet.setRowHeight(row, h + delta);
     }
 
     private changeValue(columnId, rowId, value) {
@@ -155,6 +180,14 @@ export class Commander {
         let sel = this.Selection;
         let app = this.SelectedAppearance || new Appearance();
         app.background = color;
+        this.ActiveSheet.setCellAppearance(sel.columnId, sel.rowId, app);
+    }
+
+    private fgColor (color) {
+        this.logAppearanceOnlyCommnand();
+        let sel = this.Selection;
+        let app = this.SelectedAppearance || new Appearance();
+        app.text = color;
         this.ActiveSheet.setCellAppearance(sel.columnId, sel.rowId, app);
     }
 

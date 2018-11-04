@@ -2,9 +2,10 @@ import { OpenDocument } from './core/Document';
 import { DocumentRenderer } from './rendering/DocumentRenderer';
 import { CanvasRenderer } from './rendering/canvas/CanvasRendering';
 import { UIHandlerController } from './editor/UIHandlerControler';
+import { Appearance } from './core/Appearance';
 
 export class UI {
-    
+   
     private handlers = [];
     private document:OpenDocument = new OpenDocument();
     private render:DocumentRenderer= null;
@@ -19,6 +20,16 @@ export class UI {
         element['openDocument'] = this.document;
     }
 
+    get isMerged() {
+        let cell = this.selectedCell;
+        if(!cell) return;
+        return (cell.colSpan > 1) || (cell.rowSpan > 1);
+    }
+
+    public get selectedCell() { 
+        return this.document.ActiveSheet.selectedCell;
+    }
+
     public get SelectedCellLabel () {
         return this.document.ActiveSheet.SelectionLabel;
     }
@@ -27,7 +38,12 @@ export class UI {
         return this.document.ActiveSheet.SelectedValue;
     }
 
+    public get SelectedAppearance() {
+        return this.document.ActiveSheet.SelectedAppearance;
+    }
+
     public execCmd(cmd,...args) {
+        console.log(`the command _${cmd}_ executed.`);
         this.document.execCommand(cmd,...args);
     }
 

@@ -48,7 +48,6 @@ export class CellEditor {
         this.editorElement.style.zIndex = '10000';
         this.editorElement.style.position = 'absolute';
         this.editorElement.style.background = '#fff';
-        this.editorElement.style.lineHeight = '25px';
         this.editorElement.style.textIndent = '3px';
         this.editorElement.style.border = 'none';
         this.editorElement.addEventListener('keypress',(evt) => this.onKeyPress(evt));
@@ -74,6 +73,8 @@ export class CellEditor {
                  this.Value = value
              }
 
+             this.updateEitorAppearance();
+             this.select(false);
         })
 
     }
@@ -145,46 +146,24 @@ export class CellEditor {
         return sheet.getApperance(selection.columnId, selection.rowId);
     }
 
-
-    private getFontStyle(value:string){
-        let ret ='';
-        if(!value) return ret;
-        if(value.indexOf('italic')) ret += ' italic ';
-        if(value.indexOf('underline')) ret += ' underline ';
-        return ret;
-    }
-
-    private getFontWeight(value:string) {
-        let ret ='';
-        if(!value) return ret;
-        if(value.indexOf('bold')) ret += ' bold ';
-        if(value.indexOf('bolder')) ret += ' bolder ';
-        return ret;
-    }
-
-    private getTextDecoration(value:String) {
-        if(!value) return '';
-        if(value.indexOf('underline') != -1) return 'underline';
-        if(value.indexOf('stroke') != -1) return 'stroke';
-        return '';
-    }
-
     private getTextAlign(textAlign:TextAlign) {
-        if(textAlign==TextAlign.Center) return 'center';
-        if(textAlign==TextAlign.Left) return 'left';
-        if(textAlign==TextAlign.Right) return 'right';
+        if(textAlign == TextAlign.Center) return 'center';
+        if(textAlign == TextAlign.Left) return 'left';
+        if(textAlign == TextAlign.Right) return 'right';
         return '';
     }
 
     public updateEitorAppearance (){
         let app = this.getCurrentAppearance();
+        
         this.editorElement.style.textAlign = this.getTextAlign(app.textAlign);
-        this.editorElement.style.fontStyle = this.getFontStyle(app.textStyle);
-        this.editorElement.style.fontWeight = this.getFontWeight(app.textStyle);
+        this.editorElement.style.fontStyle = app.italic ? 'italic':'';
+        this.editorElement.style.fontWeight = app.bold?'bold':'';
         this.editorElement.style.background = app.background;
         this.editorElement.style.fontFamily = app.fontName;
         this.editorElement.style.fontSize = `${app.fontSize}px`;
-        this.editorElement.style.textDecoration = this.getTextDecoration(app.textStyle);
+        this.editorElement.style.color = app.text;
+        this.editorElement.style.textDecoration = app.underline ? 'underline':'';
     }
 
     public select(animation = true) {

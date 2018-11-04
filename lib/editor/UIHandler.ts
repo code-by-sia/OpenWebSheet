@@ -35,6 +35,18 @@ export class UIHandler implements IUIHandler {
     keyDown(evt: any) { }
     keyPress(evt: any) { }
     keyUp(evt: any) { }
+
+    get locked() {
+        return this.controller.locked;
+    }
+
+    lock(){
+        this.controller.lock(this);
+    }
+
+    unlock() {
+        this.controller.unlock();
+    }
     
 }
  

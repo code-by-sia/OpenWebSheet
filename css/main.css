@@ -186,6 +186,7 @@ input[type=color] {
     border: solid thin #ccc;
     font-size: x-small;
     border-radius: 2px;
+    background: linear-gradient(to top, #ece9e6, #ffffff);
 }
 
 .menu-content .button-group {
@@ -201,7 +202,7 @@ input[type=color] {
 }
 .menu-content .button-group button:hover {
     text-decoration: underline;
-    background: #ffffa0;/* TODO: style it */
+    background: linear-gradient(to top, #dddddd, #ffffff);
 }
 .menu-content .button-group button:disabled {
     color: #ccc;
@@ -210,11 +211,17 @@ input[type=color] {
     text-decoration: none !important;
 }
 .menu-content .button-group button:first-child {
-    border-radius: 3px 0 0 3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 .menu-content .button-group button:last-child {
     border-right-style: solid;
-    border-radius: 0 3px 3px 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.menu-content .button-group .on{
+    background: linear-gradient(to top, #cccccc, #efefef);
 }
 
 .menu-content label {
