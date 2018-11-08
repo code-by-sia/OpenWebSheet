@@ -42,7 +42,7 @@ export class Sheet implements IDateProvider{
         this.defaultAppearance.background = '#ffffff';
         this.defaultAppearance.fontName = 'lato';
         this.defaultAppearance.fontSize= 12;
-        this.defaultAppearance.horisontalBorder = new Border('#eeeeee');
+        this.defaultAppearance.horizontalBorder = new Border('#eeeeee');
         this.defaultAppearance.verticalBorder = new Border('#eeeeee');
         this.defaultAppearance.text = '#444444';
 
@@ -524,7 +524,7 @@ export class Sheet implements IDateProvider{
         appearance.background = (cell && cell.background) || (col && col.background ) || (row && row.background ) || def.background;
         appearance.fontName = (cell && cell.fontName) || (col && col.fontName ) || (row && row.fontName ) || def.fontName;
         appearance.fontSize = (cell && cell.fontSize) || (col && col.fontSize ) || (row && row.fontSize ) || def.fontSize;
-        appearance.horisontalBorder = (cell && cell.horisontalBorder) || (col && col.horisontalBorder ) || (row && row.horisontalBorder ) || def.horisontalBorder;
+        appearance.horizontalBorder = (cell && cell.horizontalBorder) || (col && col.horizontalBorder ) || (row && row.horizontalBorder ) || def.horizontalBorder;
         appearance.verticalBorder = (cell && cell.verticalBorder) || (col && col.verticalBorder ) || (row && row.verticalBorder ) || def.verticalBorder;
         appearance.text = (cell && cell.text) || (col && col.text ) || (row && row.text ) || def.text;
         appearance.textAlign = (cell && cell.textAlign) || (col && col.textAlign ) || (row && row.textAlign ) || def.textAlign;

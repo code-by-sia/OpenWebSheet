@@ -31,7 +31,7 @@ export class Appearance {
     public textStyle: any;
     public text: any;
     public background: any;
-    public horisontalBorder: Border;
+    public horizontalBorder: Border;
     public verticalBorder: Border;
 
     public get bold() {

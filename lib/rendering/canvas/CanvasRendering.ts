@@ -232,7 +232,7 @@ export class CanvasRenderer implements DocumentRenderer {
                 this.paintCell(c,r,x, y);
                 
                 if (y > 0 && (!cell || !cell.isMerged)) {
-                    let horStyle = appearance.horisontalBorder;
+                    let horStyle = appearance.horizontalBorder;
                     let verStyle = appearance.verticalBorder;
                     context.strokeStyle = horStyle.color;
                     context.line(x + RowHeaderWidth, y + cellHeight, x + RowHeaderWidth + cellWidth, y + cellHeight);
