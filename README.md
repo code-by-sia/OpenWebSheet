@@ -13,6 +13,6 @@ OpenSource Web based spreadsheet
   * [ ] Open office format support
 * [ ] advanced ui features
 
-<a href="demo/demo.ows" target="_blank"> download example document</a>
+<a href="demo/DEMO.ows" target="_blank"> download example document</a>
 
 <img src="demo/demo.png" />
