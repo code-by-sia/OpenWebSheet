@@ -62,4 +62,12 @@ export class UI {
         this.handlers.forEach(handler => handler(this.document));
     }
 
+    save() {
+        return JSON.stringify(this.document.save());
+    }
+
+    load(data){
+        let obj = JSON.parse(data);
+        this.document.load(obj);
+    }
 }

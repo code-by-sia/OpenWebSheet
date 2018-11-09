@@ -227,3 +227,15 @@ input[type=color] {
 .menu-content label {
     font-size: x-small;
 }
+
+.flat-button {
+    color:#333;
+    text-shadow: 1px 1px 0 #eee;
+    transition-duration: .1s;
+}
+.flat-button:hover {
+    color:#000;
+    text-shadow: 2px 2px 0 #ccc;
+    transition-duration: .1s;
+}
+.xx-large-font { font-size: xx-large;}

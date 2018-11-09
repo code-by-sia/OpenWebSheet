@@ -17,6 +17,35 @@ define(["require", "exports", '../lib/UI', '../lib/core/Appearance'], function (
         $('#left-action').click(function () { return ui.execCmd('align', 'left'); });
         $('#center-action').click(function () { return ui.execCmd('align', 'center'); });
         $('#right-action').click(function () { return ui.execCmd('align', 'right'); });
+        $('#save-action').click(function () {
+            var content = ui.save();
+            var uriContent = "data:application/octet-stream," + encodeURIComponent(content);
+            var a = document.createElement("a");
+            a.download = "document.ows";
+            a.href = uriContent;
+            a.target = "_blank";
+            a.click();
+        });
+        $('#load-action').click(function () {
+            if (window['File'] && window['FileReader'] && window['FileList'] && window['Blob']) {
+                var f = document.createElement('input');
+                f.type = 'file';
+                f.accept = '.ows';
+                f.addEventListener('change', function (evt) {
+                    var file = evt.target['files'][0];
+                    var reader = new FileReader();
+                    reader.addEventListener('load', function (loadEvt) {
+                        var rawData = loadEvt.target['result'];
+                        ui.load(rawData);
+                    });
+                    reader.readAsText(file, 'utf8');
+                });
+                f.click();
+            }
+            else {
+                alert('The File APIs are not fully supported in this browser.');
+            }
+        });
         $("#header > .menu > li").click(function (evt) {
             var el = evt.target;
             var tg = el.getAttribute('data-for') + "-menu";

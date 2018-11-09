@@ -1,14 +1,14 @@
 import {Sheet} from './Sheet';
-import { Commander } from './Commander';
+import {Commander} from './Commander';
 
 export class OpenDocument {
-    
-    private sheets:Sheet[]=[];
-    private activeSheetIndex=0;
-    private commander:Commander;
+
+    private sheets: Sheet[] = [];
+    private activeSheetIndex = 0;
+    private commander: Commander;
     private change_listeners = [];
 
-    public constructor () {
+    public constructor() {
         this.init();
         this.commander = new Commander(this);
     }
@@ -19,7 +19,7 @@ export class OpenDocument {
         this.addSheet("Sheet3");
     }
 
-    public addSheet(name:string) {
+    public addSheet(name: string) {
         let sheet = new Sheet(name);
         sheet.addOnChange(() => this.onChange());
         this.sheets.push(sheet);
@@ -30,15 +30,15 @@ export class OpenDocument {
         return this.sheets[this.activeSheetIndex];
     }
 
-    public get ActiveSheetIndex(){
+    public get ActiveSheetIndex() {
         return this.activeSheetIndex;
     }
 
-    public set ActiveSheetIndex(index:number){
-        if(index < 0 || index >= this.sheets.length){
+    public set ActiveSheetIndex(index: number) {
+        if (index < 0 || index >= this.sheets.length) {
             throw 'invalid sheet index';
         }
-        
+
         this.activeSheetIndex = index;
         this.onChange();
     }
@@ -47,14 +47,14 @@ export class OpenDocument {
         return this.sheets;
     }
 
-    public addOnChange(handler:()=>void) {
+    public addOnChange(handler: () => void) {
         this.change_listeners.push(handler);
     }
 
-    public removeOnChange(handler:()=>void) {
+    public removeOnChange(handler: () => void) {
         let ix = this.change_listeners.indexOf(handler);
         if (ix >= 0) {
-            this.change_listeners.splice(ix,1);
+            this.change_listeners.splice(ix, 1);
         }
     }
 
@@ -62,7 +62,20 @@ export class OpenDocument {
         this.change_listeners.forEach(m => m());
     }
 
-    public execCommand(cmd:string,...args:any[]){
-        this.commander.do(cmd,...args);
+    public execCommand(cmd: string, ...args: any[]) {
+        this.commander.do(cmd, ...args);
+    }
+
+    save() {
+        return {
+            sheets: this.sheets.map(sh => sh.save()),
+            activeSheetIndex: this.activeSheetIndex
+        }
+    }
+
+    load(obj: any) {
+        this.sheets = obj.sheets.map(sh => Sheet.load(sh));
+        this.activeSheetIndex = obj.activeSheetIndex;
+        this.onChange();
     }
 }

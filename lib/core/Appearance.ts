@@ -22,6 +22,13 @@ export class Border {
     }
 
     public style: BorderStyle = BorderStyle.SolidThin;
+
+    static from(data): Border {
+        let border = new Border();
+        border.style = data.style;
+        border.color = data.color;
+        return border;
+    }
 }
 
 export class Appearance {
@@ -86,5 +93,19 @@ export class Appearance {
             throw `invalid text-alig '${value}'`
         }
 
+    }
+
+    static from(data) {
+        let app = new Appearance();
+        app.textAlign = data.textAlign;
+        app.textStyle = data.textStyle;
+        app.fontName = data.fontName;
+        app.fontSize = data.fontSize;
+        app.text = data.text;
+        app.background = data.background;
+        app.horizontalBorder =data.horizontalBorder && Border.from(data.horizontalBorder);
+        app.verticalBorder = data.verticalBorder && Border.from(data.verticalBorder);
+
+        return app;
     }
 }
