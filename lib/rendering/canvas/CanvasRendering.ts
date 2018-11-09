@@ -227,7 +227,7 @@ export class CanvasRenderer implements DocumentRenderer {
                 let cell = sheet.getCell(c, r);
                 let cellHeight = cell ? sheet.getCellHeight(cell):sheet.getRowHeight(r);
                 let cellWidth = cell ? sheet.getCellWidth(cell):sheet.getColumnWidth(c);
-                let appearance = sheet.getApperance(c,r);
+                let appearance = sheet.getAppearance(c,r);
                 context.fillStyle = appearance.text;
                 this.paintCell(c,r,x, y);
                 
@@ -251,7 +251,7 @@ export class CanvasRenderer implements DocumentRenderer {
         let cell = sheet.getCell(columnId, rowId);
         if(cell == null || cell.isMerged) return;
 
-        let appearance = sheet.getApperance(columnId, rowId);
+        let appearance = sheet.getAppearance(columnId, rowId);
         let left = x + ColumnHeaderHeight + .5;
         if (y < RowDefaultHeight) return;
 

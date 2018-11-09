@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Open WebSheet</title>
-  <link rel="stylesheet" href="css/reset.css"/>
-  <link rel="stylesheet" href="css/main.css?v2"/>
-  <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext'
-        rel='stylesheet' type='text/css'/>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"/>
+    <meta charset="UTF-8">
+    <title>Open WebSheet</title>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/main.css?v2"/>
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext'
+          rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"/>
 </head>
 <body>
 <div id="wrapper">
-  <div id="header">
-    <h1 class="title">Open WebSheet</h1>
-    <ul class="menu">
-      <li class="active" data-for="formatting">Home</li>
-      <li data-for="formulas">Formulas</li>
-      <li data-for="data">Data</li>
-      <li data-for="view">View</li>
-      <li data-for="about">About</li>
-    </ul>
-    <div class="menu-content">
-      <div class="formatting-menu active">
-        <fieldset class="last">
-          <legend>Document</legend>
-          <div style="display: flex;padding: 10px 5px;text-align: center">
-            <i id="save-action" class="far fa-save xx-large-font flat-button"></i>
-            <span style="margin:0 5px;border-right:solid #ccc thin;border-left:solid thin #ddd"></span>
-            <i id="load-action" class="far fa-folder xx-large-font flat-button"></i>
-          </div>
-        </fieldset>
-        <fieldset class="independent">
-          <legend>Font</legend>
-          <p>
-            <select id="font-name" style="width:80px;">
-              <option selected value="lato">Lato</option>
-              <option value="courier">Courier</option>
-              <option value="sans">Sans</option>
-            </select>
-            <select id="font-size">
-              <option value="6">6</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option selected value="12">12</option>
-              <option value="14">14</option>
-              <option value="16">16</option>
-              <option value="18">18</option>
-              <option value="20">20</option>
-              <option value="22">22</option>
-              <option value="24">24</option>
-              <option value="26">26</option>
-              <option value="28">28</option>
-              <option value="36">36</option>
-              <option value="48">48</option>
-              <option value="72">72</option>
-            </select>
+    <div id="header">
+        <h1 class="title">Open WebSheet</h1>
+        <ul class="menu">
+            <li class="active" data-for="formatting">Home</li>
+            <li data-for="formulas">Formulas</li>
+            <li data-for="data">Data</li>
+            <li data-for="view">View</li>
+            <li data-for="about">About</li>
+        </ul>
+        <div class="menu-content">
+            <div class="formatting-menu active">
+                <fieldset class="last">
+                    <legend>Document</legend>
+                    <div style="display: flex;padding: 10px 5px;text-align: center">
+                        <i id="save-action" class="far fa-save xx-large-font flat-button"></i>
+                        <span style="margin:0 5px;border-right:solid #ccc thin;border-left:solid thin #ddd"></span>
+                        <i id="load-action" class="far fa-folder xx-large-font flat-button"></i>
+                    </div>
+                </fieldset>
+                <fieldset class="independent">
+                    <legend>Font</legend>
+                    <p>
+                        <select id="font-name" style="width:80px;">
+                            <option selected value="lato">Lato</option>
+                            <option value="courier">Courier</option>
+                            <option value="sans">Sans</option>
+                        </select>
+                        <select id="font-size">
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option selected value="12">12</option>
+                            <option value="14">14</option>
+                            <option value="16">16</option>
+                            <option value="18">18</option>
+                            <option value="20">20</option>
+                            <option value="22">22</option>
+                            <option value="24">24</option>
+                            <option value="26">26</option>
+                            <option value="28">28</option>
+                            <option value="36">36</option>
+                            <option value="48">48</option>
+                            <option value="72">72</option>
+                        </select>
 
-          </p>
-          <p>
+                    </p>
+                    <p>
                             <span class="button-group" style="float:left;margin-right:15px;">
                                 <button id="bold-action">
                                     <i class="fa fa-bold"></i>
@@ -73,19 +73,19 @@
                                 </button>
                             </span>
 
-            <i class="fas fa-palette"></i>
-            <input type="color" value="#ffffff" id="fg-color"/>
-          </p>
-        </fieldset>
-        <fieldset class="last">
-          <legend> Format</legend>
-          <p>
-            <label>
-              Fill Color <i class="fa fa-fill"></i>
-            </label>
-            <input type="color" value="#ffffff" id="bg-color"/>
-          </p>
-          <p>
+                        <i class="fas fa-palette"></i>
+                        <input type="color" value="#ffffff" id="fg-color"/>
+                    </p>
+                </fieldset>
+                <fieldset class="last">
+                    <legend> Format</legend>
+                    <p>
+                        <label>
+                            Fill Color <i class="fa fa-fill"></i>
+                        </label>
+                        <input type="color" value="#ffffff" id="bg-color"/>
+                    </p>
+                    <p>
                             <span class="button-group">
                                 <button id="left-action">
                                     <i class="fa fa-align-left"></i>
@@ -97,54 +97,71 @@
                                     <i class="fa fa-align-right"></i>
                                 </button>
                             </span>
-          </p>
-        </fieldset>
-        <fieldset class="independent">
-          <legend>Cell</legend>
-          <p>
-                            <span class="button-group">
-                                <button id="merge-action"> Merge </button>
-                            </span>
-          </p>
-          <p>
-            [boder toolbar will be here..]
-          </p>
-        </fieldset>
-      </div>
-      <div class="formulas-menu">formulas</div>
-      <div class="data-menu">data</div>
-      <div class="view-menu">view</div>
-      <div class="about-menu">
-        <div style="text-align:center;font-size:x-large">
-          <i class="fab fa-osi"></i>
+                    </p>
+                </fieldset>
+                <fieldset class="independent">
+                    <legend>Cell</legend>
+                    <p>
+                        <button id="merge-action"> Merge <i class="fa fa-th"></i></button>
+                    </p>
+                    <p>
+                        <label style="margin-right:8px;">
+                            Border
+                        </label>
+                        <input type="color" value="#000000" id="border-color"/>
+                    </p>
+                </fieldset>
+                <fieldset>
+                    <legend> Borders</legend>
+                    <div id="border-grid">
+                        <div class="all"></div>
+                        <div class="action" id="top-border-action"></div>
+                        <div class="all"></div>
+                        <div class="action" id="left-border-action"></div>
+                        <div class="action center" id="cross-border-action">
+                            <i class="fa fa-plus"></i>
+                        </div>
+                        <div class="action" id="right-border-action"></div>
+                        <div class="all"></div>
+                        <div class="action" id="bottom-border-action"></div>
+                        <div class="all"></div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="formulas-menu">formulas</div>
+            <div class="data-menu">data</div>
+            <div class="view-menu">view</div>
+            <div class="about-menu">
+                <div style="text-align:center;font-size:x-large">
+                    <i class="fab fa-osi"></i>
+                </div>
+                Designed and developed by <strong>Siamand Ma'roufi</strong><br/>
+                <a href="http://jsglobe.com">Developer's site</a> |
+                <a href="https://github.com/SiamandMaroufi/OpenWebSheet">Source Code</a>
+            </div>
         </div>
-        Designed and developed by <strong>Siamand Ma'roufi</strong><br/>
-        <a href="http://jsglobe.com">Developer's site</a> |
-        <a href="https://github.com/SiamandMaroufi/OpenWebSheet">Source Code</a>
-      </div>
-    </div>
-    <div class="formula-bar" id="formula-bar">
-      <input type="text" class="cell-name" id="selection-input" placeholder="SELECTION" value="A1"/>
-      <span class="side">
+        <div class="formula-bar" id="formula-bar">
+            <input type="text" class="cell-name" id="selection-input" placeholder="SELECTION" value="A1"/>
+            <span class="side">
                     <span class="actions">
                         <i class="fa fa-times cancel"></i>
                         <i class="fa fa-check commit"></i>
                     </span>
                     𝑓𝑥
                 </span>
-      <input type="text" id="formula-input" class="formula"/>
-      <div class="arrow">
-        <i class="fas fa-angle-down"></i>
-      </div>
+            <input type="text" id="formula-input" class="formula"/>
+            <div class="arrow">
+                <i class="fas fa-angle-down"></i>
+            </div>
+        </div>
+
     </div>
+    <div id="content">
 
-  </div>
-  <div id="content">
+    </div>
+    <div id="footer">
 
-  </div>
-  <div id="footer">
-
-  </div>
+    </div>
 </div>
 
 <script src="js/jquery-2.1.4.min.js"></script>

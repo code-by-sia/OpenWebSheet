@@ -11,7 +11,7 @@ export class Evaluator {
         }
         
         let m;
-        let regex = this.valueRegex;
+        let regex = new RegExp(this.valueRegex);
         let temp = str;
 
         while ((m = regex.exec(str)) !== null) {
@@ -22,12 +22,16 @@ export class Evaluator {
 
             m.forEach((match, groupIndex) => {
                 if (groupIndex == 0) {
-                    temp = temp.replace(match,dataProvider.getEvaluatedValue(match))
+                    let ev = dataProvider.getEvaluatedValue(match);
+                    temp = temp.replace(match, ev);
                 }
             });
         }
-
-        return eval(temp.substr(1));
+        try {
+            return eval(temp.substr(1));
+        } catch(err) {
+            return '#ERR';
+        }
 
     }
 }

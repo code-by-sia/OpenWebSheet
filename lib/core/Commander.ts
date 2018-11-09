@@ -16,6 +16,19 @@ export class Commander {
         this.commands['font-name'] = (font) => this.appearance(app => app.fontName = font);
         this.commands['bg-color'] = (color) => this.appearance(app => app.background = color);
         this.commands['fg-color'] = (color) => this.appearance(app => app.text = color);
+        this.commands['top-border'] = (color) => this.topBorder(color);
+        this.commands['left-border'] = (color) => this.leftBorder(color);
+        this.commands['right-border'] = (color) => this.rightBorder(color);
+        this.commands['bottom-border'] = (color) => this.bottomBorder(color);
+        this.commands['cross-border'] = (color) => this.crossBorder(color);
+        this.commands['full-border'] = (color) => {
+            this.topBorder(color);
+            this.leftBorder(color)
+            this.appearance(app => {
+                app.setVertical(color);
+                app.setHorizontal(color);
+            });
+        };
         this.commands['merge'] = () => this.merge();
         this.commands['unmerge'] = () => this.unmerge();
         this.commands['align'] = (value) => this.appearance(app => app.alignTextTo(value));
@@ -44,13 +57,74 @@ export class Commander {
         return this.ActiveSheet.selection;
     }
 
+    private crossBorder(color) {
+        this.logAppearanceOnlyCommand();
+        let sel = this.Selection;
+        let sheet = this.doc.ActiveSheet;
+        for(let c=sel.left;c<= sel.right;c++) {
+            for(let r=sel.top;r<= sel.bottom;r++) {
+                let app = this.ActiveSheet.getCellAppearance(c, r) || new Appearance();
+                if(r < sel.bottom) app.setHorizontal(color);
+                if(c < sel.right) app.setVertical(color);
+                this.ActiveSheet.setCellAppearance(c, r, app, false);
+            }
+        }
+    }
+
+    private topBorder(color) {
+        this.logAppearanceOnlyCommand();
+        let sel = this.Selection;
+        let sheet = this.doc.ActiveSheet;
+        let r = sel.top - 1;
+        for (let c = sel.left; c <= sel.right; c++) {
+            let app = this.ActiveSheet.getCellAppearance(c, r) || new Appearance();
+            app.setHorizontal(color);
+            this.ActiveSheet.setCellAppearance(c, r, app, false);
+        }
+    }
+
+    private leftBorder(color) {
+        this.logAppearanceOnlyCommand();
+        let sel = this.Selection;
+        let sheet = this.doc.ActiveSheet;
+        let c = sel.left - 1;
+        for (let r = sel.top; r <= sel.bottom; r++) {
+            let app = this.ActiveSheet.getCellAppearance(c, r) || new Appearance();
+            app.setVertical(color);
+            this.ActiveSheet.setCellAppearance(c, r, app, false);
+        }
+    }
+
+    private rightBorder(color) {
+        this.logAppearanceOnlyCommand();
+        let sel = this.Selection;
+        let sheet = this.doc.ActiveSheet;
+        let c = sel.right;
+        for (let r = sel.top; r <= sel.bottom; r++) {
+            let app = this.ActiveSheet.getCellAppearance(c, r) || new Appearance();
+            app.setVertical(color);
+            this.ActiveSheet.setCellAppearance(c, r, app, false);
+        }
+    }
+
+    private bottomBorder(color) {
+        this.logAppearanceOnlyCommand();
+        let sel = this.Selection;
+        let sheet = this.doc.ActiveSheet;
+        for (let c = sel.left; c <= sel.right; c++) {
+            let app = this.ActiveSheet.getCellAppearance(c, sel.bottom) || new Appearance();
+            app.setHorizontal(color);
+            this.ActiveSheet.setCellAppearance(c, sel.rowId - 1, app, false);
+        }
+    }
+
     private get SelectedAppearance(): Appearance [] {
         let sel = this.Selection;
         let sheet = this.doc.ActiveSheet;
         let apps = [];
         for (let r = sel.top; r <= sel.bottom; r++) {
             for (let c = sel.left; c <= sel.right; c++) {
-                let app = sheet.getCellApperance(sel.columnId, sel.rowId);
+                let app = sheet.getCellAppearance(sel.columnId, sel.rowId);
                 if (app) {
                     apps.push(clone(app));
                 }
@@ -74,7 +148,7 @@ export class Commander {
         return data;
     }
 
-    private logAppearanceOnlyCommnand() {
+    private logAppearanceOnlyCommand() {
         let sel = this.Selection;
         let historyItem: CommandHistory = {
             selection: sel,
@@ -140,11 +214,11 @@ export class Commander {
     }
 
     private appearance(method: (app: Appearance) => void): void {
-        this.logAppearanceOnlyCommnand();
+        this.logAppearanceOnlyCommand();
         let sel = this.Selection;
         for (let r = sel.top; r <= sel.bottom; r++) {
             for (let c = sel.left; c <= sel.right; c++) {
-                let app = this.ActiveSheet.getCellApperance(c, r) || new Appearance();
+                let app = this.ActiveSheet.getCellAppearance(c, r) || new Appearance();
                 method(app);
                 this.ActiveSheet.setCellAppearance(c, r, app);
             }

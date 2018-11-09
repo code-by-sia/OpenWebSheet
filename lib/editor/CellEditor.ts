@@ -143,7 +143,7 @@ export class CellEditor {
     private getCurrentAppearance(){
         let sheet = this.controler.websheet.ActiveSheet;
         let selection = sheet.selection;
-        return sheet.getApperance(selection.columnId, selection.rowId);
+        return sheet.getAppearance(selection.columnId, selection.rowId);
     }
 
     private getTextAlign(textAlign:TextAlign) {

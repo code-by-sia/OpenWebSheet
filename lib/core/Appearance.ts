@@ -90,9 +90,21 @@ export class Appearance {
         else if (value.toLowerCase() == "left") {
             this.textAlign = TextAlign.Left;
         } else {
-            throw `invalid text-alig '${value}'`
+            throw `invalid text-align '${value}'`;
         }
 
+    }
+
+    public setHorizontal(value) {
+        this.horizontalBorder = new Border();
+        this.horizontalBorder.style = BorderStyle.SolidThin;
+        this.horizontalBorder.color = value;
+    }
+
+    public setVertical(value) {
+        this.verticalBorder = new Border();
+        this.verticalBorder.style = BorderStyle.SolidThin;
+        this.verticalBorder.color = value;
     }
 
     static from(data) {

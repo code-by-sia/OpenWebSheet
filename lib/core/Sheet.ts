@@ -93,7 +93,7 @@ export class Sheet implements IDateProvider {
     }
 
     public get SelectedAppearance() {
-        return this.getApperance(this.selection.columnId, this.selection.rowId);
+        return this.getAppearance(this.selection.columnId, this.selection.rowId);
     }
 
     selectPreviousColumnCell() {
@@ -203,7 +203,9 @@ export class Sheet implements IDateProvider {
         if (cell == null) {
             return null;
         }
+
         return Evaluator.Eval(this, cell.value);//TODO: should be cached and check cycles
+
     }
 
     setCellValue(columnId: number, rowId: number, value): any {
@@ -460,7 +462,7 @@ export class Sheet implements IDateProvider {
     }
 
 
-    public getColumnApperance(columnId: number): Appearance {
+    public getColumnAppearance(columnId: number): Appearance {
         return this.columnAppearance[columnId];
     }
 
@@ -468,7 +470,7 @@ export class Sheet implements IDateProvider {
         return this.rowAppearance[rowId];
     }
 
-    public getCellApperance(columnId: number, rowId: number): Appearance {
+    public getCellAppearance(columnId: number, rowId: number): Appearance {
         if (!this.appearance[columnId] || !this.appearance[columnId][rowId]) {
             return null;
         }
@@ -485,13 +487,13 @@ export class Sheet implements IDateProvider {
         if (!silent) this.onChange();
     }
 
-    public setColumApperance(columnId: number, apperance: Appearance) {
-        this.columnAppearance[columnId] = apperance;
+    public setColumAppearance(columnId: number, Appearance: Appearance) {
+        this.columnAppearance[columnId] = Appearance;
         this.onChange();
     }
 
-    public setRowAppearance(rowId: number, apperance: Appearance) {
-        this.rowAppearance[rowId] = apperance;
+    public setRowAppearance(rowId: number, Appearance: Appearance) {
+        this.rowAppearance[rowId] = Appearance;
         this.onChange();
     }
 
@@ -513,11 +515,11 @@ export class Sheet implements IDateProvider {
         this.onChange();
     }
 
-    public getApperance(columnId: number, rowId: number): Appearance {
+    public getAppearance(columnId: number, rowId: number): Appearance {
         let appearance = new Appearance();
 
-        let cell = this.getCellApperance(columnId, rowId);
-        let col = this.getColumnApperance(columnId);
+        let cell = this.getCellAppearance(columnId, rowId);
+        let col = this.getColumnAppearance(columnId);
         let row = this.getRowAppearance(rowId);
         let def = this.defaultAppearance;
 

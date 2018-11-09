@@ -27,6 +27,12 @@ $(document).ready(() => {
     $('#center-action').click(() => ui.execCmd('align', 'center'));
     $('#right-action').click(() => ui.execCmd('align', 'right'));
 
+    $('#top-border-action').click(() => ui.execCmd('top-border',$('#border-color').val()));
+    $('#left-border-action').click(() => ui.execCmd('left-border',$('#border-color').val()));
+    $('#cross-border-action').click(() => ui.execCmd('cross-border',$('#border-color').val()));
+    $('#right-border-action').click(() => ui.execCmd('right-border',$('#border-color').val()));
+    $('#bottom-border-action').click(() => ui.execCmd('bottom-border',$('#border-color').val()));
+    $('#border-grid .all').click(() => ui.execCmd('full-border', $('#border-color').val()));
     $('#save-action').click(() => {
         let content = ui.save();
         let uriContent = "data:application/octet-stream," + encodeURIComponent(content);
