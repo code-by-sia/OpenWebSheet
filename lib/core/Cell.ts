@@ -90,6 +90,7 @@ export class Cell {
         cell.evaluatedValue = data.evaluatedValue;
         cell._columnId = data._columnId;
         cell._rowId = data._rowId;
+        cell._value = data._value;
         cell.reference = data.reference && this.from(data.reference);
         return cell;
     }
