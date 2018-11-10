@@ -127,17 +127,85 @@
                         <div class="all"></div>
                     </div>
                 </fieldset>
+
             </div>
-            <div class="formulas-menu">formulas</div>
-            <div class="data-menu">data</div>
-            <div class="view-menu">view</div>
-            <div class="about-menu">
-                <div style="text-align:center;font-size:x-large">
-                    <i class="fab fa-osi"></i>
-                </div>
-                Designed and developed by <strong>Siamand Ma'roufi</strong><br/>
-                <a href="http://jsglobe.com">Developer's site</a> |
-                <a href="https://github.com/SiamandMaroufi/OpenWebSheet">Source Code</a>
+            <div class="formulas-menu">
+                <fieldset style="flex:1">
+                    <legend>Mathematical</legend>
+                </fieldset>
+                <fieldset class="last" style="flex:1">
+                    <legend>Statistics</legend>
+                </fieldset>
+                <fieldset class="independent" style="flex:3">
+                    <legend>User Defined Functions</legend>
+                </fieldset>
+            </div>
+            <div class="data-menu">
+                <fieldset>
+                    <legend> File </legend>
+                    <div style="margin:10px 20px">
+                        <i class="fa fa-file-excel" style="font-size:xx-large"></i>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Open Office</legend>
+                    <div style="text-align:center;margin:15px 10px">
+                        <span class="button-group" >
+                            <button>
+                                Import
+                            </button>
+                            <button>
+                                Export
+                            </button>
+                        </span>
+                    </div>
+                </fieldset>
+                <fieldset style="flex:1" class="last">
+                    <legend>MS Excel</legend>
+                    <div style="text-align:center;margin:15px 10px">
+                        <span class="button-group" >
+                            <button>
+                                Import
+                            </button>
+                            <button>
+                                Export
+                            </button>
+                        </span>
+                    </div>
+                </fieldset>
+                <span style="flex:4"></span>
+            </div>
+            <div class="view-menu">
+                <fieldset>
+                    <legend>Print</legend>
+                    <div style="margin:5px 20px">
+                        <i class="fa fa-print" style="font-size:xx-large"></i>
+                    </div>
+                </fieldset>
+                <fieldset style="flex:1">
+                    <legend>Layout</legend>
+                </fieldset>
+
+            </div>
+            <div class="about-menu" style="flex:1">
+                <fieldset>
+                    <legend>OSI</legend>
+                    <span style="font-size:xx-large;color:#004d40;font-weight:bold">
+                        <i class="fab fa-osi"></i>
+                    </span>
+                </fieldset>
+                <fieldset style="flex:1">
+                    <legend>About Open Web Sheet Project</legend>
+                    <span style="float:right">
+                        <a href="http://jsglobe.com"> <i class="fa fa-link"></i> Developer's site</a> |
+                        <a href="https://github.com/SiamandMaroufi/OpenWebSheet"><i class="fab fa-github"></i> Source Code</a>
+                    </span>
+                    <p>
+                        Designed and developed by <strong>Siamand Ma'roufi</strong><br/>
+                        3rd Parties: <strong>FontAwesome Icons</strong> & <strong>Google noto web font</strong><br />
+                        Licence: <strong>MIT Licence</strong>
+                    </p>
+                </fieldset>
             </div>
         </div>
         <div class="formula-bar" id="formula-bar">

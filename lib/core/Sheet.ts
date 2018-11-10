@@ -194,7 +194,7 @@ export class Sheet implements IDateProvider {
             let res=[];
             for(let c=a.columnId;c<=b.columnId;c++) {
                 for(let r=a.rowId;r<=b.rowId;r++) {
-                    res.push(this.getCellEvaluatedValue(c,r);
+                    res.push(this.getCellEvaluatedValue(c,r));
                 }
             }
             return res;
