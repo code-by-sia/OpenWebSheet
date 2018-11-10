@@ -10,6 +10,7 @@ OpenSource Web based spreadsheet
   * [x] Basic Support
   * [ ] Advanced features
 * [x] import/export
+  * [x] Mathematical formulas
   * [ ] Open office format support
 * [ ] advanced ui features
 
