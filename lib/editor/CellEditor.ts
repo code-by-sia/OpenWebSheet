@@ -89,6 +89,19 @@ export class CellEditor {
             }
             evt.preventDefault();
             this.select(true);
+        } else if (evt.key == 'ArrowRight' || evt.key == 'ArrowLeft' || evt.key == 'ArrowUp' || evt.key == 'ArrowDown' ) {
+            this.deselect();
+            if (evt.key == 'ArrowRight') {
+                this.websheet.ActiveSheet.selectNextColumnCell();
+            } else if(evt.key == 'ArrowLeft') {
+                this.websheet.ActiveSheet.selectPreviousColumnCell();
+            } else if(evt.key == 'ArrowUp') {
+                this.websheet.ActiveSheet.selectPreviousRowCell();
+            } else if(evt.key == 'ArrowDown') {
+                this.websheet.ActiveSheet.selectNextRowCell();
+            }
+            evt.preventDefault();
+            this.select(true);
         }
     }
 
