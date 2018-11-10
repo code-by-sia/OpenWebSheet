@@ -39,11 +39,11 @@ export class Sheet implements IDateProvider {
     private change_listeners = [];
 
     constructor(public title: string) {
-        this.defaultAppearance.background = '#ffffff';
+        this.defaultAppearance.background = null;
         this.defaultAppearance.fontName = 'lato';
         this.defaultAppearance.fontSize = 12;
-        this.defaultAppearance.horizontalBorder = new Border('#eeeeee');
-        this.defaultAppearance.verticalBorder = new Border('#eeeeee');
+        this.defaultAppearance.horizontalBorder = null;
+        this.defaultAppearance.verticalBorder = null;
         this.defaultAppearance.text = '#444444';
 
 

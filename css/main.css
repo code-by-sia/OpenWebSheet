@@ -60,7 +60,7 @@
 }
 #wrapper #header .menu-content > div { display: none;}
 #wrapper #header .menu-content > div.active { display:flex; }
-#wrapper #header .menu-content  div.spacer {flex:1;display;margin:0 5px;}
+#wrapper #header .menu-content  div.spacer {flex:1;margin:0 5px;}
 #wrapper #header .menu-content fieldset {
     display: block;
     float: left;
@@ -246,6 +246,10 @@ input[type=color] {
     border:solid thin #ddd;
     border-radius:5px;
     overflow:hidden;
+}
+#border-grid:hover,
+#border-grid:hover div.action{
+    background:red;
 }
 #border-grid div.action {
     background: #333;

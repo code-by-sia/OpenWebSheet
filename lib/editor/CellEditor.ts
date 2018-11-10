@@ -74,7 +74,7 @@ export class CellEditor {
              }
 
              this.updateEitorAppearance();
-             this.select(false);
+             this.select(true);
         })
 
     }
@@ -128,6 +128,9 @@ export class CellEditor {
     }
 
     public get Value(){
+        if(this.editorElement.value=="") 
+            return null;
+
         return this.editorElement.value;
     }
 

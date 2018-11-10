@@ -234,10 +234,15 @@ export class CanvasRenderer implements DocumentRenderer {
                 if (y > 0 && (!cell || !cell.isMerged)) {
                     let horStyle = appearance.horizontalBorder;
                     let verStyle = appearance.verticalBorder;
-                    context.strokeStyle = horStyle.color;
-                    context.line(x + RowHeaderWidth, y + cellHeight, x + RowHeaderWidth + cellWidth, y + cellHeight);
-                    context.strokeStyle = verStyle.color;
-                    context.line(x + RowHeaderWidth + cellWidth, y, x + RowHeaderWidth + cellWidth, y + cellHeight);
+                    
+                    context.strokeStyle = (horStyle && horStyle.color) || '#eeeeee';
+                    if(appearance.background == null || horStyle != null) { 
+                        context.line(x + RowHeaderWidth, y + cellHeight, x + RowHeaderWidth + cellWidth, y + cellHeight);
+                    }
+                    context.strokeStyle = (verStyle && verStyle.color) || '#eeeeee';
+                    if(appearance.background == null || verStyle != null) { 
+                        context.line(x + RowHeaderWidth + cellWidth, y, x + RowHeaderWidth + cellWidth, y + cellHeight);
+                    }
                 }
                 x += columnWidth;
             }
@@ -249,23 +254,25 @@ export class CanvasRenderer implements DocumentRenderer {
         let context = this.context;
         let sheet = this.document.ActiveSheet;
         let cell = sheet.getCell(columnId, rowId);
-        if(cell == null || cell.isMerged) return;
+        if(cell && cell.isMerged) return;
 
         let appearance = sheet.getAppearance(columnId, rowId);
-        let left = x + ColumnHeaderHeight + .5;
+        let left = x + ColumnHeaderHeight;
         if (y < RowDefaultHeight) return;
 
         if(appearance.fontSize) context.fontSize = parseInt(appearance.fontSize);
         if(appearance.fontName) context.fontName = appearance.fontName;
         context.fontStyle = (appearance.textStyle) ? appearance.textStyle : '';
 
-        let cellWidth = sheet.getCellWidth(cell);
-        let cellHeight = sheet.getCellHeight(cell);
+        let cellWidth = cell?sheet.getCellWidth(cell):sheet.getColumnWidth(columnId);
+        let cellHeight = cell?sheet.getCellHeight(cell):sheet.getRowHeight(rowId);
 
-        context.setMask(left, y, cellWidth - .5, cellHeight);
-        context.fillStyle = appearance.background;
-        context.fillRect(left, y, cellWidth - .5, cellHeight);
-        if(cell.label) {
+        context.setMask(left, y, cellWidth, cellHeight);
+        if(appearance.background) { 
+            context.fillStyle = appearance.background;
+            context.fillRect(left, y, cellWidth, cellHeight);
+        }
+        if(cell && cell.label) {
             context.contentFillStyle = appearance.text;
             context.strokeStyle = appearance.text;
             context.textAlign = appearance.textAlign;
