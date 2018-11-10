@@ -174,14 +174,33 @@ export class Sheet implements IDateProvider {
         this.onChange();
     }
 
-    getEvaluatedValue(exp) {
-        if (exp.indexOf(':') != -1) {
-            return []
-        }
+    private getCellPos(name) {
         const regex = /([a-zA-z]+)([0-9]+)/g;
-        const pos = regex.exec(exp);
+        if(!new RegExp(/([a-zA-z]+)([0-9]+)/g).test(name)) {
+            throw 'invalid cell name ' + name;
+        }
+        const pos = regex.exec(name);
         const columnId = this.getColumnIndex(pos[1]);
         const rowId = parseInt(pos[2]) - 1;
+
+        return { rowId: rowId, columnId: columnId };
+    }
+
+    getEvaluatedValue(exp) {
+        if (('' + exp).indexOf(':') != -1) {
+            const parts = exp.split(':');
+            const a = this.getCellPos(parts[0]);
+            const b = this.getCellPos(parts[1]);
+            let res=[];
+            for(let c=a.columnId;c<=b.columnId;c++) {
+                for(let r=a.rowId;r<=b.rowId;r++) {
+                    res.push(this.getCellEvaluatedValue(c,r);
+                }
+            }
+            return res;
+        }
+
+        let {rowId, columnId} = this.getCellPos(exp);
         return this.getCellEvaluatedValue(columnId, rowId);
     }
 
@@ -208,7 +227,7 @@ export class Sheet implements IDateProvider {
 
     }
 
-    setCellValue(columnId: number, rowId: number, value): any {
+    setCellValue(columnId: number, rowId: number, value,silent=false): any {
         let cell = this.forceGetCell(columnId, rowId);
         if (value.startsWith('=')) {
             let evaluatedValue = Evaluator.Eval(this, value);
@@ -216,20 +235,20 @@ export class Sheet implements IDateProvider {
         } else {
             cell.value = value;
         }
-
-        this.updateDependees(columnId, rowId);
-        this.onChange()
+        if(!silent) {
+            this.updateDependees(columnId, rowId);
+            this.onChange()
+        }
     }
 
     private updateDependees(columnId: number, rowId: number) {
-        //TODO: check cyclic dependencies!!!!
-        let cellName = `${Sheet.get_columnName(columnId)}${rowId + 1}`;
+        //TODO:bad performance
         for (let d of this.data) {
             if (!d) continue;
             for (let c of d) {
                 if (!c || !c.value) continue;
-                if (c.value.indexOf(cellName) != -1) {
-                    this.setCellValue(c.columnId, c.rowId, c.value)
+                if (c.value.length && c.value[0] == '=') {
+                    this.setCellValue(c.columnId, c.rowId, c.value, true)
                 }
             }
         }
