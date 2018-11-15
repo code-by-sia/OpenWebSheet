@@ -176,14 +176,14 @@ export class Sheet implements IDateProvider {
 
     private getCellPos(name) {
         const regex = /([a-zA-z]+)([0-9]+)/g;
-        if(!new RegExp(/([a-zA-z]+)([0-9]+)/g).test(name)) {
+        if (!new RegExp(/([a-zA-z]+)([0-9]+)/g).test(name)) {
             throw 'invalid cell name ' + name;
         }
         const pos = regex.exec(name);
         const columnId = this.getColumnIndex(pos[1]);
         const rowId = parseInt(pos[2]) - 1;
 
-        return { rowId: rowId, columnId: columnId };
+        return {rowId: rowId, columnId: columnId};
     }
 
     getEvaluatedValue(exp) {
@@ -191,10 +191,10 @@ export class Sheet implements IDateProvider {
             const parts = exp.split(':');
             const a = this.getCellPos(parts[0]);
             const b = this.getCellPos(parts[1]);
-            let res=[];
-            for(let c=a.columnId;c<=b.columnId;c++) {
-                for(let r=a.rowId;r<=b.rowId;r++) {
-                    res.push(this.getCellEvaluatedValue(c,r));
+            let res = [];
+            for (let c = a.columnId; c <= b.columnId; c++) {
+                for (let r = a.rowId; r <= b.rowId; r++) {
+                    res.push(this.getCellEvaluatedValue(c, r));
                 }
             }
             return res;
@@ -227,7 +227,17 @@ export class Sheet implements IDateProvider {
 
     }
 
-    setCellValue(columnId: number, rowId: number, value,silent=false): any {
+    removeCell (columnId: number, rowId: number) {
+        if(this.data[columnId] && this.data[columnId][rowId]) {
+            this.data[columnId][rowId] = undefined;
+        }
+    }
+
+    setCellValue(columnId: number, rowId: number, value, silent = false): any {
+        if(value == null) {
+            this.removeCell(columnId,rowId);
+            return;
+        }
         let cell = this.forceGetCell(columnId, rowId);
         if (value.startsWith('=')) {
             let evaluatedValue = Evaluator.Eval(this, value);
@@ -235,7 +245,7 @@ export class Sheet implements IDateProvider {
         } else {
             cell.value = value;
         }
-        if(!silent) {
+        if (!silent) {
             this.updateDependees(columnId, rowId);
             this.onChange()
         }
@@ -617,7 +627,7 @@ export class Sheet implements IDateProvider {
 
     private style(app) {
         this.appearance = [];
-        if(!app) return;
+        if (!app) return;
         for (let d of app) {
             if (!d) continue;
             for (let c of d) {
