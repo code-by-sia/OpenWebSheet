@@ -2,7 +2,6 @@ import { OpenDocument } from './core/Document';
 import { DocumentRenderer } from './rendering/DocumentRenderer';
 import { CanvasRenderer } from './rendering/canvas/CanvasRendering';
 import { UIHandlerController } from './editor/UIHandlerControler';
-import { Appearance } from './core/Appearance';
 
 export class UI {
    

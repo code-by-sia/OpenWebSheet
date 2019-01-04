@@ -1,9 +1,5 @@
-// import {WebSheet}  from '../../lib/WebSheet';
-// import {UIHandlerControler} from "../../lib/UIHandler";
-// import {demo} from '../demo';
-import {UI} from '../../lib/UI';
-import {OpenDocument} from '../../lib/core/Document';
-import {TextAlign} from '../../lib/core/Appearance';
+import {UI} from '../lib/UI';
+import {TextAlign} from '../lib/core/Appearance';
 
 /**
  * Created by SiamandM on 7/21/2016.

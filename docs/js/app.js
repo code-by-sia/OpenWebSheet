@@ -1,4 +1,4 @@
-define(["require", "exports", '../../lib/UI', '../../lib/core/Appearance'], function (require, exports, UI_1, Appearance_1) {
+define(["require", "exports", '../lib/UI', '../lib/core/Appearance'], function (require, exports, UI_1, Appearance_1) {
     /**
      * Created by SiamandM on 7/21/2016.
      */
