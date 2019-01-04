@@ -1,6 +1,9 @@
 # OpenWebSheet
 OpenSource Web based spreadsheet
 
+<a href="https://siamandmaroufi.github.io/OpenWebSheet/" >live demo </a>
+
+
 * [x] basic structure
 * [x] canvas rendering
 * [x] basic content editor
