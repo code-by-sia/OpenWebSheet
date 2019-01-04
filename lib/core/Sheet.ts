@@ -176,7 +176,7 @@ export class Sheet implements IDateProvider {
 
     private getCellPos(name) {
         const regex = /([a-zA-z]+)([0-9]+)/g;
-        if (!new RegExp(/([a-zA-z]+)([0-9]+)/g).test(name)) {
+        if (!(/([a-zA-z]+)([0-9]+)/g).test(name)) {
             throw 'invalid cell name ' + name;
         }
         const pos = regex.exec(name);

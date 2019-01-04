@@ -63,7 +63,7 @@ export class Evaluator {
         }
 
         let m;
-        let regex = new RegExp(this.valueRegex);
+        let regex = this.valueRegex;
         let temp = str;
 
         let ranges = [];

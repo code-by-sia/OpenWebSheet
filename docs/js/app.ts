@@ -1,9 +1,9 @@
-// import {WebSheet}  from '../lib/WebSheet';
-// import {UIHandlerControler} from "../lib/UIHandler";
-// import {demo} from './demo';
-import {UI} from '../lib/UI';
-import {OpenDocument} from '../lib/core/Document';
-import {TextAlign} from '../lib/core/Appearance';
+// import {WebSheet}  from '../../lib/WebSheet';
+// import {UIHandlerControler} from "../../lib/UIHandler";
+// import {demo} from '../demo';
+import {UI} from '../../lib/UI';
+import {OpenDocument} from '../../lib/core/Document';
+import {TextAlign} from '../../lib/core/Appearance';
 
 /**
  * Created by SiamandM on 7/21/2016.
@@ -37,7 +37,7 @@ $(document).ready(() => {
         let content = ui.save();
         let uriContent = "data:application/octet-stream," + encodeURIComponent(content);
         let a = document.createElement("a");
-        a.download = "document.ows";
+        a['download'] = "document.ows";
         a.href = uriContent;
         a.target = "_blank"
         a.click();

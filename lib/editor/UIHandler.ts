@@ -1,5 +1,5 @@
 ///<reference path="../core/Sheet.ts"/>
-///<reference path="../../js/jquery.d.ts"/>
+///<reference path="../jquery.d.ts"/>
 ///<reference path="./CellEditor.ts"/>
 
 import { Sheet } from "../core/Sheet";

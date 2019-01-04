@@ -1,4 +1,4 @@
-define(["require", "exports", '../lib/UI', '../lib/core/Appearance'], function (require, exports, UI_1, Appearance_1) {
+define(["require", "exports", '../../lib/UI', '../../lib/core/Appearance'], function (require, exports, UI_1, Appearance_1) {
     /**
      * Created by SiamandM on 7/21/2016.
      */
@@ -27,7 +27,7 @@ define(["require", "exports", '../lib/UI', '../lib/core/Appearance'], function (
             var content = ui.save();
             var uriContent = "data:application/octet-stream," + encodeURIComponent(content);
             var a = document.createElement("a");
-            a.download = "document.ows";
+            a['download'] = "document.ows";
             a.href = uriContent;
             a.target = "_blank";
             a.click();
