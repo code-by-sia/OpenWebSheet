@@ -234,23 +234,123 @@ input[type=color] {
     transition-duration: .1s;
 }
 .xx-large-font { font-size: xx-large;}
-
 #border-grid {
-    display:grid;
-    grid-template-columns:7px auto 7px;
-    grid-template-rows:7px auto 7px;
-    width:38px;
-    height:38px;
-    margin:2px 10px;
-    background:#aaa;
-    border:solid thin #ddd;
-    border-radius:5px;
-    overflow:hidden;
+    width: 170px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 5px;
+} 
+
+#border-grid .borders {
+    display: grid;
+    grid-template-columns: 10px 10px;
+    width: 20px;
+    height: 20px;
+    padding: 3px;
+    border-radius: 2px;
+    border: solid thin #eee;
 }
-#border-grid:hover,
-#border-grid:hover div.action{
-    background:red;
+#border-grid .borders.active {
+    border:solid 1px #000;
 }
+#border-grid .borders:hover {
+    background: #fff;
+    border:dotted 1px #000;
+}
+
+#border-grid .borders > div {
+    border:dotted 1px black;
+    display: block;
+}
+
+#border-grid .borders.top .top,
+#border-grid .borders.top .right,
+#border-grid .borders.outside .top ,
+#border-grid .borders.outside .right,
+#border-grid .borders.all .top,
+#border-grid .borders.all .right
+{
+    border-top-style:solid;
+    border-top-width:2px;
+}
+
+#border-grid .borders.horisontal .top,
+#border-grid .borders.horisontal .right,
+#border-grid .borders.inside .top,
+#border-grid .borders.inside .right,
+#border-grid .borders.all .top,
+#border-grid .borders.all .right
+{
+    border-bottom-style:solid;
+    border-bottom-width:2px;
+}
+
+#border-grid .borders.bottom .bottom,
+#border-grid .borders.bottom .left,
+#border-grid .borders.all .bottom,
+#border-grid .borders.all .left,
+#border-grid .borders.outside .bottom,
+#border-grid .borders.outside .left
+{
+    border-bottom-style:solid;
+    border-bottom-width:2px;
+}
+
+#border-grid .borders.vertical .top,
+#border-grid .borders.vertical .left,
+#border-grid .borders.inside .top,
+#border-grid .borders.inside .left,
+#border-grid .borders.all .top,
+#border-grid .borders.all .left
+{
+    border-right-style:solid;
+    border-right-width:1px;
+}
+
+
+#border-grid .borders.right .right,
+#border-grid .borders.right .bottom,
+#border-grid .borders.outside .right,
+#border-grid .borders.outside .bottom,
+#border-grid .borders.all .right,
+#border-grid .borders.all .bottom
+{
+    border-right-style:solid;
+    border-right-width:2px;
+}
+
+#border-grid .borders.left .top,
+#border-grid .borders.left .left,
+#border-grid .borders.outside .top,
+#border-grid .borders.outside .left,
+#border-grid .borders.all .top,
+#border-grid .borders.all .left {
+    border-left-style:solid;
+    border-left-width:2px;
+}
+ 
+
+#border-grid .borders .right ,
+#border-grid .borders .bottom {
+    border-left: none !important;
+}
+
+#border-grid .borders .left ,
+#border-grid .borders .bottom  {
+    border-top: none !important;
+}
+
+
+#border-grid .borders.vertical .right,
+#border-grid .borders.vertical .bottom,
+#border-grid .borders.inside .right,
+#border-grid .borders.inside .bottom,
+#border-grid .borders.all .right,
+#border-grid .borders.all .bottom {
+    border-left-style:solid !important;
+    border-left-width:1px !important;
+} 
+
 #border-grid div.action {
     background: #333;
 }
