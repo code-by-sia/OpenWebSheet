@@ -29,6 +29,7 @@ $(document).ready(() => {
     $('#right-border-action').click(() => ui.execCmd('right-border',$('#border-color').val()));
     $('#bottom-border-action').click(() => ui.execCmd('bottom-border',$('#border-color').val()));
     $('#border-grid .all').click(() => ui.execCmd('full-border', $('#border-color').val()));
+    $('#no-border').click(() => ui.execCmd('no-border','#fafafa'));
     $('#save-action').click(() => {
         let content = ui.save();
         let uriContent = "data:application/octet-stream," + encodeURIComponent(content);

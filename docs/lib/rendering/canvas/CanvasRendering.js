@@ -1,5 +1,7 @@
-define(["require", "exports", '../../common/constants', './Context', "../../core/Appearance", "../../core/Sheet"], function (require, exports, constants_1, Context_1, Appearance_1, Sheet_1) {
-    var CanvasRenderer = (function () {
+define(["require", "exports", "../../common/constants", "./Context", "../../core/Appearance", "../../core/Sheet"], function (require, exports, constants_1, Context_1, Appearance_1, Sheet_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var CanvasRenderer = /** @class */ (function () {
         function CanvasRenderer(container, document) {
             var _this = this;
             this.container = container;
@@ -239,6 +241,6 @@ define(["require", "exports", '../../common/constants', './Context', "../../core
             context.unmask();
         };
         return CanvasRenderer;
-    })();
+    }());
     exports.CanvasRenderer = CanvasRenderer;
 });

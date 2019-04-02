@@ -1,5 +1,7 @@
 define(["require", "exports", "../common/utils", "./Appearance"], function (require, exports, utils_1, Appearance_1) {
-    var Commander = (function () {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var Commander = /** @class */ (function () {
         function Commander(doc) {
             var _this = this;
             this.doc = doc;
@@ -13,6 +15,7 @@ define(["require", "exports", "../common/utils", "./Appearance"], function (requ
             this.commands['bg-color'] = function (color) { return _this.appearance(function (app) { return app.background = color; }); };
             this.commands['fg-color'] = function (color) { return _this.appearance(function (app) { return app.text = color; }); };
             this.commands['top-border'] = function (color) { return _this.topBorder(color); };
+            this.commands['no-border'] = function () { return _this.noBorder(); };
             this.commands['left-border'] = function (color) { return _this.leftBorder(color); };
             this.commands['right-border'] = function (color) { return _this.rightBorder(color); };
             this.commands['bottom-border'] = function (color) { return _this.bottomBorder(color); };
@@ -40,11 +43,11 @@ define(["require", "exports", "../common/utils", "./Appearance"], function (requ
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
             }
+            var _a;
             if (!this.has(commandName)) {
                 console.warn("command " + commandName + " does not exsits!");
             }
             (_a = this.commands)[commandName].apply(_a, args);
-            var _a;
         };
         Object.defineProperty(Commander.prototype, "ActiveSheet", {
             get: function () {
@@ -74,6 +77,14 @@ define(["require", "exports", "../common/utils", "./Appearance"], function (requ
                     this.ActiveSheet.setCellAppearance(c, r, app, false);
                 }
             }
+        };
+        Commander.prototype.noBorder = function () {
+            this.topBorder(null);
+            this.leftBorder(null);
+            this.appearance(function (app) {
+                app.setVertical(null);
+                app.setHorizontal(null);
+            });
         };
         Commander.prototype.topBorder = function (color) {
             this.logAppearanceOnlyCommand();
@@ -226,6 +237,6 @@ define(["require", "exports", "../common/utils", "./Appearance"], function (requ
             throw 'redo has not been implemented';
         };
         return Commander;
-    })();
+    }());
     exports.Commander = Commander;
 });

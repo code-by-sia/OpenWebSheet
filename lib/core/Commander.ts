@@ -17,6 +17,7 @@ export class Commander {
         this.commands['bg-color'] = (color) => this.appearance(app => app.background = color);
         this.commands['fg-color'] = (color) => this.appearance(app => app.text = color);
         this.commands['top-border'] = (color) => this.topBorder(color);
+        this.commands['no-border'] = () => this.noBorder();
         this.commands['left-border'] = (color) => this.leftBorder(color);
         this.commands['right-border'] = (color) => this.rightBorder(color);
         this.commands['bottom-border'] = (color) => this.bottomBorder(color);
@@ -71,6 +72,15 @@ export class Commander {
         }
     }
 
+    private noBorder(){
+        
+        this.topBorder(null);
+        this.leftBorder(null)
+        this.appearance(app => {
+            app.setVertical(null);
+            app.setHorizontal(null);
+        });
+    }
     private topBorder(color) {
         this.logAppearanceOnlyCommand();
         let sel = this.Selection;

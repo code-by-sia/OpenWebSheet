@@ -1,15 +1,26 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 define(["require", "exports", "./UIHandler", "../common/constants"], function (require, exports, UIHandler_1, constants_1) {
-    var SheetUIHandler = (function (_super) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var SheetUIHandler = /** @class */ (function (_super) {
         __extends(SheetUIHandler, _super);
         function SheetUIHandler() {
-            _super.apply(this, arguments);
-            this.wheelDeltaX = 0;
-            this.wheelDeltaY = 0;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.wheelDeltaX = 0;
+            _this.wheelDeltaY = 0;
+            return _this;
         }
         SheetUIHandler.prototype.mouseWheel = function (dx, dy) {
             this.wheelDeltaX += dx;
@@ -62,6 +73,6 @@ define(["require", "exports", "./UIHandler", "../common/constants"], function (r
             this.controller.cellEditor.select(true);
         };
         return SheetUIHandler;
-    })(UIHandler_1.UIHandler);
+    }(UIHandler_1.UIHandler));
     exports.SheetUIHandler = SheetUIHandler;
 });

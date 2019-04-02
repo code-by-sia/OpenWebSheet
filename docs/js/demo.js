@@ -1,4 +1,6 @@
 define(["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     function demo(sheet) {
         var cell = sheet.getCell(1, 4);
         cell.value = "Test Data";

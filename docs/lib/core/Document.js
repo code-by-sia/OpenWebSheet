@@ -1,5 +1,7 @@
-define(["require", "exports", './Sheet', './Commander'], function (require, exports, Sheet_1, Commander_1) {
-    var OpenDocument = (function () {
+define(["require", "exports", "./Sheet", "./Commander"], function (require, exports, Sheet_1, Commander_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var OpenDocument = /** @class */ (function () {
         function OpenDocument() {
             this.sheets = [];
             this.activeSheetIndex = 0;
@@ -64,8 +66,8 @@ define(["require", "exports", './Sheet', './Commander'], function (require, expo
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
             }
-            (_a = this.commander).do.apply(_a, [cmd].concat(args));
             var _a;
+            (_a = this.commander).do.apply(_a, [cmd].concat(args));
         };
         OpenDocument.prototype.save = function () {
             return {
@@ -79,6 +81,6 @@ define(["require", "exports", './Sheet', './Commander'], function (require, expo
             this.onChange();
         };
         return OpenDocument;
-    })();
+    }());
     exports.OpenDocument = OpenDocument;
 });

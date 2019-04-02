@@ -1,5 +1,7 @@
 define(["require", "exports"], function (require, exports) {
-    var Env = (function () {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var Env = /** @class */ (function () {
         function Env(ranges, dataProvider) {
             this.ranges = ranges;
             this.dataProvider = dataProvider;
@@ -41,8 +43,8 @@ define(["require", "exports"], function (require, exports) {
             return eval(txt);
         };
         return Env;
-    })();
-    var Evaluator = (function () {
+    }());
+    var Evaluator = /** @class */ (function () {
         function Evaluator() {
         }
         Evaluator.Eval = function (dataProvider, str) {
@@ -79,6 +81,6 @@ define(["require", "exports"], function (require, exports) {
         };
         Evaluator.valueRegex = /(([a-zA-Z]+[0-9])+\:?([a-zA-Z]+[0-9]+)?)/g;
         return Evaluator;
-    })();
+    }());
     exports.Evaluator = Evaluator;
 });

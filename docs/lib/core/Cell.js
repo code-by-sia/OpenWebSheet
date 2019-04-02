@@ -1,5 +1,7 @@
 define(["require", "exports"], function (require, exports) {
-    var Cell = (function () {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var Cell = /** @class */ (function () {
         function Cell(columnId, rowId) {
             this.colSpan = 1;
             this.rowSpan = 1;
@@ -120,6 +122,6 @@ define(["require", "exports"], function (require, exports) {
             };
         };
         return Cell;
-    })();
+    }());
     exports.Cell = Cell;
 });

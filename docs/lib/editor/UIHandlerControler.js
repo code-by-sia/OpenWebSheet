@@ -1,5 +1,7 @@
 define(["require", "exports", "./CellEditor", "./DocumentHandler", "./SheetUIHandler", "./ResizeHandler"], function (require, exports, CellEditor_1, DocumentHandler_1, SheetUIHandler_1, ResizeHandler_1) {
-    var UIHandlerController = (function () {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var UIHandlerController = /** @class */ (function () {
         function UIHandlerController(websheet, renderer) {
             var _this = this;
             this.websheet = websheet;
@@ -184,6 +186,6 @@ define(["require", "exports", "./CellEditor", "./DocumentHandler", "./SheetUIHan
             this.cellEditor.select(false);
         };
         return UIHandlerController;
-    })();
+    }());
     exports.UIHandlerController = UIHandlerController;
 });

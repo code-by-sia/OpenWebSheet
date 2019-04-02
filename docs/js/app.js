@@ -1,4 +1,6 @@
-define(["require", "exports", '../lib/UI', '../lib/core/Appearance'], function (require, exports, UI_1, Appearance_1) {
+define(["require", "exports", "../lib/UI", "../lib/core/Appearance"], function (require, exports, UI_1, Appearance_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * Created by SiamandM on 7/21/2016.
      */
@@ -23,6 +25,7 @@ define(["require", "exports", '../lib/UI', '../lib/core/Appearance'], function (
         $('#right-border-action').click(function () { return ui.execCmd('right-border', $('#border-color').val()); });
         $('#bottom-border-action').click(function () { return ui.execCmd('bottom-border', $('#border-color').val()); });
         $('#border-grid .all').click(function () { return ui.execCmd('full-border', $('#border-color').val()); });
+        $('#no-border').click(function () { return ui.execCmd('no-border', '#fafafa'); });
         $('#save-action').click(function () {
             var content = ui.save();
             var uriContent = "data:application/octet-stream," + encodeURIComponent(content);
