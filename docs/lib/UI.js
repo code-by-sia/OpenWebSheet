@@ -1,7 +1,5 @@
-define(["require", "exports", "./core/Document", "./rendering/canvas/CanvasRendering", "./editor/UIHandlerControler"], function (require, exports, Document_1, CanvasRendering_1, UIHandlerControler_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var UI = /** @class */ (function () {
+define(["require", "exports", './core/Document', './rendering/canvas/CanvasRendering', './editor/UIHandlerControler'], function (require, exports, Document_1, CanvasRendering_1, UIHandlerControler_1) {
+    var UI = (function () {
         function UI(element) {
             var _this = this;
             this.element = element;
@@ -57,9 +55,9 @@ define(["require", "exports", "./core/Document", "./rendering/canvas/CanvasRende
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
             }
-            var _a;
             console.log("the command _" + cmd + "_ executed.");
             (_a = this.document).execCommand.apply(_a, [cmd].concat(args));
+            var _a;
         };
         UI.prototype.addOnChangeEventListener = function (handler) {
             this.handlers.push(handler);
@@ -82,6 +80,6 @@ define(["require", "exports", "./core/Document", "./rendering/canvas/CanvasRende
             this.document.load(obj);
         };
         return UI;
-    }());
+    })();
     exports.UI = UI;
 });

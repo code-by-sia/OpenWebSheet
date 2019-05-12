@@ -2,9 +2,7 @@
 ///<reference path="../jquery.d.ts"/>
 ///<reference path="./CellEditor.ts"/>
 define(["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var UIHandler = /** @class */ (function () {
+    var UIHandler = (function () {
         function UIHandler(controller) {
             this.controller = controller;
         }
@@ -31,6 +29,6 @@ define(["require", "exports"], function (require, exports) {
             this.controller.unlock();
         };
         return UIHandler;
-    }());
+    })();
     exports.UIHandler = UIHandler;
 });

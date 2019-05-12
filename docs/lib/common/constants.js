@@ -1,6 +1,4 @@
 define(["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
     exports.SheetTitleHeight = 30;
     exports.SheetTitleWidth = 110;
     exports.ColumnHeaderHeight = 30;

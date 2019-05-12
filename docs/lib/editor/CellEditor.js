@@ -1,11 +1,9 @@
 define(["require", "exports", "../common/constants", "../core/Cell", "../core/Appearance"], function (require, exports, constants_1, Cell_1, Appearance_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * Created by SiamandM on 6/23/2016.
      */
     ///<reference path="UIHandler.ts"/>
-    var CellEditor = /** @class */ (function () {
+    var CellEditor = (function () {
         function CellEditor(controler) {
             this.controler = controler;
             this.websheet = controler.websheet;
@@ -196,10 +194,10 @@ define(["require", "exports", "../common/constants", "../core/Cell", "../core/Ap
             this.editorElement.style.height = (sheet.getCellHeight(selectedCell) - 3) + 'px';
             this.editorElement.value = selectedCell.value;
             this.editorElement.focus();
-            this.anchorElement.style.left = x2 - 5 + "px";
-            this.anchorElement.style.top = y2 - 5 + "px";
+            this.anchorElement.style.left = (x2 - 5) + "px";
+            this.anchorElement.style.top = (y2 - 5) + "px";
         };
         return CellEditor;
-    }());
+    })();
     exports.CellEditor = CellEditor;
 });

@@ -1,13 +1,10 @@
 define(["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var TextAlign;
     (function (TextAlign) {
         TextAlign[TextAlign["Left"] = 0] = "Left";
         TextAlign[TextAlign["Right"] = 1] = "Right";
         TextAlign[TextAlign["Center"] = 2] = "Center";
-    })(TextAlign = exports.TextAlign || (exports.TextAlign = {}));
-    var BorderStyle;
+    })(exports.TextAlign || (exports.TextAlign = {}));
+    var TextAlign = exports.TextAlign;
     (function (BorderStyle) {
         BorderStyle[BorderStyle["SolidThin"] = 0] = "SolidThin";
         BorderStyle[BorderStyle["SolidThick"] = 1] = "SolidThick";
@@ -18,8 +15,9 @@ define(["require", "exports"], function (require, exports) {
         BorderStyle[BorderStyle["DashedThick"] = 6] = "DashedThick";
         BorderStyle[BorderStyle["DotDashedThin"] = 7] = "DotDashedThin";
         BorderStyle[BorderStyle["DotDashedThick"] = 8] = "DotDashedThick";
-    })(BorderStyle = exports.BorderStyle || (exports.BorderStyle = {}));
-    var Border = /** @class */ (function () {
+    })(exports.BorderStyle || (exports.BorderStyle = {}));
+    var BorderStyle = exports.BorderStyle;
+    var Border = (function () {
         function Border(color) {
             if (color === void 0) { color = null; }
             this.color = color;
@@ -32,9 +30,9 @@ define(["require", "exports"], function (require, exports) {
             return border;
         };
         return Border;
-    }());
+    })();
     exports.Border = Border;
-    var Appearance = /** @class */ (function () {
+    var Appearance = (function () {
         function Appearance() {
             this.textAlign = TextAlign.Left;
         }
@@ -128,6 +126,6 @@ define(["require", "exports"], function (require, exports) {
             return app;
         };
         return Appearance;
-    }());
+    })();
     exports.Appearance = Appearance;
 });

@@ -1,15 +1,13 @@
 define(["require", "exports", "../../core/Appearance"], function (require, exports, Appearance_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * Created by SiamandM on 6/16/2016.
      */
-    var LayoutDirection;
     (function (LayoutDirection) {
         LayoutDirection[LayoutDirection["LeftToRight"] = 1] = "LeftToRight";
         LayoutDirection[LayoutDirection["RightToLeft"] = 2] = "RightToLeft";
-    })(LayoutDirection = exports.LayoutDirection || (exports.LayoutDirection = {}));
-    var Point = /** @class */ (function () {
+    })(exports.LayoutDirection || (exports.LayoutDirection = {}));
+    var LayoutDirection = exports.LayoutDirection;
+    var Point = (function () {
         function Point(x, y) {
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
@@ -17,9 +15,9 @@ define(["require", "exports", "../../core/Appearance"], function (require, expor
             this.y = y;
         }
         return Point;
-    }());
+    })();
     exports.Point = Point;
-    var ContextMask = /** @class */ (function () {
+    var ContextMask = (function () {
         function ContextMask(left, top, width, height) {
             this.x = 0;
             this.y = 0;
@@ -76,9 +74,9 @@ define(["require", "exports", "../../core/Appearance"], function (require, expor
             return new ContextMask(x, y, w, h);
         };
         return ContextMask;
-    }());
+    })();
     exports.ContextMask = ContextMask;
-    var Context = /** @class */ (function () {
+    var Context = (function () {
         function Context(context, width, height) {
             this.maskStack = [];
             this.direction = LayoutDirection.LeftToRight;
@@ -221,28 +219,28 @@ define(["require", "exports", "../../core/Appearance"], function (require, expor
         Context.prototype.openPath = function () {
             var points = [];
             for (var _i = 0; _i < arguments.length; _i++) {
-                points[_i] = arguments[_i];
+                points[_i - 0] = arguments[_i];
             }
             this.internalPath(false, true, false, points);
         };
         Context.prototype.closePath = function () {
             var points = [];
             for (var _i = 0; _i < arguments.length; _i++) {
-                points[_i] = arguments[_i];
+                points[_i - 0] = arguments[_i];
             }
             this.internalPath(true, true, false, points);
         };
         Context.prototype.fillOpenPath = function () {
             var points = [];
             for (var _i = 0; _i < arguments.length; _i++) {
-                points[_i] = arguments[_i];
+                points[_i - 0] = arguments[_i];
             }
             this.internalPath(false, true, true, points);
         };
         Context.prototype.fillClosePath = function () {
             var points = [];
             for (var _i = 0; _i < arguments.length; _i++) {
-                points[_i] = arguments[_i];
+                points[_i - 0] = arguments[_i];
             }
             this.internalPath(true, false, true, points);
         };
@@ -275,13 +273,13 @@ define(["require", "exports", "../../core/Appearance"], function (require, expor
                 stops[_i - 4] = arguments[_i];
             }
             var grd = this.context2d.createLinearGradient(x, y, x + w, y + h);
-            for (var _a = 0, stops_1 = stops; _a < stops_1.length; _a++) {
-                var n = stops_1[_a];
+            for (var _a = 0; _a < stops.length; _a++) {
+                var n = stops[_a];
                 grd.addColorStop(n[0], n[1]);
             }
             return grd;
         };
         return Context;
-    }());
+    })();
     exports.Context = Context;
 });

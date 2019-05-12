@@ -1,6 +1,4 @@
-define(["require", "exports", "../lib/UI", "../lib/core/Appearance"], function (require, exports, UI_1, Appearance_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
+define(["require", "exports", '../lib/UI', '../lib/core/Appearance'], function (require, exports, UI_1, Appearance_1) {
     /**
      * Created by SiamandM on 7/21/2016.
      */

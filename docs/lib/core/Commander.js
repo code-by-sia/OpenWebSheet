@@ -1,7 +1,5 @@
 define(["require", "exports", "../common/utils", "./Appearance"], function (require, exports, utils_1, Appearance_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var Commander = /** @class */ (function () {
+    var Commander = (function () {
         function Commander(doc) {
             var _this = this;
             this.doc = doc;
@@ -43,11 +41,11 @@ define(["require", "exports", "../common/utils", "./Appearance"], function (requ
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
             }
-            var _a;
             if (!this.has(commandName)) {
                 console.warn("command " + commandName + " does not exsits!");
             }
             (_a = this.commands)[commandName].apply(_a, args);
+            var _a;
         };
         Object.defineProperty(Commander.prototype, "ActiveSheet", {
             get: function () {
@@ -237,6 +235,6 @@ define(["require", "exports", "../common/utils", "./Appearance"], function (requ
             throw 'redo has not been implemented';
         };
         return Commander;
-    }());
+    })();
     exports.Commander = Commander;
 });

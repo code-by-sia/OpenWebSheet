@@ -1,7 +1,5 @@
 define(["require", "exports", "./Cell", "./Appearance", "../common/constants", "./formula/Evaluator"], function (require, exports, Cell_1, Appearance_1, constants_1, Evaluator_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var CellSelection = /** @class */ (function () {
+    var CellSelection = (function () {
         function CellSelection() {
         }
         Object.defineProperty(CellSelection.prototype, "single", {
@@ -15,9 +13,9 @@ define(["require", "exports", "./Cell", "./Appearance", "../common/constants", "
             return this.top + " " + this.left + " - " + this.bottom + " " + this.right;
         };
         return CellSelection;
-    }());
+    })();
     exports.CellSelection = CellSelection;
-    var Sheet = /** @class */ (function () {
+    var Sheet = (function () {
         function Sheet(title) {
             this.title = title;
             this.data = [];
@@ -247,8 +245,8 @@ define(["require", "exports", "./Cell", "./Appearance", "../common/constants", "
                 var d = _a[_i];
                 if (!d)
                     continue;
-                for (var _b = 0, d_1 = d; _b < d_1.length; _b++) {
-                    var c = d_1[_b];
+                for (var _b = 0; _b < d.length; _b++) {
+                    var c = d[_b];
                     if (!c || !c.value)
                         continue;
                     if (c.value.length && c.value[0] == '=') {
@@ -564,12 +562,12 @@ define(["require", "exports", "./Cell", "./Appearance", "../common/constants", "
         };
         Sheet.prototype.fill = function (data) {
             this.data = [];
-            for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
-                var d = data_1[_i];
+            for (var _i = 0; _i < data.length; _i++) {
+                var d = data[_i];
                 if (!d)
                     continue;
-                for (var _a = 0, d_2 = d; _a < d_2.length; _a++) {
-                    var c = d_2[_a];
+                for (var _a = 0; _a < d.length; _a++) {
+                    var c = d[_a];
                     if (!c)
                         continue;
                     var cell = Cell_1.Cell.from(c);
@@ -581,12 +579,12 @@ define(["require", "exports", "./Cell", "./Appearance", "../common/constants", "
             this.appearance = [];
             if (!app)
                 return;
-            for (var _i = 0, app_1 = app; _i < app_1.length; _i++) {
-                var d = app_1[_i];
+            for (var _i = 0; _i < app.length; _i++) {
+                var d = app[_i];
                 if (!d)
                     continue;
-                for (var _a = 0, d_3 = d; _a < d_3.length; _a++) {
-                    var c = d_3[_a];
+                for (var _a = 0; _a < d.length; _a++) {
+                    var c = d[_a];
                     if (!c)
                         continue;
                     var a = Appearance_1.Appearance.from(c);
@@ -610,6 +608,6 @@ define(["require", "exports", "./Cell", "./Appearance", "../common/constants", "
             return sh;
         };
         return Sheet;
-    }());
+    })();
     exports.Sheet = Sheet;
 });
