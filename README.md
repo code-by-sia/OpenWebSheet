@@ -1,5 +1,6 @@
 # OpenWebSheet
 OpenSource Web based spreadsheet
+<img src="demo/demo.png" />
 
 <a href="https://siamandmaroufi.github.io/OpenWebSheet/" >live demo </a>
 
@@ -19,4 +20,4 @@ OpenSource Web based spreadsheet
 
 <a href="demo/DEMO.ows" target="_blank"> download example document</a>
 
-<img src="demo/demo.png" />
+
