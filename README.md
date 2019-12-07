@@ -3,11 +3,14 @@ OpenSource Web based spreadsheet
 
 ### Installed PWA
 ##### for installing the pwa app click on install icon at the url bar's right side
+
+<a href="https://siamandmaroufi.github.io/OpenWebSheet/" >Link to the live demo _[install]_ </a>
+
+<a href="demo/DEMO.ows" target="_blank"> download example document _[download]_</a>
+
 <img src="demo/demo.png" />
 
-### Links
-<a href="https://siamandmaroufi.github.io/OpenWebSheet/" >Live demo </a>
-<a href="demo/DEMO.ows" target="_blank"> download example document _[download]_</a>
+
 
 * [x] basic structure
 * [x] canvas rendering
