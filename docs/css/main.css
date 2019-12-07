@@ -274,8 +274,8 @@ input[type=color] {
     border-top-width:2px;
 }
 
-#border-grid .borders.horisontal .top,
-#border-grid .borders.horisontal .right,
+#border-grid .borders.horizontal .top,
+#border-grid .borders.horizontal .right,
 #border-grid .borders.inside .top,
 #border-grid .borders.inside .right,
 #border-grid .borders.all .top,
