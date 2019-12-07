@@ -61,7 +61,7 @@
             display: flex;
             flex-direction: row;
             list-style: none;
-            background: #004d40;
+            background: #00454d;
 
             &-label {
                 padding: 4px 10px;
@@ -82,7 +82,7 @@
                 &.active {
                     border-radius: 3px 3px 0 0;
                     background: #fff;
-                    color: #004d40;
+                    color: #00454d;
                     border-bottom: solid thin #fff;
                 }
             }

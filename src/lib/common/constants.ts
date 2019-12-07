@@ -12,4 +12,4 @@ export const COLOR_CREAM = '#fffdd0';
 export const COLOR_0 ='#4CAF50';
 export const COLOR_1 ='#00897b';
 export const COLOR_2 ='#00796b';
-export const COLOR_3 ='#004d40';
+export const COLOR_3 ='#00454d';

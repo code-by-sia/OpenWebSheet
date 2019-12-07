@@ -1,4 +1,3 @@
-
 <template>
     <div>
         <ribbon :menu="menu" v-model="active">
@@ -92,7 +91,7 @@
             </div>
             <div slot="menu-info" style="flex:1">
                 <control-box label="OSI">
-                    <span style="font-size:xx-large;color:#004d40;font-weight:bold">
+                    <span style="font-size:xx-large;color:#00454d;font-weight:bold">
                             <i class="fab fa-osi"></i>
                         </span>
                 </control-box>
@@ -238,7 +237,9 @@
 <style scoped>
 
     .seperator {
-        margin:0 5px;border-right:solid #ccc thin;border-left:solid thin #eee
+        margin: 0 5px;
+        border-right: solid #ccc thin;
+        border-left: solid thin #eee
     }
 
     .about-menu a {

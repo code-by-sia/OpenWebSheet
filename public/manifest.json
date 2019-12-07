@@ -1,7 +1,7 @@
 {
     "name": "OpenWebSheet",
     "short_name": "OpenWebSheet",
-    "theme_color": "#004d40",
+    "theme_color": "#00454d",
     "background_color": "white",
     "display": "standalone",
     "Scope": "/OpenWebSheet/",
