@@ -1,323 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Open WebSheet</title>
-    <base href="/OpenWebSheet/" />
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/main.css?v2" />
-    <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="manifest" href="manifest.json" />
-    <link href='https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-                navigator.serviceWorker.register('service-worker.js').then(function (registration) {
-                    // Registration was successful
-                    console.log('Registered!');
-                }, function (err) {
-                    // registration failed :(
-                    console.log('ServiceWorker registration failed: ', err);
-                }).catch(function (err) {
-                    console.log(err);
-                });
-            });
-        } else {
-            console.log('service worker is not supported');
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="Siamand (Cyaxares)"><link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i&display=swap" rel=stylesheet><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous><!--[if IE]><link rel="icon" href="favicon.ico"><![endif]--><title>Open web sheet</title><script>if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('service-worker.js').then(function (registration) {
+            // Registration was successful
+            console.log('Registered!');
+          }, function (err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+          }).catch(function (err) {
+            console.log(err);
+          });
+        });
+      } else {
+        console.log('service worker is not supported');
+      }</script><style>html,
+        body {
+            height: 100%;
         }
-    </script>
-</head>
 
-<body>
-    <div id="wrapper">
-        <div id="header">
-            <ul class="menu">
-                <li class="active" data-for="formatting">Home</li>
-                <li data-for="formulas">Formulas</li>
-                <li data-for="data">Data</li>
-                <li data-for="view">View</li>
-                <li data-for="about">About</li>
-            </ul>
-            <div class="menu-content">
-                <div class="formatting-menu active">
-                    <fieldset class="last">
-                        <legend>Document</legend>
-                        <div style="display: flex;padding: 10px 5px;text-align: center">
-                            <i id="save-action" class="far fa-save xx-large-font flat-button"></i>
-                            <span style="margin:0 5px;border-right:solid #ccc thin;border-left:solid thin #ddd"></span>
-                            <i id="load-action" class="far fa-folder xx-large-font flat-button"></i>
-                        </div>
-                    </fieldset>
-                    <fieldset class="independent">
-                        <legend>Font</legend>
-                        <p>
-                            <select id="font-name" style="width:80px;">
-                                <option selected value="lato">Lato</option>
-                                <option value="courier">Courier</option>
-                                <option value="sans">Sans</option>
-                            </select>
-                            <select id="font-size">
-                                <option value="6">6</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option selected value="12">12</option>
-                                <option value="14">14</option>
-                                <option value="16">16</option>
-                                <option value="18">18</option>
-                                <option value="20">20</option>
-                                <option value="22">22</option>
-                                <option value="24">24</option>
-                                <option value="26">26</option>
-                                <option value="28">28</option>
-                                <option value="36">36</option>
-                                <option value="48">48</option>
-                                <option value="72">72</option>
-                            </select>
+        body, html, * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
 
-                        </p>
-                        <p>
-                            <span class="button-group" style="float:left;margin-right:15px;">
-                                <button id="bold-action">
-                                    <i class="fa fa-bold"></i>
-                                </button>
-                                <button id="italic-action">
-                                    <i class="fa fa-italic"></i>
-                                </button>
-                                <button id="underline-action">
-                                    <i class="fa fa-underline"></i>
-                                </button>
-                            </span>
+        body {
+            font-family: Lato, serif;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+        }
 
-                            <i class="fas fa-palette"></i>
-                            <input type="color" value="#ffffff" id="fg-color" />
-                        </p>
-                    </fieldset>
-                    <fieldset class="last">
-                        <legend> Format</legend>
-                        <p>
-                            <label>
-                                Fill Color <i class="fa fa-fill"></i>
-                            </label>
-                            <input type="color" value="#ffffff" id="bg-color" />
-                        </p>
-                        <p>
-                            <span class="button-group">
-                                <button id="left-action">
-                                    <i class="fa fa-align-left"></i>
-                                </button>
-                                <button id="center-action">
-                                    <i class="fa fa-align-center"></i>
-                                </button>
-                                <button id="right-action">
-                                    <i class="fa fa-align-right"></i>
-                                </button>
-                            </span>
-                        </p>
-                    </fieldset>
-                    <fieldset class="independent">
-                        <legend>Cell</legend>
-                        <p>
-                            <button id="merge-action"> Merge <i class="fa fa-th"></i></button>
-                        </p>
-                        <p>
-                            <label style="margin-right:8px;">
-                                Border
-                            </label>
-                            <input type="color" value="#000000" id="border-color" />
-                        </p>
-                    </fieldset>
-                    <fieldset>
-                        <legend> Borders</legend>
-                        <div id="border-grid">
+        input[type=text]:focus {
+            outline: none;
+        }
 
-                            <div class="borders all" id="all-border-action">
-                                <div class="top"></div>
-                                <div class="right"></div>
-                                <div class="left"></div>
-                                <div class="bottom"></div>
-                            </div>
-
-                            <div class="borders inside" id="cross-border-action">
-                                <div class="top"></div>
-                                <div class="right"></div>
-                                <div class="left"></div>
-                                <div class="bottom"></div>
-                            </div>
-
-                            <div class="borders horizontal" id="vertical-border-action">
-                                <div class="top"></div>
-                                <div class="right"></div>
-                                <div class="left"></div>
-                                <div class="bottom"></div>
-                            </div>
-
-                            <div class="borders vertical" id="vertical-border-action">
-                                <div class="top"></div>
-                                <div class="right"></div>
-                                <div class="left"></div>
-                                <div class="bottom"></div>
-                            </div>
-
-                            <div class="borders outside" id="outside-border-action">
-                                <div class="top"></div>
-                                <div class="right"></div>
-                                <div class="left"></div>
-                                <div class="bottom"></div>
-                            </div>
-
-                            <div class="borders left" id="left-border-action">
-                                <div class="top"></div>
-                                <div class="right"></div>
-                                <div class="left"></div>
-                                <div class="bottom"></div>
-                            </div>
-
-                            <div class="borders top" id="top-border-action">
-                                <div class="top"></div>
-                                <div class="right"></div>
-                                <div class="left"></div>
-                                <div class="bottom"></div>
-                            </div>
-
-                            <div class="borders right" id="right-border-action">
-                                <div class="top"></div>
-                                <div class="right"></div>
-                                <div class="left"></div>
-                                <div class="bottom"></div>
-                            </div>
-
-                            <div class="borders bottom" id="bottom-border-action">
-                                <div class="top"></div>
-                                <div class="right"></div>
-                                <div class="left"></div>
-                                <div class="bottom"></div>
-                            </div>
-
-                            <div class="borders" id="no-border">
-                                <div class="top"></div>
-                                <div class="right"></div>
-                                <div class="left"></div>
-                                <div class="bottom"></div>
-                            </div>
-
-                        </div>
-                    </fieldset>
-
-                </div>
-                <div class="formulas-menu">
-                    <fieldset style="flex:1">
-                        <legend>Mathematical</legend>
-                    </fieldset>
-                    <fieldset class="last" style="flex:1">
-                        <legend>Statistics</legend>
-                    </fieldset>
-                    <fieldset class="independent" style="flex:3">
-                        <legend>User Defined Functions</legend>
-                    </fieldset>
-                </div>
-                <div class="data-menu">
-                    <fieldset>
-                        <legend> File </legend>
-                        <div style="margin:10px 20px">
-                            <i class="fa fa-file-excel" style="font-size:xx-large"></i>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Open Office</legend>
-                        <div style="text-align:center;margin:15px 10px">
-                            <span class="button-group">
-                                <button>
-                                    Import
-                                </button>
-                                <button>
-                                    Export
-                                </button>
-                            </span>
-                        </div>
-                    </fieldset>
-                    <fieldset style="flex:1" class="last">
-                        <legend>MS Excel</legend>
-                        <div style="text-align:center;margin:15px 10px">
-                            <span class="button-group">
-                                <button>
-                                    Import
-                                </button>
-                                <button>
-                                    Export
-                                </button>
-                            </span>
-                        </div>
-                    </fieldset>
-                    <span style="flex:4"></span>
-                </div>
-                <div class="view-menu">
-                    <fieldset>
-                        <legend>Print</legend>
-                        <div style="margin:5px 20px">
-                            <i class="fa fa-print" style="font-size:xx-large"></i>
-                        </div>
-                    </fieldset>
-                    <fieldset style="flex:1">
-                        <legend>Layout</legend>
-                    </fieldset>
-
-                </div>
-                <div class="about-menu" style="flex:1">
-                    <fieldset>
-                        <legend>OSI</legend>
-                        <span style="font-size:xx-large;color:#004d40;font-weight:bold">
-                            <i class="fab fa-osi"></i>
-                        </span>
-                    </fieldset>
-                    <fieldset style="flex:1">
-                        <legend>About Open Web Sheet Project</legend>
-                        <span style="float:right">
-                            <a href="https://siamand.cc"> <i class="fa fa-link"></i> Developer's site</a> |
-                            <a href="https://github.com/SiamandMaroufi/OpenWebSheet"><i class="fab fa-github"></i>
-                                Source Code</a>
-                        </span>
-                        <p>
-                            Designed and developed by <strong>Siamand Ma'roufi</strong><br />
-                            3rd Parties: <strong>FontAwesome Icons</strong> & <strong>Google noto web
-                                font</strong><br />
-                            Licence: <strong>MIT Licence</strong>
-                        </p>
-                    </fieldset>
-                </div>
-            </div>
-            <div class="formula-bar" id="formula-bar">
-                <input type="text" class="cell-name" id="selection-input" placeholder="SELECTION" value="A1" />
-                <span class="side">
-                    <span class="actions">
-                        <i class="fa fa-times cancel"></i>
-                        <i class="fa fa-check commit"></i>
-                    </span>
-                    𝑓𝑥
-                </span>
-                <input type="text" id="formula-input" class="formula" />
-                <div class="arrow">
-                    <i class="fas fa-angle-down"></i>
-                </div>
-            </div>
-
-        </div>
-        <div id="content">
-
-        </div>
-        <div id="footer">
-
-        </div>
-    </div>
-
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/require.js"></script>
-    <script src="js/main.js"></script>
-
-</body>
-
-</html>
+        #app {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }</style><link href=/css/app.79faabc0.css rel=preload as=style><link href=/js/app.d3d50316.js rel=preload as=script><link href=/js/chunk-vendors.c8175199.js rel=preload as=script><link href=/css/app.79faabc0.css rel=stylesheet><link rel=icon type=image/png sizes=32x32 href=/img/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/img/icons/favicon-16x16.png><link rel=manifest href=/manifest.json><meta name=theme-color content=#4DBA87><meta name=apple-mobile-web-app-capable content=no><meta name=apple-mobile-web-app-status-bar-style content=default><meta name=apple-mobile-web-app-title content=openwebsheet><link rel=apple-touch-icon href=/img/icons/apple-touch-icon-152x152.png><link rel=mask-icon href=/img/icons/safari-pinned-tab.svg color=#4DBA87><meta name=msapplication-TileImage content=/img/icons/msapplication-icon-144x144.png><meta name=msapplication-TileColor content=#000000></head><body><noscript><strong>We're sorry but OpenWebSheet doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=/js/chunk-vendors.c8175199.js></script><script src=/js/app.d3d50316.js></script></body></html>

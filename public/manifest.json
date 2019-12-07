@@ -1,0 +1,29 @@
+{
+    "name": "OpenWebSheet",
+    "short_name": "OpenWebSheet",
+    "theme_color": "#004d40",
+    "background_color": "white",
+    "display": "standalone",
+    "Scope": "/OpenWebSheet/",
+    "start_url": "/OpenWebSheet/",
+    "author": "Siamand (Cyaxares)",
+    "description": "Open source spreadsheet",
+    "icons": [
+        {
+            "src": "img/icons/64x64.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        },
+        {
+            "src": "img/icons/128x128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "img/icons/256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "splash_pages": null
+}
