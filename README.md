@@ -1,7 +1,8 @@
 # OpenWebSheet
 OpenSource Web based spreadsheet
 
-### installed PWA
+### Installed PWA
+##### for installing the pwa app click on install icon at the url bar's right side
 <img src="demo/demo.png" />
 
 ### Links
