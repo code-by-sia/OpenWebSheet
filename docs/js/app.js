@@ -20,6 +20,8 @@ define(["require", "exports", '../lib/UI', '../lib/core/Appearance'], function (
         $('#top-border-action').click(function () { return ui.execCmd('top-border', $('#border-color').val()); });
         $('#left-border-action').click(function () { return ui.execCmd('left-border', $('#border-color').val()); });
         $('#cross-border-action').click(function () { return ui.execCmd('cross-border', $('#border-color').val()); });
+        $('#horizontal-border-action').click(function () { return ui.execCmd('horizontal-border', $('#border-color').val()); });
+        $('#vertical-border-action').click(function () { return ui.execCmd('vertical-border', $('#border-color').val()); });
         $('#right-border-action').click(function () { return ui.execCmd('right-border', $('#border-color').val()); });
         $('#bottom-border-action').click(function () { return ui.execCmd('bottom-border', $('#border-color').val()); });
         $('#border-grid .all').click(function () { return ui.execCmd('full-border', $('#border-color').val()); });
