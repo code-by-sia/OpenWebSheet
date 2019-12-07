@@ -12,6 +12,23 @@
     <link href='https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('js/service-worker.js').then(function (registration) {
+                    // Registration was successful
+                    console.log('Registered!');
+                }, function (err) {
+                    // registration failed :(
+                    console.log('ServiceWorker registration failed: ', err);
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            });
+        } else {
+            console.log('service worker is not supported');
+        }
+    </script>
 </head>
 
 <body>
@@ -301,23 +318,7 @@
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/require.js"></script>
     <script src="js/main.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-                navigator.serviceWorker.register('js/service-worker.js').then(function (registration) {
-                    // Registration was successful
-                    console.log('Registered!');
-                }, function (err) {
-                    // registration failed :(
-                    console.log('ServiceWorker registration failed: ', err);
-                }).catch(function (err) {
-                    console.log(err);
-                });
-            });
-        } else {
-            console.log('service worker is not supported');
-        }
-    </script>
+
 </body>
 
 </html>
