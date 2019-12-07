@@ -5,7 +5,7 @@
     "background_color": "white",
     "display": "standalone",
     "Scope": "/OpenWebSheet/",
-    "start_url": "/",
+    "start_url": "/OpenWebSheet/",
     "author": "Siamand (Cyaxares)",
     "description": "Open source spreadsheet",
     "icons": [
