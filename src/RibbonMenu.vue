@@ -1,4 +1,4 @@
-import { TextAlign } from "@/lib/core/Appearance"
+
 <template>
     <div>
         <ribbon :menu="menu" v-model="active">
