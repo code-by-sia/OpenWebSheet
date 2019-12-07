@@ -4,8 +4,8 @@
     "theme_color": "#004d40",
     "background_color": "white",
     "display": "standalone",
-    "Scope": "/OpenWebSheet",
-    "start_url": "index.html",
+    "Scope": "/OpenWebSheet/",
+    "start_url": "/index.html",
     "author": "Siamand (Cyaxares)",
     "description": "Open source spreadsheet",
     "icons": [
