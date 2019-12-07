@@ -1,9 +1,12 @@
 # OpenWebSheet
 OpenSource Web based spreadsheet
+
+### installed PWA
 <img src="demo/demo.png" />
 
-<a href="https://siamandmaroufi.github.io/OpenWebSheet/" >live demo </a>
-
+### Links
+<a href="https://siamandmaroufi.github.io/OpenWebSheet/" >Live demo </a>
+<a href="demo/DEMO.ows" target="_blank"> download example document _[download]_</a>
 
 * [x] basic structure
 * [x] canvas rendering
@@ -18,6 +21,6 @@ OpenSource Web based spreadsheet
   * [ ] Open office format support
 * [ ] advanced ui features
 
-<a href="demo/DEMO.ows" target="_blank"> download example document</a>
+
 
 
