@@ -5,7 +5,7 @@ OpenSource Web based spreadsheet
 ##### for installing the pwa app click on install icon at the url bar's right side
 
 1. <a href="https://siamandmaroufi.github.io/OpenWebSheet/" >Install</a> the PWA application <br />
-2. <a href="demo/DEMO.ows" target="_blank">Download</a>  the `demo.ows` sample  file
+2. <a href="demo/DEMO.ows" download>Download</a>  the `demo.ows` sample  file
 3. click on load *Folder Icon* and load the sample file
 
 
