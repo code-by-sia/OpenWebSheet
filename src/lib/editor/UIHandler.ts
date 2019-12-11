@@ -52,8 +52,9 @@ export class UIHandler implements IUIHandler {
   mouseWheel(dx: number, dy: number) {
   }
 
-  keyDown(evt: any) {
+  keyDown(evt: KeyboardEvent) {
   }
+
 
   keyPress(evt: any) {
   }

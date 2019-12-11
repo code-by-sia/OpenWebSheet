@@ -258,7 +258,7 @@ export class Sheet implements IDateProvider {
       for (let c of d) {
         if (!c || !c.value) continue;
         if (c.value.length && c.value[0] == '=') {
-          this.setCellValue(c.columnId, c.rowId, c.value, true)
+          this.setCellValue(c.columnId, c.rowId, c.value, true);
         }
       }
     }
@@ -450,7 +450,7 @@ export class Sheet implements IDateProvider {
 
     cell.rowSpan = 1;
     cell.colSpan = 1;
-    this.setCell(columnId, rowId, cell, true)
+    this.setCell(columnId, rowId, cell, true);
     this.onChange();
 
   }

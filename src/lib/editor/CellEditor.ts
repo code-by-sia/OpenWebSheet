@@ -18,10 +18,10 @@ export class CellEditor {
   private selectionElement!: HTMLElement;
   private editorElement!: HTMLInputElement;
   private anchorElement!: HTMLSpanElement;
+  private editMode = false;
 
   constructor(public controler: UIHandlerController) {
     this.websheet = controler.websheet;
-
     this.initialize();
     this.select();
   }
@@ -46,13 +46,12 @@ export class CellEditor {
 
     this.editorElement = document.createElement('input');
     this.editorElement.type = 'text';
+    this.editorElement.style.display = 'block';
     this.editorElement.style.zIndex = '10000';
     this.editorElement.style.position = 'absolute';
     this.editorElement.style.background = '#fff';
     this.editorElement.style.textIndent = '3px';
     this.editorElement.style.border = 'none';
-    this.editorElement.addEventListener('keypress', (evt) => this.onKeyPress(evt));
-    this.editorElement.addEventListener('keydown', (evt) => this.onKeyDown(evt));
     this.selectionElement.appendChild(this.editorElement);
 
     this.anchorElement = document.createElement('span');
@@ -74,48 +73,10 @@ export class CellEditor {
         this.Value = value
       }
 
-      this.updateEitorAppearance();
+      this.updateEditorAppearance();
       this.select(true);
     })
 
-  }
-
-  private onKeyDown(evt: KeyboardEvent) {
-    if (evt.key == 'Tab') {
-      this.deselect();
-      if (evt.shiftKey) {
-        this.websheet.ActiveSheet.selectPreviousColumnCell();
-      } else {
-        this.websheet.ActiveSheet.selectNextColumnCell();
-      }
-      evt.preventDefault();
-      this.select(true);
-    } else if (evt.key == 'ArrowRight' || evt.key == 'ArrowLeft' || evt.key == 'ArrowUp' || evt.key == 'ArrowDown') {
-      this.deselect();
-      if (evt.key == 'ArrowRight') {
-        this.websheet.ActiveSheet.selectNextColumnCell();
-      } else if (evt.key == 'ArrowLeft') {
-        this.websheet.ActiveSheet.selectPreviousColumnCell();
-      } else if (evt.key == 'ArrowUp') {
-        this.websheet.ActiveSheet.selectPreviousRowCell();
-      } else if (evt.key == 'ArrowDown') {
-        this.websheet.ActiveSheet.selectNextRowCell();
-      }
-      evt.preventDefault();
-      this.select(true);
-    }
-  }
-
-  private onKeyPress(evt: KeyboardEvent) {
-    if (evt.key == 'Enter') {
-      this.deselect();
-      if (evt.shiftKey) {
-        this.websheet.ActiveSheet.selectPreviousRowCell();
-      } else {
-        this.websheet.ActiveSheet.selectNextRowCell();
-      }
-      this.select(true);
-    }
   }
 
   disableAnimation() {
@@ -146,6 +107,20 @@ export class CellEditor {
     return (cell.value != this.Value)
   }
 
+  public get EditMode() {
+    return this.editMode;
+  }
+
+  public set EditMode(mode: boolean) {
+    this.editMode = mode;
+    if (mode) {
+      this.editorElement.readOnly = false;
+    } else {
+      this.editorElement.readOnly = true;
+    }
+    this.editorElement.focus();
+  }
+
   public deselect() {
     let cell = this.getCurrentCell();
     if (this.IsDirty) {
@@ -172,7 +147,7 @@ export class CellEditor {
     return '';
   }
 
-  public updateEitorAppearance() {
+  public updateEditorAppearance() {
     let app = this.getCurrentAppearance();
 
     this.editorElement.style.textAlign = this.getTextAlign(app.textAlign);
@@ -192,7 +167,7 @@ export class CellEditor {
       this.disableAnimation();
     }
 
-    this.updateEitorAppearance();
+    this.updateEditorAppearance();
 
     let sheet = this.controler.websheet.ActiveSheet;
     let selection = sheet.selection;
@@ -219,7 +194,7 @@ export class CellEditor {
     this.editorElement.style.top = (editorY - y1) + 'px';
     this.editorElement.style.width = (sheet.getCellWidth(selectedCell) - 3) + 'px';
     this.editorElement.style.height = (sheet.getCellHeight(selectedCell) - 3) + 'px';
-    this.editorElement.value = selectedCell.value;
+
     this.editorElement.focus();
 
     this.anchorElement.style.left = `${x2 - 5}px`;

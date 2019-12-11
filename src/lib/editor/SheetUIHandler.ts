@@ -1,5 +1,7 @@
 import { UIHandler } from "./UIHandler";
 import { ColumnHeaderHeight, RowHeaderWidth, SheetTitleHeight } from "../common/constants";
+import { UIHandlerController } from "@/lib/editor/UIHandlerControler"
+import { Sheet } from "@/lib/core/Sheet"
 
 export class SheetUIHandler extends UIHandler {
 
@@ -8,6 +10,12 @@ export class SheetUIHandler extends UIHandler {
 
   private oldX!: number;
   private oldY!: number;
+  private sheet: Sheet
+
+  constructor(controller: UIHandlerController) {
+    super(controller);
+    this.sheet = controller.websheet.ActiveSheet;
+  }
 
   mouseWheel(dx: number, dy: number) {
 
@@ -47,8 +55,51 @@ export class SheetUIHandler extends UIHandler {
     this.selectCell(x, y);
   }
 
-  keyPress(evt: any) {
+  keyPress(evt: KeyboardEvent) {
+    if (evt.key == 'Enter') {
+      if (!this.controller.EditMode) {
+        this.controller.EditMode = true;
+        return;
+      } else {
+        this.controller.commit();
+        this.controller.EditMode = false;
+      }
+      if (evt.shiftKey) {
+        this.sheet.selectPreviousRowCell();
+      } else {
+        this.sheet.selectNextRowCell();
+      }
+    }
+  }
 
+  keyDown(evt: KeyboardEvent) {
+    if (evt.key == 'Tab') {
+      this.controller.deselect();
+      if (evt.shiftKey) {
+        this.sheet.selectPreviousColumnCell();
+      } else {
+        this.sheet.selectNextColumnCell();
+      }
+      evt.preventDefault();
+      this.controller.select(true);
+    }
+    if (this.controller.EditMode) {
+      return;
+    }
+    if (evt.key == 'ArrowRight' || evt.key == 'ArrowLeft' || evt.key == 'ArrowUp' || evt.key == 'ArrowDown') {
+      this.controller.deselect();
+      if (evt.key == 'ArrowRight') {
+        this.sheet.selectNextColumnCell();
+      } else if (evt.key == 'ArrowLeft') {
+        this.sheet.selectPreviousColumnCell();
+      } else if (evt.key == 'ArrowUp') {
+        this.sheet.selectPreviousRowCell();
+      } else if (evt.key == 'ArrowDown') {
+        this.sheet.selectNextRowCell();
+      }
+      evt.preventDefault();
+      this.controller.select(true);
+    }
   }
 
   private selectCell(x: number, y: number) {

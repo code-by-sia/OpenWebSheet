@@ -16,13 +16,21 @@ export class UIHandlerController {
     this.cellEditor = new CellEditor(this);
     this.addHandlers();
     this.attachEvents();
-    websheet.addOnChange(() => this.cellEditor.updateEitorAppearance());
+    websheet.addOnChange(() => this.cellEditor.updateEditorAppearance());
   }
 
   private addHandlers() {
     this.handlers.push(new WebSheetUIHandler(this));
     this.handlers.push(new SheetUIHandler(this));
     this.handlers.push(new ResizeHandler(this));
+  }
+
+  public get EditMode() {
+    return this.cellEditor.EditMode;
+  }
+
+  public set EditMode(mode: boolean) {
+    this.cellEditor.EditMode = mode;
   }
 
   public select(animation: boolean = true) {
@@ -107,9 +115,9 @@ export class UIHandlerController {
       return false;
     })
 
-    overlay.addEventListener('keydown', (evt: any) => controler.keyDown(evt));
-    overlay.addEventListener('keypress', (evt: any) => controler.keyPress(evt));
-    overlay.addEventListener('keyup', (evt: any) => controler.keyUp(evt));
+    window.addEventListener('keydown', (evt: any) => controler.keyDown(evt));
+    window.addEventListener('keypress', (evt: any) => controler.keyPress(evt));
+    window.addEventListener('keyup', (evt: any) => controler.keyUp(evt));
     window.addEventListener('resize', () => this.renderer.resize());
 
   }
