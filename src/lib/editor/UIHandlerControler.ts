@@ -90,8 +90,9 @@ export class UIHandlerController {
     };
 
     const getTouchXY = function (evt: TouchEvent) {
-      const x = evt.touches[0].clientX - element.offsetLeft
-      const y = evt.touches[0].clientY - element.offsetTop
+      let touch = evt.touches.length ? evt.touches[0] : evt.changedTouches[0]
+      const x = touch.clientX - element.offsetLeft
+      const y = touch.clientY - element.offsetTop
       return {x, y}
     }
 

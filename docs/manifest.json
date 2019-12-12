@@ -1,1 +1,29 @@
-{"name":"Open Sheet","short_name":"OpenWebSheet","theme_color":"#00454d","icons":[{"src":"img/icons/64x64.png","sizes":"64x64","type":"image/png"},{"src":"img/icons/128x128.png","sizes":"128x128","type":"image/png"},{"src":"img/icons/256x256.png","sizes":"256x256","type":"image/png"}],"start_url":"/OpenWebSheet/","display":"standalone","background_color":"white","Scope":"/OpenWebSheet/","author":"Siamand (Cyaxares)","description":"Open source spreadsheet","splash_pages":null}
+{
+  "name": "Open Sheet",
+  "short_name": "OpenWebSheet",
+  "theme_color": "#00454d",
+  "icons": [
+    {
+      "src": "img/icons/64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icons/128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icons/256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/OpenWebSheet/",
+  "display": "standalone",
+  "background_color": "white",
+  "Scope": "/OpenWebSheet/",
+  "author": "Siamand (Cyaxares)",
+  "description": "Open source spreadsheet",
+  "splash_pages": null
+}
