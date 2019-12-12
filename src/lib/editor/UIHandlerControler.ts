@@ -97,18 +97,27 @@ export class UIHandlerController {
     }
 
     overlay.addEventListener('touchstart', (evt: TouchEvent) => {
-      let pos = getTouchXY(evt)
-      controler.mouseDown(pos.x, pos.y);
+      if (evt.touches.length == 1) {
+        let pos = getTouchXY(evt)
+        controler.mouseDown(pos.x, pos.y);
+        evt.preventDefault()
+      }
     })
 
     overlay.addEventListener('touchmove', (evt: TouchEvent) => {
-      let pos = getTouchXY(evt)
-      controler.mouseMove(pos.x, pos.y);
+      if (evt.touches.length == 1) {
+        let pos = getTouchXY(evt)
+        controler.mouseMove(pos.x, pos.y);
+        evt.preventDefault()
+      }
     })
 
     overlay.addEventListener('touchend', (evt: TouchEvent) => {
-      let pos = getTouchXY(evt)
-      controler.mouseUp(pos.x, pos.y);
+      if (evt.touches.length == 1) {
+        evt.preventDefault()
+        let pos = getTouchXY(evt)
+        controler.mouseUp(pos.x, pos.y);
+      }
     })
 
     overlay.addEventListener('touchcancel', (evt: TouchEvent) => {
