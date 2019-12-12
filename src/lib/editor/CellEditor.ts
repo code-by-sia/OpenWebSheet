@@ -52,6 +52,17 @@ export class CellEditor {
     this.editorElement.style.background = '#fff';
     this.editorElement.style.textIndent = '3px';
     this.editorElement.style.border = 'none';
+
+    const forceEditMode = () => {
+      if (!this.EditMode) {
+        this.EditMode = true;
+      }
+    }
+
+    this.editorElement.addEventListener('click', forceEditMode)
+    this.editorElement.addEventListener('change', forceEditMode)
+    this.editorElement.addEventListener('touchstart', forceEditMode)
+
     this.selectionElement.appendChild(this.editorElement);
 
     this.anchorElement = document.createElement('span');

@@ -86,8 +86,34 @@ export class UIHandlerController {
       let x = evt.offsetX || evt.layerX || (evt.clientX - element.offsetLeft);
       let y = evt.offsetY || evt.layerY || (evt.clientY - element.offsetTop);
 
-      return {'x': x, 'y': y}
+      return {x, y}
     };
+
+    const getTouchXY = function (evt: TouchEvent) {
+      const x = evt.touches[0].clientX - element.offsetLeft
+      const y = evt.touches[0].clientY - element.offsetTop
+      return {x, y}
+    }
+
+    overlay.addEventListener('touchstart', (evt: TouchEvent) => {
+      let pos = getTouchXY(evt)
+      controler.mouseDown(pos.x, pos.y);
+    })
+
+    overlay.addEventListener('touchmove', (evt: TouchEvent) => {
+      let pos = getTouchXY(evt)
+      controler.mouseMove(pos.x, pos.y);
+    })
+
+    overlay.addEventListener('touchend', (evt: TouchEvent) => {
+      let pos = getTouchXY(evt)
+      controler.mouseUp(pos.x, pos.y);
+    })
+
+    overlay.addEventListener('touchcancel', (evt: TouchEvent) => {
+      let pos = getTouchXY(evt)
+      controler.mouseUp(pos.x, pos.y);
+    })
 
     overlay.addEventListener('mousedown', (evt: MouseEvent) => {
       let pos = getXY(evt);

@@ -102,6 +102,12 @@ export class SheetUIHandler extends UIHandler {
     }
   }
 
+  dblClick() {
+    if (!this.controller.EditMode) {
+      this.controller.EditMode = true;
+    }
+  }
+
   private selectCell(x: number, y: number) {
     if (y < ColumnHeaderHeight || x < RowHeaderWidth) {
       return;
