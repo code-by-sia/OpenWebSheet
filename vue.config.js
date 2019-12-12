@@ -5,6 +5,7 @@ module.exports = {
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'none',
-    display: 'standalone'
+    display: 'standalone',
+    scope: "/OpenWebSheet/"
   }
 }
