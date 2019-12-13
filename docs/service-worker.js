@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.3816894f5181a5362bb6fe4580fd946c.js"
+  "precache-manifest.868f694df6abb9daa6ee8d2b600ef4e1.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "openwebsheet"});
