@@ -67,7 +67,7 @@
     }
 
     onModeChanged(newMode: 'file' | 'local') {
-      if (this.fileMode == 'file') {
+      if (this.fileMode == 'file' && localStorage.getItem('data') != null) {
         (<any>this.$refs['sheet']).load(localStorage.getItem('data'))
       }
       this.fileMode = newMode;
