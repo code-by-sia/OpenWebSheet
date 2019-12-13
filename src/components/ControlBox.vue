@@ -100,12 +100,20 @@
             color: #333;
             text-shadow: 1px 1px 0 #eee;
             transition-duration: .1s;
+            align-items: center;
+            align-content: center;
+            display: flex;
+            padding: 0 5px;
         }
 
         .flat-button:hover {
             color: #000;
             text-shadow: 2px 2px 0 #ccc;
             transition-duration: .1s;
+        }
+
+        .x-large-font {
+            font-size: x-large;
         }
 
         .xx-large-font {

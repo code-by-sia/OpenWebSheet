@@ -1,19 +1,164 @@
+<script lang="ts">
+
+  import { Component, Prop } from "vue-property-decorator"
+  import Vue from 'vue';
+  import { RibbonMenuItem } from "@/components/RibbonMenu"
+  import Ribbon from "@/components/Ribbon.vue"
+  import ControlBox from "@/components/ControlBox.vue"
+  import CellBorderStyle from "@/components/CellBorderStyle.vue"
+  import FontSizeSelector from "@/components/FontSizeSelector.vue"
+  import ActionGroup from "@/components/ActionGroup.vue"
+  import ColorPicker from "@/components/ColorPicker.vue"
+  import ActionButton from "@/components/ActionButton.vue"
+  import { Appearance, TextAlign } from "@/lib/core/Appearance"
+  import FontFamilySelector from "@/components/FontNameSelector.vue"
+  import { Color } from "@/lib/common/types"
+
+  @Component({
+    name: "RibbonMenu",
+    components: {
+      FontFamilySelector,
+      ActionButton, ColorPicker, ActionGroup, FontSizeSelector, CellBorderStyle, ControlBox, Ribbon
+    }
+  })
+  export default class RibbonMenu extends Vue {
+    active = 'menu-home';
+    private fileMode = 'file';
+
+    @Prop()
+    appearance!: Appearance
+
+    @Prop({default: () => ({isMerged: true})})
+    state!: { isMerged: boolean }
+
+    borderColor: Color = 'black';
+
+    get isLocalMode(){
+      return this.fileMode === 'local';
+    }
+
+    changeMode(newMode:string) {
+      this.fileMode = newMode
+      this.$emit('mode-changed', newMode )
+    }
+
+    get activeStyle() {
+      return this.appearance || new Appearance()
+    }
+
+    get textAlignment() {
+      return [
+        {
+          name: 'left',
+          selected: this.activeStyle.textAlign === TextAlign.Left
+        },
+        {
+          name: 'center',
+          selected: this.activeStyle.textAlign === TextAlign.Center
+        },
+        {
+          name: 'right',
+          selected: this.activeStyle.textAlign === TextAlign.Right
+        }
+      ]
+    }
+
+    get fontStyle() {
+      return [
+        {name: 'bold', selected: this.activeStyle.bold},
+        {name: 'italic', selected: this.activeStyle.italic},
+        {name: 'underline', selected: this.activeStyle.underline}
+      ]
+    }
+
+    onBorderChanged(borderStructure: string) {
+      this.onAction(borderStructure, this.borderColor)
+    }
+
+    onAlign(alignment: string) {
+      this.onAction('align', alignment)
+    }
+
+    get foreColor() {
+      return this.activeStyle.text
+    }
+
+    set foreColor(color: string) {
+      this.onAction('fg-color', color)
+    }
+
+    get fillColor() {
+      return this.activeStyle.background
+    }
+
+    set fillColor(color: string) {
+      this.onAction('bg-color', color)
+    }
+
+    get fontSize() {
+      return this.activeStyle.fontSize
+    }
+
+    set fontSize(newSize: number) {
+      this.onAction('font-size', newSize)
+    }
+
+    get fontFamily() {
+      return this.activeStyle.fontName
+    }
+
+    set fontFamily(newFont: string) {
+      this.onAction('font-name', newFont)
+    }
+
+    toggleMerge() {
+      this.onAction(this.state.isMerged ? 'unmerge' : 'merge')
+    }
+
+    onAction(actionName: string, args?: any) {
+      this.$emit('action', {actionName, args})
+    }
+
+    menu: RibbonMenuItem[] = [
+      {name: 'menu-home', label: 'Home'},
+      {name: 'menu-formulas', label: 'Formulas'},
+      {name: 'menu-data', label: 'Data'},
+      {name: 'menu-view', label: 'View'},
+      {name: 'menu-info', label: 'About'}
+    ]
+  }
+</script>
+
 <template>
     <div>
         <ribbon :menu="menu" v-model="active">
             <div slot="menu-home">
-                <control-box label="Document" class="last">
+                <control-box label="Local Storage" v-if="isLocalMode">
+                    <span style="display: flex;align-content: center;flex-direction: column;align-items: center">
+                    <i @click="changeMode('file')"
+                       class="far fa-times-circle xx-large-font flat-button"></i>
+                    <span style="padding: 5px">
+                        Back to file mode
+                    </span>
+                    </span>
+                </control-box>
+                <control-box label="Document" class="last" v-else>
                     <div style="display: flex;padding: 10px 5px;text-align: center">
-                        <i class="far fa-save xx-large-font flat-button"
+                        <i class="fas fa-save x-large-font flat-button"
                            @click="onAction('save-ows')">
                         </i>
                         <span class="seperator">
                         </span>
-                        <i class="far fa-folder xx-large-font flat-button"
+                        <i class="fas fa-folder x-large-font flat-button"
                            @click="onAction('load-ows')">
                         </i>
+                        <span class="seperator">
+                        </span>
+                        <i @click="changeMode('local')"
+                           class="fas fa-warehouse x-large-font flat-button"></i>
                     </div>
                 </control-box>
+
                 <control-box label="Font" class="independent">
                     <p>
                         <font-family-selector v-model="fontFamily"/>
@@ -112,127 +257,6 @@
         </ribbon>
     </div>
 </template>
-
-<script lang="ts">
-
-  import { Component, Prop } from "vue-property-decorator"
-  import Vue from 'vue';
-  import { RibbonMenuItem } from "@/components/RibbonMenu"
-  import Ribbon from "@/components/Ribbon.vue"
-  import ControlBox from "@/components/ControlBox.vue"
-  import CellBorderStyle from "@/components/CellBorderStyle.vue"
-  import FontSizeSelector from "@/components/FontSizeSelector.vue"
-  import ActionGroup from "@/components/ActionGroup.vue"
-  import ColorPicker from "@/components/ColorPicker.vue"
-  import ActionButton from "@/components/ActionButton.vue"
-  import { Appearance, TextAlign } from "@/lib/core/Appearance"
-  import FontFamilySelector from "@/components/FontNameSelector.vue"
-  import { Color } from "@/lib/common/types"
-
-  @Component({
-    name: "RibbonMenu",
-    components: {
-      FontFamilySelector,
-      ActionButton, ColorPicker, ActionGroup, FontSizeSelector, CellBorderStyle, ControlBox, Ribbon
-    }
-  })
-  export default class RibbonMenu extends Vue {
-    active = 'menu-home';
-
-    @Prop()
-    appearance!: Appearance
-
-    @Prop({default: () => ({isMerged: true})})
-    state!: { isMerged: boolean }
-
-    borderColor: Color = 'black';
-
-    get activeStyle() {
-      return this.appearance || new Appearance()
-    }
-
-    get textAlignment() {
-      return [
-        {
-          name: 'left',
-          selected: this.activeStyle.textAlign === TextAlign.Left
-        },
-        {
-          name: 'center',
-          selected: this.activeStyle.textAlign === TextAlign.Center
-        },
-        {
-          name: 'right',
-          selected: this.activeStyle.textAlign === TextAlign.Right
-        }
-      ]
-    }
-
-    get fontStyle() {
-      return [
-        {name: 'bold', selected: this.activeStyle.bold},
-        {name: 'italic', selected: this.activeStyle.italic},
-        {name: 'underline', selected: this.activeStyle.underline}
-      ]
-    }
-
-    onBorderChanged(borderStructure: string) {
-      this.onAction(borderStructure, this.borderColor)
-    }
-
-    onAlign(alignment: string) {
-      this.onAction('align', alignment)
-    }
-
-    get foreColor() {
-      return this.activeStyle.text
-    }
-
-    set foreColor(color: string) {
-      this.onAction('fg-color', color)
-    }
-
-    get fillColor() {
-      return this.activeStyle.background
-    }
-
-    set fillColor(color: string) {
-      this.onAction('bg-color', color)
-    }
-
-    get fontSize() {
-      return this.activeStyle.fontSize
-    }
-
-    set fontSize(newSize: number) {
-      this.onAction('font-size', newSize)
-    }
-
-    get fontFamily() {
-      return this.activeStyle.fontName
-    }
-
-    set fontFamily(newFont: string) {
-      this.onAction('font-name', newFont)
-    }
-
-    toggleMerge() {
-      this.onAction(this.state.isMerged ? 'unmerge' : 'merge')
-    }
-
-    onAction(actionName: string, args?: any) {
-      this.$emit('action', {actionName, args})
-    }
-
-    menu: RibbonMenuItem[] = [
-      {name: 'menu-home', label: 'Home'},
-      {name: 'menu-formulas', label: 'Formulas'},
-      {name: 'menu-data', label: 'Data'},
-      {name: 'menu-view', label: 'View'},
-      {name: 'menu-info', label: 'About'}
-    ]
-  }
-</script>
 
 <style scoped>
 

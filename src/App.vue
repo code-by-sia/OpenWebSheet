@@ -1,17 +1,3 @@
-<template>
-    <div id="app">
-        <ribbon-menu :appearance="appearance"
-                     :state="state"
-                     @action="onAction"/>
-        <formula-bar :label="state.label"
-                     v-model="state.value"
-                     @commit="onCommit"
-                     @abort="onAbort"/>
-        <open-sheet @ready="onReady" @change="onChange"/>
-        <status-bar/>
-    </div>
-</template>
-
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
   import RibbonMenu from "@/RibbonMenu.vue"
@@ -35,6 +21,7 @@
   export default class App extends Vue {
     private uiManager!: UI
     private appearance: Appearance = new Appearance()
+    private fileMode: 'local' | 'file' = 'file'
     private state = {
       isMerged: false,
       label: 'A1',
@@ -52,6 +39,10 @@
       this.state.label = doc.ActiveSheet.SelectionLabel
       this.state.value = doc.ActiveSheet.SelectedValue
       this.state.originalValue = doc.ActiveSheet.SelectedValue
+
+      if (this.fileMode == 'local') {
+        localStorage.setItem('data', JSON.stringify(doc.save()))
+      }
     }
 
     onCommit() {
@@ -73,6 +64,13 @@
         return
       }
       this.uiManager.execCmd(actionName, args)
+    }
+
+    onModeChanged(newMode: 'file' | 'local') {
+      if (this.fileMode == 'file') {
+        (<any>this.$refs['sheet']).load(localStorage.getItem('data'))
+      }
+      this.fileMode = newMode;
     }
 
     onLoad() {
@@ -110,6 +108,21 @@
 
   }
 </script>
+
+<template>
+    <div id="app">
+        <ribbon-menu :appearance="appearance"
+                     :state="state"
+                     @mode-changed="onModeChanged"
+                     @action="onAction"/>
+        <formula-bar :label="state.label"
+                     v-model="state.value"
+                     @commit="onCommit"
+                     @abort="onAbort"/>
+        <open-sheet ref="sheet" @ready="onReady" @change="onChange"/>
+        <status-bar/>
+    </div>
+</template>
 
 <style lang="scss">
 
