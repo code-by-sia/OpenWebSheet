@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActionButton should append prefix and postfix slots 1`] = `
+"[PRE]
+        LABEL
+        [POST]"
+`;
+
+exports[`ActionButton should renders empty button by default 1`] = `
+<button data-qa="action" class="action">
+
+</button>
+`;

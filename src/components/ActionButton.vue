@@ -1,9 +1,9 @@
 <template>
-    <button class="action" :disabled="disabled" @click="$emit('click')">
+    <button class="action" :disabled="disabled" @click="$emit('click')" data-qa="action">
         <slot>
-            <slot name="prefix" />
+            <slot name="prefix"/>
             {{label}}
-            <slot name="postfix" />
+            <slot name="postfix"/>
         </slot>
     </button>
 </template>
@@ -28,8 +28,9 @@
         font-size: x-small;
         border-radius: 2px;
         background: linear-gradient(to top, #ece9e6, #ffffff);
-        padding:3px;
+        padding: 3px;
         width: 100%;
+
         &.on {
             background: linear-gradient(to top, #cccccc, #efefef);
         }
