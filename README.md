@@ -9,7 +9,7 @@ OpenSource Web based spreadsheet
 3. click on load *Folder Icon* and load the sample file
 
 
-<img src="https://siamandmaroufi.github.io/OpenWebSheet/demo/demo.png" />
+<img src="https://siamandmaroufi.github.io/OpenWebSheet/demo.png" />
 
 ### Roadmap
 
