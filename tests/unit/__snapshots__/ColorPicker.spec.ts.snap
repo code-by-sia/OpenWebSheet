@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorPicker should renders pre/post slots when they are exits 1`] = `
+"[PRE]
+            LABEL
+            [POST]"
+`;
