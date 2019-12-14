@@ -1,4 +1,5 @@
 # OpenWebSheet
+<img src=https://github.com/SiamandMaroufi/OpenWebSheet/workflows/CI/badge.svg />
 OpenSource Web based spreadsheet
 
 ### Installed PWA
