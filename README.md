@@ -1,8 +1,11 @@
 # OpenWebSheet
-<img src=https://github.com/SiamandMaroufi/OpenWebSheet/workflows/CI/badge.svg />
+[<img src=https://github.com/SiamandMaroufi/OpenWebSheet/workflows/CI/badge.svg />](https://github.com/SiamandMaroufi/OpenWebSheet/actions?query=workflow%3ACI)
 OpenSource Web based spreadsheet
+ 
+### Installed PWA: 
 
-### Installed PWA
+<img src="https://siamandmaroufi.github.io/OpenWebSheet/demo.png" />
+
 ##### for installing the pwa app click on install icon at the url bar's right side
 
 1. <a href="https://siamandmaroufi.github.io/OpenWebSheet/" >Install</a> the PWA application <br />
@@ -11,7 +14,7 @@ OpenSource Web based spreadsheet
 
 
 
-[<img src="https://siamandmaroufi.github.io/OpenWebSheet/demo.png" />](https://github.com/SiamandMaroufi/OpenWebSheet/actions?query=workflow%3ACI)
+
 ### Roadmap
 
 * [x] basic structure
