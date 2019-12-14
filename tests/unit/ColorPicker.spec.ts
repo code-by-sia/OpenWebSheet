@@ -53,6 +53,17 @@ describe('ColorPicker', () => {
     expect((<HTMLInputElement>wrapper.find('[data-qa=input-el]').element).value).toBe('#00ff00')
   });
 
+
+  it('should use WHITE when the value is null', () => {
+    const wrapper = shallowMount(ColorPicker, {
+      propsData: {
+        value: null
+      }
+    })
+    expect((<HTMLInputElement>wrapper.find('[data-qa=input-el]').element).value).toBe('#ffffff')
+  });
+
+
   it('should emit change when the color changes', () => {
     const wrapper = shallowMount(ColorPicker)
     wrapper.find('[data-qa=input-el]').setValue('#ff0000')

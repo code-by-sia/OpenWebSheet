@@ -11,7 +11,7 @@
     label?: string;
 
     get color() {
-      if (this.value === null) {
+      if (!this.value) {
         return '#ffffff';
       }
       return this.value;
