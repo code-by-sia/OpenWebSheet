@@ -1,69 +1,78 @@
+<script lang="ts">
+  import { Component } from "vue-property-decorator"
+  import Vue from 'vue';
+
+  @Component({name: 'cell-border-style'})
+  export default class CellBorderStyle extends Vue {
+
+  }
+</script>
 <template>
-    <div class="cell-border-style">
-        <div class="borders all" @click="$emit('change','full-border')">
+    <div class="cell-border-style" data-qa="cell-border">
+        <div class="borders all" data-qa="full" @click="$emit('change','full-border')">
             <div class="top"></div>
             <div class="right"></div>
             <div class="left"></div>
             <div class="bottom"></div>
         </div>
 
-        <div class="borders inside" @click="$emit('change','cross-border')">
+        <div class="borders inside" data-qa="cross" @click="$emit('change','cross-border')">
             <div class="top"></div>
             <div class="right"></div>
             <div class="left"></div>
             <div class="bottom"></div>
         </div>
 
-        <div class="borders horizontal" @click="$emit('change','horizontal-border')">
+        <div class="borders horizontal" data-qa="hor" @click="$emit('change','horizontal-border')">
             <div class="top"></div>
             <div class="right"></div>
             <div class="left"></div>
             <div class="bottom"></div>
         </div>
 
-        <div class="borders vertical" @click="$emit('change','vertical-border')">
+        <div class="borders vertical" data-qa="ver" @click="$emit('change','vertical-border')">
             <div class="top"></div>
             <div class="right"></div>
             <div class="left"></div>
             <div class="bottom"></div>
         </div>
 
-        <div class="borders outside" @click="$emit('change','outside-border')">
+        <div class="borders outside" data-qa="out" @click="$emit('change','outside-border')">
             <div class="top"></div>
             <div class="right"></div>
             <div class="left"></div>
             <div class="bottom"></div>
         </div>
 
-        <div class="borders left" @click="$emit('change','left-border')">
+        <div class="borders left" data-qa="left" @click="$emit('change','left-border')">
             <div class="top"></div>
             <div class="right"></div>
             <div class="left"></div>
             <div class="bottom"></div>
         </div>
 
-        <div class="borders top" @click="$emit('change','top-border')">
+        <div class="borders top" data-qa="top" @click="$emit('change','top-border')">
             <div class="top"></div>
             <div class="right"></div>
             <div class="left"></div>
             <div class="bottom"></div>
         </div>
 
-        <div class="borders right" @click="$emit('change','right-border')">
+        <div class="borders right" data-qa="right" @click="$emit('change','right-border')">
             <div class="top"></div>
             <div class="right"></div>
             <div class="left"></div>
             <div class="bottom"></div>
         </div>
 
-        <div class="borders bottom" @click="$emit('change','bottom-border')">
+        <div class="borders bottom" data-qa="bottom" @click="$emit('change','bottom-border')">
             <div class="top"></div>
             <div class="right"></div>
             <div class="left"></div>
             <div class="bottom"></div>
         </div>
 
-        <div class="borders" @click="$emit('change','no-border')">
+        <div class="borders" data-qa="no" @click="$emit('change','no-border')">
             <div class="top"></div>
             <div class="right"></div>
             <div class="left"></div>
@@ -72,11 +81,6 @@
 
     </div>
 </template>
-<script lang="ts">
-  export default {
-    name: 'cell-border-style'
-  }
-</script>
 <style lang="scss" scoped>
 
     .cell-border-style {
