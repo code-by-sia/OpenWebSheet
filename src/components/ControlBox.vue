@@ -1,9 +1,9 @@
 <template>
-    <div class="control-box">
-        <div class="control-box-controls" :style="{display:grid?'grid':'flex'}">
+    <div class="control-box" data-qa="control-box">
+        <div class="control-box-controls" :style="{display:grid?'grid':'flex'}" data-qa="content">
             <slot/>
         </div>
-        <div class="control-box-header" v-if="label">{{label}}</div>
+        <div class="control-box-header" data-qa="header" v-if="label">{{label}}</div>
     </div>
 </template>
 
