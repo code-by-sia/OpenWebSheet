@@ -10,8 +10,8 @@ OpenSource Web based spreadsheet
 3. click on load *Folder Icon* and load the sample file
 
 
-<img src="https://siamandmaroufi.github.io/OpenWebSheet/demo.png" />
 
+[<img src="https://siamandmaroufi.github.io/OpenWebSheet/demo.png" />](https://github.com/SiamandMaroufi/OpenWebSheet/actions?query=workflow%3ACI)
 ### Roadmap
 
 * [x] basic structure
