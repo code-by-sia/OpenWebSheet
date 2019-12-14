@@ -1,6 +1,7 @@
 # OpenWebSheet
+OpenSource Web based spreadsheet <br />
 [<img src=https://github.com/SiamandMaroufi/OpenWebSheet/workflows/CI/badge.svg />](https://github.com/SiamandMaroufi/OpenWebSheet/actions?query=workflow%3ACI)
-OpenSource Web based spreadsheet
+
  
 ### Installed PWA: 
 
