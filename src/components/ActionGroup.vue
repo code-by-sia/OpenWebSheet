@@ -1,11 +1,13 @@
 <template>
-    <div class="action-group">
+    <div class="action-group" data-qa="action-group">
         <action-button v-for="action in actions"
                        :key="action.name"
                        class="action-group-item"
                        :disabled="action.disabled"
                        :class="{'on':action.selected}"
                        @click="$emit('action',action.name)"
+                       data-qa="action-item"
+                       :data-qa-name="action.name"
         >
             <slot :name="action.name">
                 {{action.label}}
