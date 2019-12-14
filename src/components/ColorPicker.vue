@@ -1,18 +1,3 @@
-<template>
-    <div class="color-picker">
-        <label>
-            <slot>
-                <span class="prefix" v-if="!!$slots['prefix']">
-                    <slot name="prefix"/>
-                </span>
-                {{label}}
-                <slot name="postfix" class="postfix"/>
-            </slot>
-        </label>
-        <input type="color" v-model="color" id="bg-color"/>
-    </div>
-</template>
-
 <script lang="ts">
   import { Component, Prop } from "vue-property-decorator"
   import Vue from 'vue';
@@ -37,7 +22,20 @@
     }
   }
 </script>
-
+<template>
+    <div class="color-picker" data-qa="color-picker">
+        <label data-qa="label">
+            <slot>
+                <span class="prefix" v-if="!!$slots['prefix']">
+                    <slot name="prefix"/>
+                </span>
+                {{label}}
+                <slot name="postfix" class="postfix"/>
+            </slot>
+        </label>
+        <input type="color" v-model="color" data-qa="input-el"/>
+    </div>
+</template>
 <style lang="scss" scoped>
     .color-picker {
         display: flex;

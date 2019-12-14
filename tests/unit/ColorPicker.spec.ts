@@ -1,63 +1,62 @@
 import { shallowMount } from '@vue/test-utils';
-import ActionButton from "@/components/ActionButton.vue"
+import ColorPicker from "@/components/ColorPicker.vue"
 
-describe('ActionButton', () => {
+describe('ColorPicker', () => {
   it('is a vue instance', () => {
-    const wrapper = shallowMount(ActionButton, {})
+    const wrapper = shallowMount(ColorPicker)
     expect(wrapper.isVueInstance()).toBe(true)
   });
 
-  it('should renders empty button by default', () => {
-    const wrapper = shallowMount(ActionButton, {})
-    expect(wrapper.html()).toMatchSnapshot()
+  it('should use white as default value', () => {
+    const wrapper = shallowMount(ColorPicker)
+    expect(wrapper.props('value')).toBe('#ffffff')
+    expect(wrapper.props('label')).toBeUndefined()
   });
 
   it('should renders label', () => {
-    const wrapper = shallowMount(ActionButton, {
+    const wrapper = shallowMount(ColorPicker, {
       propsData: {
         label: 'LABEL'
       }
     })
-    expect(wrapper.find('[data-qa=action]').text()).toBe('LABEL')
-    expect(wrapper.find('[data-qa=action]').attributes('disabled')).toBeFalsy()
+    expect(wrapper.find('[data-qa=label]').text()).toBe('LABEL')
   });
 
-  it('should reflect disabled on the target button', () => {
-    const wrapper = shallowMount(ActionButton, {
-      propsData: {
-        label: 'LABEL',
-        disabled: true
-      }
-    })
-    expect(wrapper.find('[data-qa=action]').attributes('disabled')).toBeTruthy()
-  });
-
-
-  it('should uses default slot when it exists', () => {
-    const wrapper = shallowMount(ActionButton, {
+  it('should renders default slot when it is exits', () => {
+    const wrapper = shallowMount(ColorPicker, {
       slots: {
-        default: '<strong data-qa="custom-slot">CUSTOM</strong>'
+        default: '[SLUG]'
       }
-    });
-
-    expect(wrapper.find('[data-qa=custom-slot]').exists()).toBe(true)
-    expect(wrapper.find('[data-qa=custom-slot]').text()).toBe('CUSTOM')
+    })
+    expect(wrapper.find('[data-qa=label]').text()).toBe('[SLUG]')
   });
 
-  it('should append prefix and postfix slots', () => {
-    const wrapper = shallowMount(ActionButton, {
-      propsData: {
-        label: 'LABEL'
+  it('should renders pre/post slots when they are exits', () => {
+    const wrapper = shallowMount(ColorPicker, {
+      slots: {
+        prefix: '[PRE]',
+        postfix: '[POST]'
       },
-      slots: {
-        prefix: '<strong data-qa="pre">[PRE]</strong>',
-        postfix: '<strong data-qa="post">[POST]</strong>'
+      propsData: {
+        label: 'LABEL'
       }
-    });
+    })
+    expect(wrapper.find('[data-qa=label]').text()).toMatchSnapshot()
+  });
 
-    expect(wrapper.find('[data-qa=pre]').exists()).toBe(true)
-    expect(wrapper.find('[data-qa=post]').exists()).toBe(true)
-    expect(wrapper.find('[data-qa=action]').text()).toMatchSnapshot()
+  it('should use the prop value for input value', () => {
+    const wrapper = shallowMount(ColorPicker, {
+      propsData: {
+        value: '#00ff00'
+      }
+    })
+    expect((<HTMLInputElement>wrapper.find('[data-qa=input-el]').element).value).toBe('#00ff00')
+  });
+
+  it('should emit change when the color changes', () => {
+    const wrapper = shallowMount(ColorPicker)
+    wrapper.find('[data-qa=input-el]').setValue('#ff0000')
+    expect(wrapper.emitted('input')).toEqual([['#ff0000']])
   });
 
 });
