@@ -1,6 +1,6 @@
 <template>
-    <select class="font-family" v-model="selectedFamily">
-        <option v-for="family in families" :value="family" :key="family">
+    <select class="font-family" v-model="selectedFamily" data-qa="font-name-selector">
+        <option v-for="family in families" :value="family" :key="family" >
             {{family}}
         </option>
     </select>
