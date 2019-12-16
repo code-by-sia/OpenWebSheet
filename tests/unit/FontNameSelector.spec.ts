@@ -1,5 +1,4 @@
 import { shallowMount } from '@vue/test-utils';
-import ControlBox from "@/components/ControlBox.vue"
 import FontNameSelector from "@/components/FontNameSelector.vue"
 
 describe('FontNameSelector', () => {
