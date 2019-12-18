@@ -36,5 +36,11 @@
   ],
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
+  },
+  "lint-staged": {
+    "*.{ts,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }
