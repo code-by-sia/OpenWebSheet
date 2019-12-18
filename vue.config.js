@@ -7,5 +7,9 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: 'none',
     display: 'standalone',
     scope: "/OpenWebSheet/"
-  }
+  },
+
+  publicPath: '/OpenWebSheet/',
+  outputDir: 'docs',
+  runtimeCompiler: true
 }
