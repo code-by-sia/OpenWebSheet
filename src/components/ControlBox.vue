@@ -8,17 +8,17 @@
 </template>
 
 <script lang="ts">
-  import { Component, Prop } from "vue-property-decorator"
-  import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
+import Vue from 'vue';
 
-  @Component({name: "ControlBox"})
-  export default class ControlBox extends Vue {
-    @Prop()
-    label?: string;
+@Component({name: 'ControlBox'})
+export default class ControlBox extends Vue {
+  @Prop()
+  public label?: string;
 
-    @Prop({default: true})
-    grid!: boolean
-  }
+  @Prop({default: true})
+  public grid!: boolean;
+}
 </script>
 
 <style lang="scss" scoped>

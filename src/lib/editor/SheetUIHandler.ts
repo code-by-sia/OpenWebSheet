@@ -1,7 +1,7 @@
-import { UIHandler } from "./UIHandler";
-import { ColumnHeaderHeight, RowHeaderWidth, SheetTitleHeight } from "../common/constants";
-import { UIHandlerController } from "@/lib/editor/UIHandlerControler"
-import { Sheet } from "@/lib/core/Sheet"
+import { UIHandler } from './UIHandler';
+import { ColumnHeaderHeight, RowHeaderWidth, SheetTitleHeight } from '../common/constants';
+import { UIHandlerController } from '@/lib/editor/UIHandlerControler';
+import { Sheet } from '@/lib/core/Sheet';
 
 export class SheetUIHandler extends UIHandler {
 
@@ -10,21 +10,21 @@ export class SheetUIHandler extends UIHandler {
 
   private oldX!: number;
   private oldY!: number;
-  private sheet: Sheet
+  private sheet: Sheet;
 
   constructor(controller: UIHandlerController) {
     super(controller);
     this.sheet = controller.websheet.ActiveSheet;
   }
 
-  mouseWheel(dx: number, dy: number) {
+  public mouseWheel(dx: number, dy: number) {
 
     this.wheelDeltaX += dx;
     this.wheelDeltaY += dy;
 
-    let websheet = this.controller.websheet;
-    let sheet = websheet.ActiveSheet;
-    let delta = 120;
+    const websheet = this.controller.websheet;
+    const sheet = websheet.ActiveSheet;
+    const delta = 120;
 
     if (this.wheelDeltaX > delta) {
       sheet.scrollRight();
@@ -46,16 +46,16 @@ export class SheetUIHandler extends UIHandler {
 
   }
 
-  mouseDown(x: number, y: number) {
+  public mouseDown(x: number, y: number) {
     this.oldX = x;
     this.oldY = y;
   }
 
-  mouseUp(x: number, y: number) {
+  public mouseUp(x: number, y: number) {
     this.selectCell(x, y);
   }
 
-  keyPress(evt: KeyboardEvent) {
+  public keyPress(evt: KeyboardEvent) {
     if (evt.key == 'Enter') {
       if (!this.controller.EditMode) {
         this.controller.EditMode = true;
@@ -72,7 +72,7 @@ export class SheetUIHandler extends UIHandler {
     }
   }
 
-  keyDown(evt: KeyboardEvent) {
+  public keyDown(evt: KeyboardEvent) {
     if (evt.key == 'Tab') {
       this.controller.deselect();
       if (evt.shiftKey) {
@@ -102,7 +102,7 @@ export class SheetUIHandler extends UIHandler {
     }
   }
 
-  dblClick() {
+  public dblClick() {
     if (!this.controller.EditMode) {
       this.controller.EditMode = true;
     }
@@ -115,11 +115,11 @@ export class SheetUIHandler extends UIHandler {
     if (y > this.controller.renderer.Element.clientHeight - SheetTitleHeight) {
       return;
     }
-    let sheet = this.controller.websheet.ActiveSheet;
-    let x1 = this.oldX - RowHeaderWidth;
-    let y1 = this.oldY - ColumnHeaderHeight;
-    let x2 = x - RowHeaderWidth;
-    let y2 = y - ColumnHeaderHeight;
+    const sheet = this.controller.websheet.ActiveSheet;
+    const x1 = this.oldX - RowHeaderWidth;
+    const y1 = this.oldY - ColumnHeaderHeight;
+    const x2 = x - RowHeaderWidth;
+    const y2 = y - ColumnHeaderHeight;
     this.controller.deselect();
     sheet.selectByXY(x1, y1, x2, y2);
     this.controller.select(true);

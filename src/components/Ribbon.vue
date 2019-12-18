@@ -1,23 +1,23 @@
 <script lang="ts">
-  import { Component, Prop, Vue } from "vue-property-decorator"
-  import { RibbonMenuItem } from "@/components/RibbonMenu"
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { RibbonMenuItem } from '@/components/RibbonMenu';
 
-  @Component({name: "Ribbon"})
-  export default class Ribbon extends Vue {
-    @Prop({required: true})
-    value!: string;
+@Component({name: 'Ribbon'})
+export default class Ribbon extends Vue {
+  @Prop({required: true})
+  public value!: string;
 
-    @Prop({required: true})
-    menu!: RibbonMenuItem[];
+  @Prop({required: true})
+  public menu!: RibbonMenuItem[];
 
-    get active() {
-      return this.value
-    }
-
-    set active(newValue) {
-      this.$emit('input', newValue)
-    }
+  get active() {
+    return this.value;
   }
+
+  set active(newValue) {
+    this.$emit('input', newValue);
+  }
+}
 </script>
 
 <template>

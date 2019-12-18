@@ -1,32 +1,32 @@
 ///<reference path="../core/Sheet.ts"/>
 ///<reference path="./CellEditor.ts"/>
 
-import { Sheet } from "../core/Sheet";
-import { UIHandlerController } from "./UIHandlerControler";
+import { Sheet } from '../core/Sheet';
+import { UIHandlerController } from './UIHandlerControler';
 
-//import {CellEditor} from "./CellEditor"
+// import {CellEditor} from "./CellEditor"
 /**
  * Created by SiamandM on 6/17/2016.
  */
 
 export interface IUIHandler {
-  click(): void
+  click(): void;
 
-  dblClick(): void
+  dblClick(): void;
 
-  mouseDown(x: number, y: number): void
+  mouseDown(x: number, y: number): void;
 
-  mouseMove(x: number, y: number): void
+  mouseMove(x: number, y: number): void;
 
-  mouseUp(x: number, y: number): void
+  mouseUp(x: number, y: number): void;
 
-  mouseWheel(dx: number, dy: number): void
+  mouseWheel(dx: number, dy: number): void;
 
-  keyDown(evt: any): void
+  keyDown(evt: any): void;
 
-  keyPress(evt: any): void
+  keyPress(evt: any): void;
 
-  keyUp(evt: any): void
+  keyUp(evt: any): void;
 }
 
 export class UIHandler implements IUIHandler {
@@ -34,43 +34,43 @@ export class UIHandler implements IUIHandler {
 
   }
 
-  click() {
+  public click() {
   }
 
-  dblClick() {
+  public dblClick() {
   }
 
-  mouseDown(x: number, y: number) {
+  public mouseDown(x: number, y: number) {
   }
 
-  mouseMove(x: number, y: number) {
+  public mouseMove(x: number, y: number) {
   }
 
-  mouseUp(x: number, y: number) {
+  public mouseUp(x: number, y: number) {
   }
 
-  mouseWheel(dx: number, dy: number) {
+  public mouseWheel(dx: number, dy: number) {
   }
 
-  keyDown(evt: KeyboardEvent) {
+  public keyDown(evt: KeyboardEvent) {
   }
 
 
-  keyPress(evt: any) {
+  public keyPress(evt: any) {
   }
 
-  keyUp(evt: any) {
+  public keyUp(evt: any) {
   }
 
   get locked() {
     return this.controller.locked;
   }
 
-  lock() {
+  public lock() {
     this.controller.lock(this);
   }
 
-  unlock() {
+  public unlock() {
     this.controller.unlock();
   }
 

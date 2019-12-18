@@ -6,23 +6,23 @@
     </select>
 </template>
 <script lang="ts">
-  import { Component, Prop } from "vue-property-decorator"
-  import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
+import Vue from 'vue';
 
-  @Component({name: 'font-family-selector'})
-  export default class FontFamilySelector extends Vue {
-    @Prop({default: 'Lato'})
-    value!: string;
+@Component({name: 'font-family-selector'})
+export default class FontFamilySelector extends Vue {
+  @Prop({default: 'Lato'})
+  public value!: string;
 
-    families = ['Lato','Sans','Serif','Courier','Courier New']
+  public families = ['Lato', 'Sans', 'Serif', 'Courier', 'Courier New'];
 
-    get selectedFamily() {
-      return this.value
-    }
-
-    set selectedFamily(newValue: string) {
-      this.$emit('input', newValue)
-      this.$emit('change', newValue)
-    }
+  get selectedFamily() {
+    return this.value;
   }
+
+  set selectedFamily(newValue: string) {
+    this.$emit('input', newValue);
+    this.$emit('change', newValue);
+  }
+}
 </script>

@@ -3,7 +3,7 @@ export function clone(obj: any) {
 }
 
 export function isComma(ch: string) {
-  return (ch === ",");
+  return (ch === ',');
 }
 
 export function isDigit(ch: string) {
@@ -19,9 +19,9 @@ export function isOperator(ch: string) {
 }
 
 export function isLeftParenthesis(ch: string) {
-  return (ch === "(");
+  return (ch === '(');
 }
 
 export function isRightParenthesis(ch: string) {
-  return (ch == ")");
+  return (ch == ')');
 }

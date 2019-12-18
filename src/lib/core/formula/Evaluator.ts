@@ -7,13 +7,9 @@ class Env {
   constructor(private ranges: any, private dataProvider: any) {
   }
 
-  private data(selector: any) {
-    return this.dataProvider.getEvaluatedValue(selector);
-  }
-
   public Eval(txt: string) {
-    let _M_E_ = this;
-    let _R_A_N_G_E_ = this.ranges;
+    const _M_E_ = this;
+    const _R_A_N_G_E_ = this.ranges;
 
     const PI = Math.PI;
     const E = Math.E;
@@ -55,15 +51,15 @@ class Env {
     }
 
     function ASINH(v: number) {
-      return Math['asinh'](v);
+      return Math.asinh(v);
     }
 
     function ACOSH(v: number) {
-      return Math['acosh'](v);
+      return Math.acosh(v);
     }
 
     function ATANH(v: number) {
-      return Math['atanh'](v);
+      return Math.atanh(v);
     }
 
     function ABS(v: number) {
@@ -75,7 +71,7 @@ class Env {
     }
 
     function CBRT(v: number) {
-      return Math['cbrt'](v);
+      return Math.cbrt(v);
     }
 
     function LOG(v: number) {
@@ -87,7 +83,7 @@ class Env {
     }
 
     function TRUNC(v: number) {
-      return Math['trunc'](v);
+      return Math.trunc(v);
     }
 
     function CEIL(v: number) {
@@ -101,12 +97,13 @@ class Env {
 
     return eval(txt);
   }
+
+  private data(selector: any) {
+    return this.dataProvider.getEvaluatedValue(selector);
+  }
 }
 
 export class Evaluator {
-
-
-  private static valueRegex = /(([a-zA-Z]+[0-9])+\:?([a-zA-Z]+[0-9]+)?)/g;
 
   public static Eval(dataProvider: IDateProvider, str: string) {
     if (str.length < 1 || str[0] != '=') {
@@ -114,10 +111,10 @@ export class Evaluator {
     }
 
     let m;
-    let regex = this.valueRegex;
+    const regex = this.valueRegex;
     let temp = str;
 
-    let ranges: any[] = [];
+    const ranges: any[] = [];
     let range_index = 0;
     while ((m = regex.exec(str)) !== null) {
       // This is necessary to avoid infinite loops with zero-width matches
@@ -130,7 +127,7 @@ export class Evaluator {
           ranges.push(match);
           temp = temp.replace(match + '', `_R_A_N_G_E_[${range_index++}]`);
         } else if (groupIndex == 0) {
-          let ev = dataProvider.getEvaluatedValue(match);
+          const ev = dataProvider.getEvaluatedValue(match);
           temp = temp.replace(match, ev);
         }
       });
@@ -143,6 +140,9 @@ export class Evaluator {
     }
 
   }
+
+
+  private static valueRegex = /(([a-zA-Z]+[0-9])+\:?([a-zA-Z]+[0-9]+)?)/g;
 
 
 }

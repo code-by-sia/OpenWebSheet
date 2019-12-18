@@ -4,9 +4,9 @@
 </template>
 
 <script lang="ts">
-  export default {
-    name: "StatusBar"
-  }
+export default {
+  name: 'StatusBar',
+};
 </script>
 
 <style lang="scss" scoped>

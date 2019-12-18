@@ -17,25 +17,24 @@
 </template>
 
 <script lang="ts">
+import { Component, Prop } from 'vue-property-decorator';
+import Vue from 'vue';
+import Action from './Action';
+import ActionButton from '@/components/ActionButton.vue';
 
-  import { Component, Prop } from "vue-property-decorator"
-  import Vue from 'vue';
-  import Action from './Action';
-  import ActionButton from "@/components/ActionButton.vue"
 
+@Component({
+  name: 'ActionGroup',
+  components: {ActionButton},
+})
+export default class ActionGroup extends Vue {
+  @Prop({required: true})
+  public value!: Action[];
 
-  @Component({
-    name: "ActionGroup",
-    components: {ActionButton}
-  })
-  export default class ActionGroup extends Vue {
-    @Prop({required: true})
-    value!: Action[];
-
-    get actions() {
-      return this.value
-    }
+  get actions() {
+    return this.value;
   }
+}
 </script>
 
 <style lang="scss" scoped>

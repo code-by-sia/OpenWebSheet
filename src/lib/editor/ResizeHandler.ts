@@ -1,5 +1,5 @@
-import { UIHandler } from "./UIHandler";
-import { RowHeaderWidth, ColumnHeaderHeight } from "../common/constants";
+import { UIHandler } from './UIHandler';
+import { RowHeaderWidth, ColumnHeaderHeight } from '../common/constants';
 
 const delta = 4;
 
@@ -11,7 +11,7 @@ export class ResizeHandler extends UIHandler {
   private oldY!: number;
   private engaged = false;
 
-  mouseMove(x: number, y: number) {
+  public mouseMove(x: number, y: number) {
     const c = this.hitColumn(x - RowHeaderWidth, y);
     const r = this.hitRow(x, y - ColumnHeaderHeight);
     if (c !== false) {
@@ -23,7 +23,7 @@ export class ResizeHandler extends UIHandler {
     }
   }
 
-  mouseDown(x: number, y: number) {
+  public mouseDown(x: number, y: number) {
     this.col = this.hitColumn(x - RowHeaderWidth, y);
     this.row = this.hitRow(x, y - ColumnHeaderHeight);
     this.oldX = x;
@@ -42,8 +42,8 @@ export class ResizeHandler extends UIHandler {
     }
   }
 
-  mouseUp(x: number, y: number) {
-    if (!this.engaged) return;
+  public mouseUp(x: number, y: number) {
+    if (!this.engaged) { return; }
     if (this.col !== false) {
       this.controller.alterColumn(this.col, x - this.oldX);
       this.controller.resetCursor();
@@ -58,7 +58,7 @@ export class ResizeHandler extends UIHandler {
   }
 
   private hitRow(x: number, y: number): any {
-    if (x > RowHeaderWidth) return false;
+    if (x > RowHeaderWidth) { return false; }
     const rowH = (r: any) => this.controller.websheet.ActiveSheet.getRowHeight(r);
     let j = 0;
     for (let i = rowH(j++); i < y + delta; i += rowH(j++)) {
@@ -71,7 +71,7 @@ export class ResizeHandler extends UIHandler {
   }
 
   private hitColumn(x: number, y: number): any {
-    if (y > ColumnHeaderHeight) return false;
+    if (y > ColumnHeaderHeight) { return false; }
     const colW = (c: any) => this.controller.websheet.ActiveSheet.getColumnWidth(c);
     let j = 0;
     for (let i = colW(j++); i < x + delta; i += colW(j++)) {

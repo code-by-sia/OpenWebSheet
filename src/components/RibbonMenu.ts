@@ -1,4 +1,4 @@
 export interface RibbonMenuItem {
-  name:string;
-  label:string;
+  name: string;
+  label: string;
 }

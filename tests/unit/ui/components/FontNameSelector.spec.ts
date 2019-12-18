@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import FontNameSelector from "@/components/FontNameSelector.vue"
+import FontNameSelector from '@/components/FontNameSelector.vue';
 
 describe('FontNameSelector', () => {
   it('is a vue instance', () => {
@@ -9,22 +9,22 @@ describe('FontNameSelector', () => {
 
   it('should pick a font by default', () => {
     const wrapper = shallowMount(FontNameSelector);
-    expect((<HTMLSelectElement>wrapper.element).value).toBeTruthy();
-  })
+    expect((wrapper.element as HTMLSelectElement).value).toBeTruthy();
+  });
 
   it('should set the font family form props', () => {
     const wrapper = shallowMount(FontNameSelector, {
       propsData: {
-        value: 'Sans'
-      }
+        value: 'Sans',
+      },
     });
-    expect((<HTMLSelectElement>wrapper.element).value).toBe('Sans');
-  })
+    expect((wrapper.element as HTMLSelectElement).value).toBe('Sans');
+  });
 
   it('should emit change when value changes', () => {
     const wrapper = shallowMount(FontNameSelector);
-    wrapper.setValue('Courier')
-    expect(wrapper.emitted().change).toEqual([['Courier']])
-  })
+    wrapper.setValue('Courier');
+    expect(wrapper.emitted().change).toEqual([['Courier']]);
+  });
 
 });

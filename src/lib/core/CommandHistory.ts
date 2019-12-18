@@ -1,6 +1,6 @@
 export interface CommandHistory {
-    selection:any;
-    appearance?:any;
-    data?:any;
-    meta?:any;
+    selection: any;
+    appearance?: any;
+    data?: any;
+    meta?: any;
 }

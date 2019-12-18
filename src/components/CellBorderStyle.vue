@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { Component } from "vue-property-decorator"
-  import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
+import Vue from 'vue';
 
-  @Component({name: 'cell-border-style'})
-  export default class CellBorderStyle extends Vue {
+@Component({name: 'cell-border-style'})
+export default class CellBorderStyle extends Vue {
 
-  }
+}
 </script>
 <template>
     <div class="cell-border-style" data-qa="cell-border">

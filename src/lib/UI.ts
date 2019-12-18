@@ -5,23 +5,9 @@ import { UIHandlerController } from './editor/UIHandlerControler';
 
 export class UI {
 
-  private handlers: ((doc: OpenDocument) => void)[] = [];
-  private document: OpenDocument = new OpenDocument();
-  private readonly render: DocumentRenderer | null = null;
-  private uiController: UIHandlerController;
-
-  public constructor(private element: HTMLElement) {
-    this.render = new CanvasRenderer(element, this.document);
-    this.uiController = new UIHandlerController(this.document, this.render);
-    this.document.addOnChange(() => this.raiseOnChangeEventListener());
-    this.render.render();
-
-    (<any>element)['openDocument'] = this.document;
-  }
-
   get isMerged() {
-    let cell = this.selectedCell;
-    if (!cell) return false;
+    const cell = this.selectedCell;
+    if (!cell) { return false; }
     return (cell.colSpan > 1) || (cell.rowSpan > 1);
   }
 
@@ -41,6 +27,20 @@ export class UI {
     return this.document.ActiveSheet.SelectedAppearance;
   }
 
+  private handlers: Array<(doc: OpenDocument) => void> = [];
+  private document: OpenDocument = new OpenDocument();
+  private readonly render: DocumentRenderer | null = null;
+  private uiController: UIHandlerController;
+
+  public constructor(private element: HTMLElement) {
+    this.render = new CanvasRenderer(element, this.document);
+    this.uiController = new UIHandlerController(this.document, this.render);
+    this.document.addOnChange(() => this.raiseOnChangeEventListener());
+    this.render.render();
+
+    (element as any).openDocument = this.document;
+  }
+
   public execCmd(cmd: string, ...args: any[]) {
     console.log(`the command _${cmd}_ executed.`);
     this.uiController.commit();
@@ -52,22 +52,22 @@ export class UI {
   }
 
   public removeOnChangeEventListener(handler: (doc: OpenDocument) => void) {
-    let ix = this.handlers.indexOf(handler);
+    const ix = this.handlers.indexOf(handler);
     if (ix != -1) {
       this.handlers.splice(ix, 1);
     }
   }
 
-  private raiseOnChangeEventListener() {
-    this.handlers.forEach(handler => handler(this.document));
-  }
-
-  save() {
+  public save() {
     return JSON.stringify(this.document.save());
   }
 
-  load(data: any) {
-    let obj = JSON.parse(data);
+  public load(data: any) {
+    const obj = JSON.parse(data);
     this.document.load(obj);
+  }
+
+  private raiseOnChangeEventListener() {
+    this.handlers.forEach((handler) => handler(this.document));
   }
 }

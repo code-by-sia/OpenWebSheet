@@ -1,132 +1,131 @@
 <script lang="ts">
+import { Component, Prop } from 'vue-property-decorator';
+import Vue from 'vue';
+import { RibbonMenuItem } from '@/components/RibbonMenu';
+import Ribbon from '@/components/Ribbon.vue';
+import ControlBox from '@/components/ControlBox.vue';
+import CellBorderStyle from '@/components/CellBorderStyle.vue';
+import FontSizeSelector from '@/components/FontSizeSelector.vue';
+import ActionGroup from '@/components/ActionGroup.vue';
+import ColorPicker from '@/components/ColorPicker.vue';
+import ActionButton from '@/components/ActionButton.vue';
+import { Appearance, TextAlign } from '@/lib/core/Appearance';
+import FontFamilySelector from '@/components/FontNameSelector.vue';
+import { Color } from '@/lib/common/types';
 
-  import { Component, Prop } from "vue-property-decorator"
-  import Vue from 'vue';
-  import { RibbonMenuItem } from "@/components/RibbonMenu"
-  import Ribbon from "@/components/Ribbon.vue"
-  import ControlBox from "@/components/ControlBox.vue"
-  import CellBorderStyle from "@/components/CellBorderStyle.vue"
-  import FontSizeSelector from "@/components/FontSizeSelector.vue"
-  import ActionGroup from "@/components/ActionGroup.vue"
-  import ColorPicker from "@/components/ColorPicker.vue"
-  import ActionButton from "@/components/ActionButton.vue"
-  import { Appearance, TextAlign } from "@/lib/core/Appearance"
-  import FontFamilySelector from "@/components/FontNameSelector.vue"
-  import { Color } from "@/lib/common/types"
+@Component({
+  name: 'RibbonMenu',
+  components: {
+    FontFamilySelector,
+    ActionButton, ColorPicker, ActionGroup, FontSizeSelector, CellBorderStyle, ControlBox, Ribbon,
+  },
+})
+export default class RibbonMenu extends Vue {
 
-  @Component({
-    name: "RibbonMenu",
-    components: {
-      FontFamilySelector,
-      ActionButton, ColorPicker, ActionGroup, FontSizeSelector, CellBorderStyle, ControlBox, Ribbon
-    }
-  })
-  export default class RibbonMenu extends Vue {
-    active = 'menu-home';
-    private fileMode = 'file';
-
-    @Prop()
-    appearance!: Appearance
-
-    @Prop({default: () => ({isMerged: true})})
-    state!: { isMerged: boolean }
-
-    borderColor: Color = 'black';
-
-    get isLocalMode(){
-      return this.fileMode === 'local';
-    }
-
-    changeMode(newMode:string) {
-      this.fileMode = newMode
-      this.$emit('mode-changed', newMode )
-    }
-
-    get activeStyle() {
-      return this.appearance || new Appearance()
-    }
-
-    get textAlignment() {
-      return [
-        {
-          name: 'left',
-          selected: this.activeStyle.textAlign === TextAlign.Left
-        },
-        {
-          name: 'center',
-          selected: this.activeStyle.textAlign === TextAlign.Center
-        },
-        {
-          name: 'right',
-          selected: this.activeStyle.textAlign === TextAlign.Right
-        }
-      ]
-    }
-
-    get fontStyle() {
-      return [
-        {name: 'bold', selected: this.activeStyle.bold},
-        {name: 'italic', selected: this.activeStyle.italic},
-        {name: 'underline', selected: this.activeStyle.underline}
-      ]
-    }
-
-    onBorderChanged(borderStructure: string) {
-      this.onAction(borderStructure, this.borderColor)
-    }
-
-    onAlign(alignment: string) {
-      this.onAction('align', alignment)
-    }
-
-    get foreColor() {
-      return this.activeStyle.text
-    }
-
-    set foreColor(color: string) {
-      this.onAction('fg-color', color)
-    }
-
-    get fillColor() {
-      return this.activeStyle.background
-    }
-
-    set fillColor(color: string) {
-      this.onAction('bg-color', color)
-    }
-
-    get fontSize() {
-      return this.activeStyle.fontSize
-    }
-
-    set fontSize(newSize: number) {
-      this.onAction('font-size', newSize)
-    }
-
-    get fontFamily() {
-      return this.activeStyle.fontName
-    }
-
-    set fontFamily(newFont: string) {
-      this.onAction('font-name', newFont)
-    }
-
-    toggleMerge() {
-      this.onAction(this.state.isMerged ? 'unmerge' : 'merge')
-    }
-
-    onAction(actionName: string, args?: any) {
-      this.$emit('action', {actionName, args})
-    }
-
-    menu: RibbonMenuItem[] = [
-      {name: 'menu-home', label: 'Home'},
-      {name: 'menu-formulas', label: 'Formulas'},
-      {name: 'menu-data', label: 'Data'},
-      {name: 'menu-view', label: 'View'},
-      {name: 'menu-info', label: 'About'}
-    ]
+  get isLocalMode() {
+    return this.fileMode === 'local';
   }
+
+  get activeStyle() {
+    return this.appearance || new Appearance();
+  }
+
+  get textAlignment() {
+    return [
+      {
+        name: 'left',
+        selected: this.activeStyle.textAlign === TextAlign.Left,
+      },
+      {
+        name: 'center',
+        selected: this.activeStyle.textAlign === TextAlign.Center,
+      },
+      {
+        name: 'right',
+        selected: this.activeStyle.textAlign === TextAlign.Right,
+      },
+    ];
+  }
+
+  get fontStyle() {
+    return [
+      {name: 'bold', selected: this.activeStyle.bold},
+      {name: 'italic', selected: this.activeStyle.italic},
+      {name: 'underline', selected: this.activeStyle.underline},
+    ];
+  }
+
+  get foreColor() {
+    return this.activeStyle.text;
+  }
+
+  set foreColor(color: string) {
+    this.onAction('fg-color', color);
+  }
+
+  get fillColor() {
+    return this.activeStyle.background;
+  }
+
+  set fillColor(color: string) {
+    this.onAction('bg-color', color);
+  }
+
+  get fontSize() {
+    return this.activeStyle.fontSize;
+  }
+
+  set fontSize(newSize: number) {
+    this.onAction('font-size', newSize);
+  }
+
+  get fontFamily() {
+    return this.activeStyle.fontName;
+  }
+
+  set fontFamily(newFont: string) {
+    this.onAction('font-name', newFont);
+  }
+  public active = 'menu-home';
+
+  @Prop()
+  public appearance!: Appearance;
+
+  @Prop({default: () => ({isMerged: true})})
+  public state!: { isMerged: boolean };
+
+  public borderColor: Color = 'black';
+
+  public menu: RibbonMenuItem[] = [
+    {name: 'menu-home', label: 'Home'},
+    {name: 'menu-formulas', label: 'Formulas'},
+    {name: 'menu-data', label: 'Data'},
+    {name: 'menu-view', label: 'View'},
+    {name: 'menu-info', label: 'About'},
+  ];
+  private fileMode = 'file';
+
+  public changeMode(newMode: string) {
+    this.fileMode = newMode;
+    this.$emit('mode-changed', newMode );
+  }
+
+  public onBorderChanged(borderStructure: string) {
+    this.onAction(borderStructure, this.borderColor);
+  }
+
+  public onAlign(alignment: string) {
+    this.onAction('align', alignment);
+  }
+
+  public toggleMerge() {
+    this.onAction(this.state.isMerged ? 'unmerge' : 'merge');
+  }
+
+  public onAction(actionName: string, args?: any) {
+    this.$emit('action', {actionName, args});
+  }
+}
 </script>
 
 <template>
@@ -167,7 +166,7 @@
                     <p>
                         <action-group :value="fontStyle" style="float:left;margin-right:15px;" @action="onAction">
                             <i slot="bold" class="fa fa-bold"></i>
-                            <i slot="italic" class="fa fa-italic"></i>
+                            <i slot="italic" class="fa fa-italic"/>
                             <i slot="underline" class="fa fa-underline"></i>
                         </action-group>
                         <color-picker v-model="foreColor">

@@ -1,17 +1,50 @@
-import { OpenDocument } from "../core/Document";
-import { UIHandlerController } from "./UIHandlerControler";
-import { ColumnHeaderHeight, RowHeaderWidth, SheetTitleHeight, COLOR_1, COLOR_2 } from "../common/constants";
-import { Cell } from "../core/Cell";
-import { Sheet } from "../core/Sheet";
-import { TextAlign } from "../core/Appearance";
-import { CellValue } from "@/lib/common/types"
+import { OpenDocument } from '../core/Document';
+import { UIHandlerController } from './UIHandlerControler';
+import { ColumnHeaderHeight, RowHeaderWidth, SheetTitleHeight, COLOR_1, COLOR_2 } from '../common/constants';
+import { Cell } from '../core/Cell';
+import { Sheet } from '../core/Sheet';
+import { TextAlign } from '../core/Appearance';
+import { CellValue } from '@/lib/common/types';
 
 /**
  * Created by SiamandM on 6/23/2016.
  */
-///<reference path="UIHandler.ts"/>
+/// <reference path="UIHandler.ts"/>
 
 export class CellEditor {
+
+  public get Value() {
+    if (this.editorElement.value == '') {
+      return null;
+    }
+
+    return this.editorElement.value;
+  }
+
+  public set Value(newValue: CellValue) {
+    if (this.editorElement) {
+      this.editorElement.value = newValue ? newValue + '' : '';
+    }
+  }
+
+  public get IsDirty() {
+    const cell = this.getCurrentCell();
+    return (cell.value != this.Value);
+  }
+
+  public get EditMode() {
+    return this.editMode;
+  }
+
+  public set EditMode(mode: boolean) {
+    this.editMode = mode;
+    if (mode) {
+      this.editorElement.readOnly = false;
+    } else {
+      this.editorElement.readOnly = true;
+    }
+    this.editorElement.focus();
+  }
 
   private websheet: OpenDocument;
   private editorArea!: HTMLDivElement;
@@ -26,7 +59,7 @@ export class CellEditor {
     this.select();
   }
 
-  initialize() {
+  public initialize() {
     this.editorArea = document.createElement('div');
     this.editorArea.style.position = 'absolute';
     this.editorArea.style.top = ColumnHeaderHeight + 'px';
@@ -57,11 +90,11 @@ export class CellEditor {
       if (!this.EditMode) {
         this.EditMode = true;
       }
-    }
+    };
 
-    this.editorElement.addEventListener('click', forceEditMode)
-    this.editorElement.addEventListener('change', forceEditMode)
-    this.editorElement.addEventListener('touchstart', forceEditMode)
+    this.editorElement.addEventListener('click', forceEditMode);
+    this.editorElement.addEventListener('change', forceEditMode);
+    this.editorElement.addEventListener('touchstart', forceEditMode);
 
     this.selectionElement.appendChild(this.editorElement);
 
@@ -81,85 +114,34 @@ export class CellEditor {
     this.websheet.addOnChange(() => {
       const value = this.websheet.ActiveSheet.SelectedValue;
       if (value != this.Value) {
-        this.Value = value
+        this.Value = value;
       }
 
       this.updateEditorAppearance();
       this.select(true);
-    })
+    });
 
   }
 
-  disableAnimation() {
+  public disableAnimation() {
     this.selectionElement.style.transitionDuration = '';
     this.anchorElement.style.transitionDuration = '';
   }
 
-  enableAnimation() {
+  public enableAnimation() {
     this.selectionElement.style.transitionDuration = '.1s';
     this.anchorElement.style.transitionDuration = '.1s';
   }
 
-  public get Value() {
-    if (this.editorElement.value == "")
-      return null;
-
-    return this.editorElement.value;
-  }
-
-  public set Value(newValue: CellValue) {
-    if (this.editorElement) {
-      this.editorElement.value = newValue ? newValue + '' : '';
-    }
-  }
-
-  public get IsDirty() {
-    let cell = this.getCurrentCell();
-    return (cell.value != this.Value)
-  }
-
-  public get EditMode() {
-    return this.editMode;
-  }
-
-  public set EditMode(mode: boolean) {
-    this.editMode = mode;
-    if (mode) {
-      this.editorElement.readOnly = false;
-    } else {
-      this.editorElement.readOnly = true;
-    }
-    this.editorElement.focus();
-  }
-
   public deselect() {
-    let cell = this.getCurrentCell();
+    const cell = this.getCurrentCell();
     if (this.IsDirty) {
-      this.controler.websheet.execCommand('change-value', cell.columnId, cell.rowId, this.Value)
+      this.controler.websheet.execCommand('change-value', cell.columnId, cell.rowId, this.Value);
     }
-  }
-
-  private getCurrentCell() {
-    let sheet = this.controler.websheet.ActiveSheet;
-    let selection = sheet.selection;
-    return sheet.getCell(selection.columnId, selection.rowId) || new Cell(selection.columnId, selection.rowId);
-  }
-
-  private getCurrentAppearance() {
-    let sheet = this.controler.websheet.ActiveSheet;
-    let selection = sheet.selection;
-    return sheet.getAppearance(selection.columnId, selection.rowId);
-  }
-
-  private getTextAlign(textAlign: TextAlign) {
-    if (textAlign == TextAlign.Center) return 'center';
-    if (textAlign == TextAlign.Left) return 'left';
-    if (textAlign == TextAlign.Right) return 'right';
-    return '';
   }
 
   public updateEditorAppearance() {
-    let app = this.getCurrentAppearance();
+    const app = this.getCurrentAppearance();
 
     this.editorElement.style.textAlign = this.getTextAlign(app.textAlign);
     this.editorElement.style.fontStyle = app.italic ? 'italic' : '';
@@ -180,26 +162,26 @@ export class CellEditor {
 
     this.updateEditorAppearance();
 
-    let sheet = this.controler.websheet.ActiveSheet;
-    let selection = sheet.selection;
+    const sheet = this.controler.websheet.ActiveSheet;
+    const selection = sheet.selection;
 
-    let x1 = sheet.getColumnLeft(selection.left);
-    let y1 = sheet.getRowTop(selection.top);
-    let x2 = sheet.getColumnRight(selection.right);
-    let y2 = sheet.getRowBottom(selection.bottom);
+    const x1 = sheet.getColumnLeft(selection.left);
+    const y1 = sheet.getRowTop(selection.top);
+    const x2 = sheet.getColumnRight(selection.right);
+    const y2 = sheet.getRowBottom(selection.bottom);
 
-    let w = x2 - x1;
-    let h = y2 - y1;
+    const w = x2 - x1;
+    const h = y2 - y1;
 
     this.selectionElement.style.left = (x1 - 2) + 'px';
     this.selectionElement.style.top = (y1 - 2) + 'px';
     this.selectionElement.style.width = (w - 2) + 'px';
     this.selectionElement.style.height = (h - 2) + 'px';
 
-    let selectedCell = this.getCurrentCell();
+    const selectedCell = this.getCurrentCell();
 
-    let editorY = sheet.getRowTop(selection.rowId);
-    let editorX = sheet.getColumnLeft(selection.columnId);
+    const editorY = sheet.getRowTop(selection.rowId);
+    const editorX = sheet.getColumnLeft(selection.columnId);
 
     this.editorElement.style.left = (editorX - x1) + 'px';
     this.editorElement.style.top = (editorY - y1) + 'px';
@@ -211,6 +193,25 @@ export class CellEditor {
     this.anchorElement.style.left = `${x2 - 5}px`;
     this.anchorElement.style.top = `${y2 - 5}px`;
 
+  }
+
+  private getCurrentCell() {
+    const sheet = this.controler.websheet.ActiveSheet;
+    const selection = sheet.selection;
+    return sheet.getCell(selection.columnId, selection.rowId) || new Cell(selection.columnId, selection.rowId);
+  }
+
+  private getCurrentAppearance() {
+    const sheet = this.controler.websheet.ActiveSheet;
+    const selection = sheet.selection;
+    return sheet.getAppearance(selection.columnId, selection.rowId);
+  }
+
+  private getTextAlign(textAlign: TextAlign) {
+    if (textAlign == TextAlign.Center) { return 'center'; }
+    if (textAlign == TextAlign.Left) { return 'left'; }
+    if (textAlign == TextAlign.Right) { return 'right'; }
+    return '';
   }
 
 }

@@ -1,12 +1,24 @@
-import { UIHandler } from "./UIHandler";
-import { CellEditor } from "./CellEditor";
-import { WebSheetUIHandler } from "./DocumentHandler";
-import { SheetUIHandler } from "./SheetUIHandler";
-import { OpenDocument } from "../core/Document";
-import { DocumentRenderer } from "../rendering/DocumentRenderer";
-import { ResizeHandler } from "./ResizeHandler";
+import { UIHandler } from './UIHandler';
+import { CellEditor } from './CellEditor';
+import { WebSheetUIHandler } from './DocumentHandler';
+import { SheetUIHandler } from './SheetUIHandler';
+import { OpenDocument } from '../core/Document';
+import { DocumentRenderer } from '../rendering/DocumentRenderer';
+import { ResizeHandler } from './ResizeHandler';
 
 export class UIHandlerController {
+
+  public get EditMode() {
+    return this.cellEditor.EditMode;
+  }
+
+  public set EditMode(mode: boolean) {
+    this.cellEditor.EditMode = mode;
+  }
+
+  get locked() {
+    return !!this.lockedOn;
+  }
 
   private handlers: UIHandler[] = [];
   private lockedOn: UIHandler | null = null;
@@ -19,26 +31,12 @@ export class UIHandlerController {
     websheet.addOnChange(() => this.cellEditor.updateEditorAppearance());
   }
 
-  private addHandlers() {
-    this.handlers.push(new WebSheetUIHandler(this));
-    this.handlers.push(new SheetUIHandler(this));
-    this.handlers.push(new ResizeHandler(this));
-  }
-
-  public get EditMode() {
-    return this.cellEditor.EditMode;
-  }
-
-  public set EditMode(mode: boolean) {
-    this.cellEditor.EditMode = mode;
-  }
-
   public select(animation: boolean = true) {
-    this.cellEditor.select(animation)
+    this.cellEditor.select(animation);
   }
 
   public deselect() {
-    this.cellEditor.deselect()
+    this.cellEditor.deselect();
   }
 
   public alterColumn(columnId: number, delta: number) {
@@ -47,10 +45,6 @@ export class UIHandlerController {
 
   public alterRow(rowId: number, delta: number) {
     this.websheet.execCommand('alter-row', rowId, delta);
-  }
-
-  get locked() {
-    return !!this.lockedOn;
   }
 
   public lock(uiHandler: UIHandler) {
@@ -69,9 +63,9 @@ export class UIHandlerController {
     this.renderer.Element.style.cursor = cursor;
   }
 
-  attachEvents() {
-    let element = this.renderer.Element;
-    let overlay = document.createElement('div');
+  public attachEvents() {
+    const element = this.renderer.Element;
+    const overlay = document.createElement('div');
     overlay.style.position = 'absolute';
     overlay.style.top = '0';
     overlay.style.left = '0';
@@ -82,68 +76,68 @@ export class UIHandlerController {
 
     const controler = this;
 
-    const getXY = function (evt: MouseEvent) {
-      let x = evt.offsetX || evt.layerX || (evt.clientX - element.offsetLeft);
-      let y = evt.offsetY || evt.layerY || (evt.clientY - element.offsetTop);
+    const getXY = function(evt: MouseEvent) {
+      const x = evt.offsetX || evt.layerX || (evt.clientX - element.offsetLeft);
+      const y = evt.offsetY || evt.layerY || (evt.clientY - element.offsetTop);
 
-      return {x, y}
+      return {x, y};
     };
 
-    const getTouchXY = function (evt: TouchEvent) {
-      let touch = evt.touches.length ? evt.touches[0] : evt.changedTouches[0]
-      const x = touch.clientX - element.offsetLeft
-      const y = touch.clientY - element.offsetTop
-      return {x, y}
-    }
+    const getTouchXY = function(evt: TouchEvent) {
+      const touch = evt.touches.length ? evt.touches[0] : evt.changedTouches[0];
+      const x = touch.clientX - element.offsetLeft;
+      const y = touch.clientY - element.offsetTop;
+      return {x, y};
+    };
 
     overlay.addEventListener('touchstart', (evt: TouchEvent) => {
       if (evt.touches.length == 1) {
-        let pos = getTouchXY(evt)
+        const pos = getTouchXY(evt);
         controler.mouseDown(pos.x, pos.y);
-        evt.preventDefault()
+        evt.preventDefault();
       }
-    })
+    });
 
     overlay.addEventListener('touchmove', (evt: TouchEvent) => {
-        let pos = getTouchXY(evt)
+        const pos = getTouchXY(evt);
         controler.mouseMove(pos.x, pos.y);
-    })
+    });
 
     overlay.addEventListener('touchend', (evt: TouchEvent) => {
-        let pos = getTouchXY(evt)
+        const pos = getTouchXY(evt);
         controler.mouseUp(pos.x, pos.y);
-    })
+    });
 
     overlay.addEventListener('touchcancel', (evt: TouchEvent) => {
-      let pos = getTouchXY(evt)
+      const pos = getTouchXY(evt);
       controler.mouseUp(pos.x, pos.y);
-    })
+    });
 
     overlay.addEventListener('mousedown', (evt: MouseEvent) => {
-      let pos = getXY(evt);
+      const pos = getXY(evt);
       controler.mouseDown(pos.x, pos.y);
-    })
+    });
 
     overlay.addEventListener('mousemove', (evt: MouseEvent) => {
-      let pos = getXY(evt);
+      const pos = getXY(evt);
       controler.mouseMove(pos.x, pos.y);
-    })
+    });
 
     overlay.addEventListener('mouseup', (evt: MouseEvent) => {
-      let pos = getXY(evt);
+      const pos = getXY(evt);
       controler.mouseUp(pos.x, pos.y);
-    })
+    });
 
-    overlay.addEventListener('click', (evt: MouseEvent) => controler.click())
-    overlay.addEventListener('dblclick', (evt: MouseEvent) => controler.dblClick())
+    overlay.addEventListener('click', (evt: MouseEvent) => controler.click());
+    overlay.addEventListener('dblclick', (evt: MouseEvent) => controler.dblClick());
     overlay.addEventListener('mousewheel', (evt: any) => {
-      let dx = evt.wheelDeltaX;
-      let dy = evt.wheelDeltaY;
+      const dx = evt.wheelDeltaX;
+      const dy = evt.wheelDeltaY;
       controler.mouseWheel(dx, dy);
       evt.preventDefault();
       evt.stopPropagation();
       return false;
-    })
+    });
 
     window.addEventListener('keydown', (evt: any) => controler.keyDown(evt));
     window.addEventListener('keypress', (evt: any) => controler.keyPress(evt));
@@ -152,7 +146,7 @@ export class UIHandlerController {
 
   }
 
-  click() {
+  public click() {
     if (this.lockedOn) {
       this.lockedOn.click();
       return;
@@ -163,7 +157,7 @@ export class UIHandlerController {
     }
   }
 
-  dblClick() {
+  public dblClick() {
     if (this.lockedOn) {
       this.lockedOn.dblClick();
       return;
@@ -174,7 +168,7 @@ export class UIHandlerController {
     }
   }
 
-  mouseDown(x: number, y: number) {
+  public mouseDown(x: number, y: number) {
     if (this.lockedOn) {
       this.lockedOn.mouseDown(x, y);
       return;
@@ -185,7 +179,7 @@ export class UIHandlerController {
     }
   }
 
-  mouseMove(x: number, y: number) {
+  public mouseMove(x: number, y: number) {
     if (this.lockedOn) {
       this.lockedOn.mouseMove(x, y);
       return;
@@ -196,7 +190,7 @@ export class UIHandlerController {
     }
   }
 
-  mouseUp(x: number, y: number) {
+  public mouseUp(x: number, y: number) {
     if (this.lockedOn) {
       this.lockedOn.mouseUp(x, y);
       return;
@@ -207,7 +201,7 @@ export class UIHandlerController {
     }
   }
 
-  mouseWheel(dx: number, dy: number) {
+  public mouseWheel(dx: number, dy: number) {
     if (this.lockedOn) {
       this.lockedOn.mouseWheel(dx, dy);
       return;
@@ -218,7 +212,7 @@ export class UIHandlerController {
     }
   }
 
-  keyDown(evt: any) {
+  public keyDown(evt: any) {
     if (this.lockedOn) {
       this.lockedOn.keyDown(evt);
       return;
@@ -229,7 +223,7 @@ export class UIHandlerController {
     }
   }
 
-  keyPress(evt: any) {
+  public keyPress(evt: any) {
     if (this.lockedOn) {
       this.lockedOn.keyPress(evt);
       return;
@@ -240,7 +234,7 @@ export class UIHandlerController {
     }
   }
 
-  keyUp(evt: any) {
+  public keyUp(evt: any) {
     if (this.lockedOn) {
       this.lockedOn.keyUp(evt);
       return;
@@ -251,14 +245,20 @@ export class UIHandlerController {
     }
   }
 
-  changeActiveSheet(index: number) {
+  public changeActiveSheet(index: number) {
     this.cellEditor.deselect();
     this.websheet.ActiveSheetIndex = index;
     this.cellEditor.select(false);
   }
 
-  commit() {
+  public commit() {
     this.cellEditor.deselect();
     this.cellEditor.select(false);
+  }
+
+  private addHandlers() {
+    this.handlers.push(new WebSheetUIHandler(this));
+    this.handlers.push(new SheetUIHandler(this));
+    this.handlers.push(new ResizeHandler(this));
   }
 }

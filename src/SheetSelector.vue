@@ -7,7 +7,3 @@
     name: "SheetSelector"
   }
 </script>
-
-<style scoped>
-
-</style>

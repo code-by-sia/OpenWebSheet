@@ -9,17 +9,17 @@
 </template>
 
 <script lang="ts">
-  import { Component, Prop } from "vue-property-decorator"
-  import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
+import Vue from 'vue';
 
-  @Component({name: "ActionButton"})
-  export default class ActionButton extends Vue {
-    @Prop()
-    label?: string;
+@Component({name: 'ActionButton'})
+export default class ActionButton extends Vue {
+  @Prop()
+  public label?: string;
 
-    @Prop({default: false})
-    disabled!: boolean;
-  }
+  @Prop({default: false})
+  public disabled!: boolean;
+}
 </script>
 
 <style lang="scss" scoped>

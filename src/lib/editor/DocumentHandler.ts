@@ -3,13 +3,13 @@ import { SheetTitleHeight, RowHeaderWidth, SheetTitleWidth } from '../common/con
 
 export class WebSheetUIHandler extends UIHandler {
 
-  mouseUp(x: number, y: number) {
+  public mouseUp(x: number, y: number) {
     if (y < this.controller.renderer.Element.clientHeight - SheetTitleHeight) {
       return;
     }
 
-    let j = Math.floor((x - RowHeaderWidth) / (SheetTitleWidth + 5));
-    let n = (x - RowHeaderWidth) % (SheetTitleWidth + 5);
+    const j = Math.floor((x - RowHeaderWidth) / (SheetTitleWidth + 5));
+    const n = (x - RowHeaderWidth) % (SheetTitleWidth + 5);
     if (n < SheetTitleWidth && j < this.controller.websheet.Sheets.length) {
       this.controller.changeActiveSheet(j);
     }
