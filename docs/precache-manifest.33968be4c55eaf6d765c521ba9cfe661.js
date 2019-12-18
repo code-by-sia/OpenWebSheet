@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/OpenWebSheet/DEMO.ows"
   },
   {
-    "revision": "7b194a4f5c51df745363",
+    "revision": "05279be2afdc29aab945",
     "url": "/OpenWebSheet/css/app.15d18b48.css"
   },
   {
@@ -12,16 +12,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/OpenWebSheet/demo.png"
   },
   {
-    "revision": "50fb5172a7c2215f7388a9c31067b3cb",
+    "revision": "237a4095983ba88f020b6f66acc6ea7e",
     "url": "/OpenWebSheet/index.html"
   },
   {
-    "revision": "7b194a4f5c51df745363",
-    "url": "/OpenWebSheet/js/app.d413334a.js"
+    "revision": "05279be2afdc29aab945",
+    "url": "/OpenWebSheet/js/app.1a3f57e0.js"
   },
   {
-    "revision": "fcf4f755a5f0b0218536",
-    "url": "/OpenWebSheet/js/chunk-vendors.d832c77d.js"
+    "revision": "b5ab979dae1a580ab315",
+    "url": "/OpenWebSheet/js/chunk-vendors.41679ca2.js"
   },
   {
     "revision": "5541760245021567b24d7341df5dfc59",
