@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.868f694df6abb9daa6ee8d2b600ef4e1.js"
+  "/OpenWebSheet/precache-manifest.33968be4c55eaf6d765c521ba9cfe661.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "openwebsheet"});
+workbox.core.setCacheNameDetails({prefix: "OpenWebSheet"});
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {

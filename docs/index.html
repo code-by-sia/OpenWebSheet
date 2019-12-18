@@ -1,81 +1,44 @@
-<!DOCTYPE html>
-<html lang=en>
-<head>
-    <meta charset=utf-8>
-    <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <meta name=author content="Siamand (Cyaxares)">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i&display=swap" rel=stylesheet>
-    <link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css
-          integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
-    <!--[if IE]>
-    <link rel="icon" href="favicon.ico"><![endif]--><title>Open web sheet</title>
-    <script>if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('service-worker.js').then(function (registration) {
-          // Registration was successful
-          console.log('Registered!');
-        }, function (err) {
-          // registration failed :(
-          console.log('ServiceWorker registration failed: ', err);
-        }).catch(function (err) {
-          console.log(err);
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name=author content="Siamand (Cyaxares)"><link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i&display=swap" rel=stylesheet><link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous><!--[if IE]><link rel="icon" href="favicon.ico"><![endif]--><title>Open web sheet</title><script>if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('service-worker.js').then(function (registration) {
+            // Registration was successful
+            console.log('Registered!');
+          }, function (err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+          }).catch(function (err) {
+            console.log(err);
+          });
         });
-      });
-    } else {
-      console.log('service worker is not supported');
-    }</script>
-    <style>html,
-    body {
-        height: 100%;
-    }
+      } else {
+        console.log('service worker is not supported');
+      }</script><style>html,
+        body {
+            height: 100%;
+        }
 
-    body, html, * {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        vertical-align: baseline;
-    }
+        body, html, * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
 
-    body {
-        font-family: Lato, serif;
-        font-size: 12px;
-        display: flex;
-        flex-direction: column;
-    }
+        body {
+            font-family: Lato, serif;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+        }
 
-    input[type=text]:focus {
-        outline: none;
-    }
+        input[type=text]:focus {
+            outline: none;
+        }
 
-    #app {
-        flex: 1;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }</style>
-    <link href=css/app.b14c6230.css rel=preload as=style>
-    <link href=js/app.6aa221e5.js rel=preload as=script>
-    <link href=js/chunk-vendors.c8175199.js rel=preload as=script>
-    <link href=css/app.b14c6230.css rel=stylesheet>
-    <link rel=icon type=image/png sizes=32x32 href=img/icons/favicon-32x32.png>
-    <link rel=icon type=image/png sizes=16x16 href=img/icons/favicon-16x16.png>
-    <link rel=manifest href=manifest.json>
-    <meta name=theme-color content=#00454d>
-    <meta name=apple-mobile-web-app-capable content=yes>
-    <meta name=apple-mobile-web-app-status-bar-style content=none>
-    <meta name=apple-mobile-web-app-title content="Open Sheet">
-    <link rel=apple-touch-icon href=img/icons/apple-touch-icon-152x152.png>
-    <link rel=mask-icon href=img/icons/safari-pinned-tab.svg color=#00454d>
-    <meta name=msapplication-TileImage content=img/icons/msapplication-icon-144x144.png>
-    <meta name=msapplication-TileColor content=#000000>
-</head>
-<body>
-<noscript><strong>We're sorry but OpenWebSheet doesn't work properly without JavaScript enabled. Please enable it to
-    continue.</strong></noscript>
-<div id=app></div>
-<script src=js/chunk-vendors.c8175199.js></script>
-<script src=js/app.6aa221e5.js></script>
-</body>
-</html>
+        #app {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }</style><link href=/OpenWebSheet/css/app.15d18b48.css rel=preload as=style><link href=/OpenWebSheet/js/app.1a3f57e0.js rel=preload as=script><link href=/OpenWebSheet/js/chunk-vendors.41679ca2.js rel=preload as=script><link href=/OpenWebSheet/css/app.15d18b48.css rel=stylesheet><link rel=icon type=image/png sizes=32x32 href=/OpenWebSheet/img/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/OpenWebSheet/img/icons/favicon-16x16.png><link rel=manifest href=/OpenWebSheet/manifest.json><meta name=theme-color content=#00454d><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=none><meta name=apple-mobile-web-app-title content="Open Sheet"><link rel=apple-touch-icon href=/OpenWebSheet/img/icons/apple-touch-icon-152x152.png><link rel=mask-icon href=/OpenWebSheet/img/icons/safari-pinned-tab.svg color=#00454d><meta name=msapplication-TileImage content=/OpenWebSheet/img/icons/msapplication-icon-144x144.png><meta name=msapplication-TileColor content=#000000></head><body><noscript><strong>We're sorry but OpenWebSheet doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=/OpenWebSheet/js/chunk-vendors.41679ca2.js></script><script src=/OpenWebSheet/js/app.1a3f57e0.js></script></body></html>
