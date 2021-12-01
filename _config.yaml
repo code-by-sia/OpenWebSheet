@@ -1,1 +1,8 @@
 
+title: Open web sheet
+url: http://siamandmaroufi.github.io
+baseurl: /openwebsheet
+
+page_gen-dirs: true
+kramdown:
+ parse_block_html: true
