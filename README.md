@@ -1,17 +1,17 @@
 # OpenWebSheet
 OpenSource Web based spreadsheet 
 
-[<img src=https://github.com/SiamandMaroufi/OpenWebSheet/workflows/CI/badge.svg />](https://github.com/SiamandMaroufi/OpenWebSheet/actions?query=workflow%3ACI)
+[<img src=https://github.com/code-by-sia/OpenWebSheet/workflows/CI/badge.svg />](https://github.com/code-by-sia/OpenWebSheet/actions?query=workflow%3ACI)
 
  
 ### Installed PWA: 
 
-<img src="https://siamandmaroufi.github.io/OpenWebSheet/demo.png" />
+<img src="https://code-by-sia.github.io/OpenWebSheet/demo.png" />
 
 ##### for installing the pwa app click on install icon at the url bar's right side
 
-1. <a href="https://siamandmaroufi.github.io/OpenWebSheet/" >Install</a> the PWA application <br />
-2. <a href="https://siamandmaroufi.github.io/OpenWebSheet/demo/DEMO.ows" download="download" target="_blank" >Download</a>  the `demo.ows` sample  file
+1. <a href="https://code-by-sia.github.io/OpenWebSheet/" >Install</a> the PWA application <br />
+2. <a href="https://code-by-sia.github.io/OpenWebSheet/demo/DEMO.ows" download="download" target="_blank" >Download</a>  the `demo.ows` sample  file
 3. click on load *Folder Icon* and load the sample file
 
 

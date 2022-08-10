@@ -241,14 +241,14 @@ export default class RibbonMenu extends Vue {
                 </control-box>
                 <control-box label="About Open Web Sheet Project" style="flex:1;" :grid="false">
                     <span style="flex: 1">
-                        Designed and developed by <strong>Siamand Maroufi</strong><br/>
+                        Designed and developed by <strong>Siamand</strong><br/>
                         3rd Parties: <strong>FontAwesome Icons</strong> & <strong>Google noto web
                         font</strong><br/>
                         Licence: <strong>MIT Licence</strong>
                     </span>
                     <span style="align-self: flex-start">
                             <a href="https://siamand.cc"> <i class="fa fa-link"></i> Developer's site</a> |
-                            <a href="https://github.com/SiamandMaroufi/OpenWebSheet"><i class="fab fa-github"></i>
+                            <a href="https://github.com/code-by-sia/OpenWebSheet"><i class="fab fa-github"></i>
                                 Source Code</a>
                     </span>
                 </control-box>
