@@ -4,7 +4,8 @@
 
 @layer components {
   .ows-app {
-    @apply flex flex-col h-screen min-h-screen text-sm text-gray-900 bg-white;
+    @apply flex flex-col h-screen min-h-screen overflow-hidden text-sm text-gray-900 bg-white;
+    height: 100dvh;
   }
 
   .ows-ribbon {
@@ -16,8 +17,8 @@
   }
 
   .ows-tabs-list {
-    @apply inline-flex h-10 items-center justify-center rounded-lg bg-gray-100 p-1 text-gray-500;
-    @apply mx-3 mt-3;
+    @apply inline-flex min-h-10 items-center justify-start rounded-lg bg-gray-100 p-1 text-gray-500;
+    @apply mx-3 mt-3 max-w-[calc(100%-1.5rem)] overflow-x-auto;
   }
 
   .ows-tabs-trigger {
@@ -41,6 +42,7 @@
 
   .ows-ribbon-panel {
     @apply flex items-stretch gap-3 min-h-28 p-3 pt-0 overflow-x-auto bg-white;
+    scrollbar-width: thin;
   }
 
   .ows-control-group {
@@ -123,7 +125,7 @@
   }
 
   .ows-sheet-surface {
-    @apply flex-1 relative min-h-0;
+    @apply flex-1 relative min-h-0 overflow-hidden;
   }
 
   .ows-status-bar {
@@ -224,5 +226,128 @@
   .ows-border-inside span:nth-child(1),
   .ows-border-inside span:nth-child(2) {
     border-bottom-width: 2px !important;
+  }
+
+  @media (max-width: 768px) {
+    .ows-ribbon {
+      @apply max-h-[48dvh];
+    }
+
+    .ows-tabs-list {
+      @apply mx-2 mt-2 w-[calc(100%-1rem)];
+    }
+
+    .ows-tabs-trigger {
+      @apply flex-1 min-w-12 px-2 text-xs;
+    }
+
+    .ows-tab-label {
+      @apply gap-1.5;
+    }
+
+    .ows-tab-label i {
+      @apply text-sm;
+    }
+
+    .ows-ribbon-panel {
+      @apply grid auto-cols-[minmax(9.5rem,1fr)] grid-flow-col gap-2 p-2 pt-0 min-h-0;
+    }
+
+    .ows-control-group {
+      @apply min-w-0 rounded-md;
+    }
+
+    .ows-control-content {
+      @apply px-2 pb-2 justify-start overflow-x-auto;
+    }
+
+    .ows-control-label {
+      @apply px-2 py-1.5;
+    }
+
+    .ows-button-row {
+      @apply flex-wrap;
+    }
+
+    .ows-button {
+      @apply min-w-8 px-2;
+    }
+
+    .ows-field {
+      @apply flex-wrap;
+    }
+
+    .ows-field select {
+      @apply max-w-28;
+    }
+
+    .ows-formula-bar {
+      @apply min-h-10;
+    }
+
+    .ows-cell-name {
+      @apply w-14 shrink-0;
+    }
+
+    .ows-formula-actions {
+      @apply gap-1 px-2;
+    }
+
+    .ows-formula-input {
+      @apply min-w-0 text-sm;
+    }
+
+    .ows-border-grid {
+      @apply w-36;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ows-ribbon {
+      @apply max-h-[42dvh];
+    }
+
+    .ows-tab-label {
+      @apply flex-col gap-0.5;
+    }
+
+    .ows-tabs-trigger {
+      @apply min-w-14 px-1.5 py-1 text-[0.68rem];
+    }
+
+    .ows-ribbon-panel {
+      @apply auto-cols-[minmax(8.5rem,86vw)];
+    }
+  }
+
+  @media print {
+    @page {
+      margin: 0.35in;
+    }
+
+    html,
+    body,
+    #app {
+      @apply h-auto min-h-0 overflow-visible bg-white;
+    }
+
+    .ows-app {
+      @apply block h-auto min-h-0 overflow-visible bg-white;
+    }
+
+    .ows-ribbon,
+    .ows-formula-bar,
+    .ows-status-bar {
+      display: none !important;
+    }
+
+    .ows-sheet-surface {
+      @apply block h-auto min-h-0 overflow-visible;
+    }
+
+    .ows-sheet-surface canvas {
+      @apply block max-w-full h-auto;
+      page-break-inside: avoid;
+    }
   }
 }
