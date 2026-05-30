@@ -26,6 +26,8 @@ describe('RibbonMenu', () => {
     selectTab('Formulas');
     expect(await screen.findByText('Mathematical')).toBeInTheDocument();
     expect(screen.getByText('User Defined Functions')).toBeInTheDocument();
+    expect(screen.getByTitle('Insert SUM')).toBeInTheDocument();
+    expect(screen.getByTitle('Insert SQRT')).toBeInTheDocument();
 
     selectTab('Data');
     expect(await screen.findByText('Open Office')).toBeInTheDocument();
@@ -62,5 +64,14 @@ describe('RibbonMenu', () => {
     fireEvent.click(headings);
 
     expect(headings.closest('button')).not.toHaveClass('ows-button-active');
+  });
+
+  it('emits formula template actions from the Formulas tab', async () => {
+    const onAction = renderRibbon();
+
+    selectTab('Formulas');
+    fireEvent.click(await screen.findByTitle('Insert SUM'));
+
+    expect(onAction).toHaveBeenCalledWith({actionName: 'formula-template', args: '=SUM('});
   });
 });

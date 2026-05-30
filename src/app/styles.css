@@ -114,6 +114,10 @@
     @apply text-green-700;
   }
 
+  .ows-formula-tools {
+    @apply flex flex-wrap items-center justify-center gap-1.5;
+  }
+
   .ows-formula-input {
     @apply flex-1 h-7 mx-1 border-l border-gray-300 px-2 outline-none;
   }
