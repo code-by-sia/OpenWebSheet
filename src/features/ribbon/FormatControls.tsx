@@ -10,6 +10,12 @@ interface FormatControlsProps {
   onAction: (action: AppAction) => void;
 }
 
+const alignments = [
+  {icon: 'fa fa-align-left', label: 'Align left', value: 'left', textAlign: TextAlign.Left},
+  {icon: 'fa fa-align-center', label: 'Align center', value: 'center', textAlign: TextAlign.Center},
+  {icon: 'fa fa-align-right', label: 'Align right', value: 'right', textAlign: TextAlign.Right},
+];
+
 export function FormatControls(props: FormatControlsProps) {
   const action = (actionName: string, args?: any) => props.onAction({actionName, args});
 
@@ -30,22 +36,22 @@ export function FormatControls(props: FormatControlsProps) {
         })),
       ),
       React.createElement('div', {className: 'ows-button-row'},
-        React.createElement(AlignButton, {action, alignment: TextAlign.Left, appearance: props.appearance}),
-        React.createElement(AlignButton, {action, alignment: TextAlign.Center, appearance: props.appearance}),
-        React.createElement(AlignButton, {action, alignment: TextAlign.Right, appearance: props.appearance}),
+        alignments.map((alignment) => React.createElement(AlignButton, {
+          action,
+          alignment,
+          appearance: props.appearance,
+          key: alignment.value,
+        })),
       ),
     ),
   );
 }
 
 function AlignButton({action, alignment, appearance}: any) {
-  const icon = alignment === TextAlign.Left
-    ? 'fa fa-align-left'
-    : alignment === TextAlign.Center ? 'fa fa-align-center' : 'fa fa-align-right';
-
   return React.createElement(Button, {
-    active: appearance.textAlign === alignment,
-    icon,
-    onClick: () => action('align', alignment),
+    active: appearance.textAlign === alignment.textAlign,
+    icon: alignment.icon,
+    onClick: () => action('align', alignment.value),
+    title: alignment.label,
   });
 }

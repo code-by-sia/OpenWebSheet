@@ -54,6 +54,16 @@ describe('RibbonMenu', () => {
     expect(onAction).toHaveBeenCalledWith({actionName: 'outside-border', args: '#000000'});
   });
 
+  it('emits text alignment command values the core accepts', () => {
+    const onAction = renderRibbon();
+
+    fireEvent.click(screen.getByTitle('Align center'));
+    fireEvent.click(screen.getByTitle('Align right'));
+
+    expect(onAction).toHaveBeenCalledWith({actionName: 'align', args: 'center'});
+    expect(onAction).toHaveBeenCalledWith({actionName: 'align', args: 'right'});
+  });
+
   it('toggles view layout section items', async () => {
     renderRibbon();
 
