@@ -49,7 +49,7 @@ npm install
 Start the development server:
 
 ```sh
-npm run serve
+npm run dev
 ```
 
 Build for production:
@@ -58,16 +58,16 @@ Build for production:
 npm run build
 ```
 
-Run linting:
+Run type checking:
 
 ```sh
-npm run lint
+npm run typecheck
 ```
 
 Run unit tests:
 
 ```sh
-npm run test:unit
+npm test
 ```
 
 ## Documentation

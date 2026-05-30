@@ -2,7 +2,7 @@
 
 ## High-Level Components
 
-- UI Layer (currently Vue-based)
+- UI Layer (React-based)
 - Spreadsheet core logic
 - Canvas renderer
 - Formula evaluation
