@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .ows-app {
+    @apply flex flex-col h-screen min-h-screen text-sm text-gray-900 bg-white;
+  }
+
+  .ows-ribbon {
+    @apply flex flex-col border-b border-gray-300 bg-gray-100;
+  }
+
+  .ows-ribbon-tabs {
+    @apply flex gap-1 bg-brand px-5 pt-1;
+  }
+
+  .ows-ribbon-tab {
+    @apply px-3 py-1 text-xs font-bold text-white rounded-t border border-transparent;
+  }
+
+  .ows-ribbon-tab-active {
+    @apply bg-white text-brand border-white;
+  }
+
+  .ows-ribbon-panel {
+    @apply flex items-stretch gap-2 h-24 p-2 overflow-x-auto bg-panel;
+  }
+
+  .ows-control-group {
+    @apply flex flex-col min-w-control bg-white border border-gray-300 rounded-sm shadow-sm overflow-hidden;
+  }
+
+  .ows-control-group-wide {
+    @apply flex-1;
+  }
+
+  .ows-control-content {
+    @apply flex flex-1 items-center justify-center px-3 pt-2;
+  }
+
+  .ows-control-label {
+    @apply h-5 leading-5 text-center text-xs font-bold uppercase text-gray-400 bg-gray-50;
+  }
+
+  .ows-button-row {
+    @apply flex items-center gap-1;
+  }
+
+  .ows-stack {
+    @apply flex flex-col gap-2;
+  }
+
+  .ows-button {
+    @apply inline-flex items-center justify-center gap-1 min-w-button h-7 px-2;
+    @apply text-xs border border-gray-300 rounded-sm bg-white text-gray-800;
+  }
+
+  .ows-button-active {
+    @apply bg-gray-300;
+  }
+
+  .ows-field {
+    @apply flex items-center gap-1 text-xs text-gray-500;
+  }
+
+  .ows-field select,
+  .ows-field input {
+    @apply h-7 border border-gray-300 rounded-sm bg-white text-gray-900;
+  }
+
+  .ows-formula-bar {
+    @apply flex items-center border-b border-t border-gray-300 bg-white;
+  }
+
+  .ows-cell-name {
+    @apply w-20 h-8 text-center border-0 text-xs text-gray-600;
+  }
+
+  .ows-formula-actions {
+    @apply flex items-center gap-2 h-8 px-3 border-l border-gray-300 text-gray-500;
+  }
+
+  .ows-formula-actions button {
+    @apply text-xs text-gray-500;
+  }
+
+  .ows-formula-active .ows-formula-actions button:first-child {
+    @apply text-red-700;
+  }
+
+  .ows-formula-active .ows-formula-actions button:nth-child(2) {
+    @apply text-green-700;
+  }
+
+  .ows-formula-input {
+    @apply flex-1 h-7 mx-1 border-l border-gray-300 px-2 outline-none;
+  }
+
+  .ows-sheet-surface {
+    @apply flex-1 relative min-h-0;
+  }
+
+  .ows-status-bar {
+    @apply h-6 px-3 leading-6 text-xs border-t border-gray-300 bg-gray-50 text-gray-500;
+  }
+
+  .ows-muted {
+    @apply text-xs uppercase text-gray-400;
+  }
+
+  .ows-about {
+    @apply flex flex-col gap-1 text-xs;
+  }
+}

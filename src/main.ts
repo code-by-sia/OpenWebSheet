@@ -1,9 +1,10 @@
-import Vue from 'vue';
-import App from './App.vue';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './react/App';
 import './registerServiceWorker';
+import './react/styles.css';
 
-Vue.config.productionTip = false;
-
-new Vue({
-  render: (h) => h(App),
-}).$mount('#app');
+ReactDOM.render(
+  React.createElement(App),
+  document.getElementById('app'),
+);

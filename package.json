@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "core-js": "^3.5.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.11",
     "vue-class-component": "^7.0.2",
@@ -17,14 +19,17 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.24",
+    "@types/react": "^16.8.0",
+    "@types/react-dom": "^16.8.0",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-pwa": "^4.1.0",
     "@vue/cli-plugin-typescript": "^4.1.0",
     "@vue/cli-plugin-unit-jest": "^4.1.0",
     "@vue/cli-service": "^4.2.3",
     "@vue/test-utils": "1.0.0-beta.29",
-    "node-sass": "^4.13.1",
+    "sass": "^1.32.13",
     "sass-loader": "^8.0.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "typescript": "~3.5.3",
     "vue-template-compiler": "^2.6.11"
   },
