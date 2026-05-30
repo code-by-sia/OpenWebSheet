@@ -8,11 +8,11 @@ import { ViewRibbon } from './ViewRibbon';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/Tabs';
 
 const tabs = [
-  {id: 'home', label: 'Home'},
-  {id: 'formulas', label: 'Formulas'},
-  {id: 'data', label: 'Data'},
-  {id: 'view', label: 'View'},
-  {id: 'about', label: 'About'},
+  {id: 'home', icon: 'fa fa-home', label: 'Home'},
+  {id: 'formulas', icon: 'fa fa-square-root-alt', label: 'Formulas'},
+  {id: 'data', icon: 'fa fa-database', label: 'Data'},
+  {id: 'view', icon: 'fa fa-eye', label: 'View'},
+  {id: 'about', icon: 'fa fa-info-circle', label: 'About'},
 ];
 
 export function RibbonMenu(props: RibbonProps) {
@@ -21,7 +21,12 @@ export function RibbonMenu(props: RibbonProps) {
     {className: 'ows-ribbon'},
     React.createElement(Tabs, {defaultValue: 'home'},
       React.createElement(TabsList, null,
-        tabs.map((tab) => React.createElement(TabsTrigger, {key: tab.id, value: tab.id}, tab.label)),
+        tabs.map((tab) => React.createElement(TabsTrigger, {key: tab.id, value: tab.id},
+          React.createElement('span', {className: 'ows-tab-label'},
+            React.createElement('i', {className: tab.icon}),
+            tab.label,
+          ),
+        )),
       ),
       React.createElement(TabsContent, {value: 'home'}, React.createElement(HomeRibbon, props)),
       React.createElement(TabsContent, {value: 'formulas'}, React.createElement(FormulaRibbon)),
