@@ -1,9 +1,11 @@
 import React from 'react';
 import { RibbonProps } from '@/app/types';
 import { AboutRibbon } from './AboutRibbon';
+import { DataRibbon } from './DataRibbon';
+import { FormulaRibbon } from './FormulaRibbon';
 import { HomeRibbon } from './HomeRibbon';
-import { PlaceholderRibbon } from './PlaceholderRibbon';
 import { RibbonTab, RibbonTabs } from './RibbonTabs';
+import { ViewRibbon } from './ViewRibbon';
 
 const tabs: RibbonTab[] = [
   {id: 'home', label: 'Home'},
@@ -18,9 +20,13 @@ export function RibbonMenu(props: RibbonProps) {
 
   const content = active === 'home'
     ? React.createElement(HomeRibbon, props)
-    : active === 'about'
-      ? React.createElement(AboutRibbon)
-      : React.createElement(PlaceholderRibbon, {labels: [active]});
+    : active === 'formulas'
+      ? React.createElement(FormulaRibbon)
+      : active === 'data'
+        ? React.createElement(DataRibbon)
+        : active === 'view'
+          ? React.createElement(ViewRibbon)
+          : React.createElement(AboutRibbon);
 
   return React.createElement(
     'header',

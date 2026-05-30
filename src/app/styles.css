@@ -112,4 +112,88 @@
   .ows-about {
     @apply flex flex-col gap-1 text-xs;
   }
+
+  .ows-large-icon {
+    @apply text-3xl text-brand;
+  }
+
+  .ows-border-grid {
+    @apply grid grid-cols-5 gap-1 w-40;
+  }
+
+  .ows-border-tile {
+    @apply grid grid-cols-2 w-7 h-7 p-1 border border-gray-200 rounded-sm bg-white;
+  }
+
+  .ows-border-tile:hover {
+    @apply border-gray-900;
+  }
+
+  .ows-border-tile span {
+    @apply block border border-dotted border-gray-800;
+  }
+
+  .ows-border-tile span:nth-child(2),
+  .ows-border-tile span:nth-child(4) {
+    border-left: 0 !important;
+  }
+
+  .ows-border-tile span:nth-child(3),
+  .ows-border-tile span:nth-child(4) {
+    border-top: 0 !important;
+  }
+
+  .ows-border-all span:nth-child(1),
+  .ows-border-all span:nth-child(2),
+  .ows-border-outside span:nth-child(1),
+  .ows-border-outside span:nth-child(2),
+  .ows-border-top span:nth-child(1),
+  .ows-border-top span:nth-child(2) {
+    @apply border-t-2 border-t-gray-900;
+  }
+
+  .ows-border-all span:nth-child(3),
+  .ows-border-all span:nth-child(4),
+  .ows-border-outside span:nth-child(3),
+  .ows-border-outside span:nth-child(4),
+  .ows-border-bottom span:nth-child(3),
+  .ows-border-bottom span:nth-child(4) {
+    @apply border-b-2 border-b-gray-900;
+  }
+
+  .ows-border-all span:nth-child(1),
+  .ows-border-all span:nth-child(3),
+  .ows-border-outside span:nth-child(1),
+  .ows-border-outside span:nth-child(3),
+  .ows-border-left span:nth-child(1),
+  .ows-border-left span:nth-child(3) {
+    @apply border-l-2 border-l-gray-900;
+  }
+
+  .ows-border-all span:nth-child(2),
+  .ows-border-all span:nth-child(4),
+  .ows-border-outside span:nth-child(2),
+  .ows-border-outside span:nth-child(4),
+  .ows-border-right span:nth-child(2),
+  .ows-border-right span:nth-child(4) {
+    @apply border-r-2 border-r-gray-900;
+  }
+
+  .ows-border-all span:nth-child(1),
+  .ows-border-all span:nth-child(3),
+  .ows-border-inside span:nth-child(1),
+  .ows-border-inside span:nth-child(3),
+  .ows-border-vertical span:nth-child(1),
+  .ows-border-vertical span:nth-child(3) {
+    border-right-width: 2px !important;
+  }
+
+  .ows-border-all span:nth-child(1),
+  .ows-border-all span:nth-child(2),
+  .ows-border-horizontal span:nth-child(1),
+  .ows-border-horizontal span:nth-child(2),
+  .ows-border-inside span:nth-child(1),
+  .ows-border-inside span:nth-child(2) {
+    border-bottom-width: 2px !important;
+  }
 }

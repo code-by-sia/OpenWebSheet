@@ -4,6 +4,7 @@ import { CellControls } from './CellControls';
 import { DocumentControls } from './DocumentControls';
 import { FontControls } from './FontControls';
 import { FormatControls } from './FormatControls';
+import { BorderControls } from './BorderControls';
 
 export function HomeRibbon(props: RibbonProps) {
   return React.createElement(
@@ -17,5 +18,6 @@ export function HomeRibbon(props: RibbonProps) {
     React.createElement(FontControls, {appearance: props.appearance, onAction: props.onAction}),
     React.createElement(FormatControls, {appearance: props.appearance, onAction: props.onAction}),
     React.createElement(CellControls, {onAction: props.onAction, state: props.state}),
+    React.createElement(BorderControls, {onAction: props.onAction}),
   );
 }
