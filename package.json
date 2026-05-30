@@ -13,16 +13,17 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@radix-ui/react-tabs": "^1.1.13",
     "core-js": "^3.49.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "register-service-worker": "^1.7.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^12.1.5",
-    "@types/react": "^16.14.68",
-    "@types/react-dom": "^16.9.19",
+    "@testing-library/react": "^14.3.1",
+    "@types/react": "^18.3.29",
+    "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^6.0.2",
     "autoprefixer": "^10.5.0",
     "jsdom": "^29.1.1",

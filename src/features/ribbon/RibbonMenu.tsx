@@ -4,10 +4,10 @@ import { AboutRibbon } from './AboutRibbon';
 import { DataRibbon } from './DataRibbon';
 import { FormulaRibbon } from './FormulaRibbon';
 import { HomeRibbon } from './HomeRibbon';
-import { RibbonTab, RibbonTabs } from './RibbonTabs';
 import { ViewRibbon } from './ViewRibbon';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/Tabs';
 
-const tabs: RibbonTab[] = [
+const tabs = [
   {id: 'home', label: 'Home'},
   {id: 'formulas', label: 'Formulas'},
   {id: 'data', label: 'Data'},
@@ -16,22 +16,18 @@ const tabs: RibbonTab[] = [
 ];
 
 export function RibbonMenu(props: RibbonProps) {
-  const [active, setActive] = React.useState('home');
-
-  const content = active === 'home'
-    ? React.createElement(HomeRibbon, props)
-    : active === 'formulas'
-      ? React.createElement(FormulaRibbon)
-      : active === 'data'
-        ? React.createElement(DataRibbon)
-        : active === 'view'
-          ? React.createElement(ViewRibbon)
-          : React.createElement(AboutRibbon);
-
   return React.createElement(
     'header',
     {className: 'ows-ribbon'},
-    React.createElement(RibbonTabs, {active, onChange: setActive, tabs}),
-    content,
+    React.createElement(Tabs, {defaultValue: 'home'},
+      React.createElement(TabsList, null,
+        tabs.map((tab) => React.createElement(TabsTrigger, {key: tab.id, value: tab.id}, tab.label)),
+      ),
+      React.createElement(TabsContent, {value: 'home'}, React.createElement(HomeRibbon, props)),
+      React.createElement(TabsContent, {value: 'formulas'}, React.createElement(FormulaRibbon)),
+      React.createElement(TabsContent, {value: 'data'}, React.createElement(DataRibbon)),
+      React.createElement(TabsContent, {value: 'view'}, React.createElement(ViewRibbon)),
+      React.createElement(TabsContent, {value: 'about'}, React.createElement(AboutRibbon)),
+    ),
   );
 }

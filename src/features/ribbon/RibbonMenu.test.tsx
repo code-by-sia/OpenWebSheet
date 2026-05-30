@@ -16,24 +16,28 @@ describe('RibbonMenu', () => {
     return onAction;
   }
 
-  it('switches tabs and renders the migrated tab content', () => {
+  function selectTab(label: string) {
+    fireEvent.mouseDown(screen.getByText(label), {button: 0, ctrlKey: false});
+  }
+
+  it('switches tabs and renders the migrated tab content', async () => {
     renderRibbon();
 
-    fireEvent.click(screen.getByText('Formulas'));
-    expect(screen.getByText('Mathematical')).toBeInTheDocument();
+    selectTab('Formulas');
+    expect(await screen.findByText('Mathematical')).toBeInTheDocument();
     expect(screen.getByText('User Defined Functions')).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText('Data'));
-    expect(screen.getByText('Open Office')).toBeInTheDocument();
+    selectTab('Data');
+    expect(await screen.findByText('Open Office')).toBeInTheDocument();
     expect(screen.getByText('MS Excel')).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText('View'));
-    expect(screen.getByText('Print')).toBeInTheDocument();
+    selectTab('View');
+    expect(await screen.findByText('Print')).toBeInTheDocument();
     expect(screen.getByText('Layout')).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText('About'));
+    selectTab('About');
 
-    expect(screen.getByText('Open Web Sheet Project')).toBeInTheDocument();
+    expect(await screen.findByText('Open Web Sheet Project')).toBeInTheDocument();
     expect(screen.getByText('Source Code')).toBeInTheDocument();
   });
 

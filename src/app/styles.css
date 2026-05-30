@@ -8,19 +8,35 @@
   }
 
   .ows-ribbon {
-    @apply flex flex-col border-b border-gray-300 bg-gray-100;
+    @apply flex flex-col border-b border-gray-300 bg-white;
   }
 
-  .ows-ribbon-tabs {
-    @apply flex gap-1 bg-brand px-5 pt-1;
+  .ows-tabs {
+    @apply w-full;
   }
 
-  .ows-ribbon-tab {
-    @apply px-3 py-1 text-xs font-bold text-white rounded-t border border-transparent;
+  .ows-tabs-list {
+    @apply inline-flex h-10 items-center justify-center rounded-md bg-gray-100 p-1 text-gray-500;
+    @apply mx-2 mt-2;
   }
 
-  .ows-ribbon-tab-active {
-    @apply bg-white text-brand border-white;
+  .ows-tabs-trigger {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5;
+    @apply text-sm font-medium ring-offset-white transition-all;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .ows-tabs-trigger[data-state='active'] {
+    @apply bg-white text-gray-950 shadow-sm;
+  }
+
+  .ows-tabs-content {
+    @apply mt-2 ring-offset-white;
+  }
+
+  .ows-tabs-content:focus-visible {
+    @apply outline-none ring-2 ring-brand ring-offset-2;
   }
 
   .ows-ribbon-panel {
