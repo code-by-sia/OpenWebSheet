@@ -34,6 +34,9 @@ describe('RibbonMenu', () => {
     selectTab('View');
     expect(await screen.findByText('Print')).toBeInTheDocument();
     expect(screen.getByText('Layout')).toBeInTheDocument();
+    expect(screen.getByText('Normal')).toBeInTheDocument();
+    expect(screen.getByText('Page layout')).toBeInTheDocument();
+    expect(screen.getByText('Gridlines')).toBeInTheDocument();
 
     selectTab('About');
 
@@ -47,5 +50,17 @@ describe('RibbonMenu', () => {
     fireEvent.click(screen.getByTitle('Outside borders'));
 
     expect(onAction).toHaveBeenCalledWith({actionName: 'outside-border', args: '#000000'});
+  });
+
+  it('toggles view layout section items', async () => {
+    renderRibbon();
+
+    selectTab('View');
+    const headings = await screen.findByText('Headings');
+    expect(headings.closest('button')).toHaveClass('ows-button-active');
+
+    fireEvent.click(headings);
+
+    expect(headings.closest('button')).not.toHaveClass('ows-button-active');
   });
 });
