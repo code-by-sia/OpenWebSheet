@@ -10,11 +10,12 @@ OpenWebSheet is an open-source, web-based spreadsheet application. It runs in th
 
 1. Open the hosted app: <https://code-by-sia.github.io/OpenWebSheet/>
 2. Install the PWA using the install icon in the browser address bar.
-3. Download the sample file: <https://code-by-sia.github.io/OpenWebSheet/demo/DEMO.ows>
+3. Download the sample file: <https://code-by-sia.github.io/OpenWebSheet/DEMO.ows>
 4. Use the folder/load icon in the app to open the sample `.ows` file.
 
 ## Features
 
+- React application shell with shadcn-style controls
 - Canvas-based spreadsheet rendering
 - Basic cell content editing
 - Borders
@@ -76,15 +77,17 @@ Additional documentation is available in the [`docs/`](docs/) directory:
 
 - [Development guide](docs/development.md)
 - [Architecture overview](docs/architecture.md)
+- [UI structure](docs/ui-structure.md)
 - [User guide](docs/user-guide.md)
 - [Supported formats](docs/supported-formats.md)
+- [Troubleshooting](docs/troubleshooting.md)
 
 ## Contributing
 
 1. Create an issue or choose an existing one.
 2. Create a focused branch for the change.
 3. Keep changes small and reviewable.
-4. Run linting and tests before opening a pull request.
+4. Run tests, type checking, and the production build before opening a pull request.
 5. Update documentation when behavior, setup, or architecture changes.
 
 ## License
