@@ -63,6 +63,10 @@
     @apply flex items-center gap-1;
   }
 
+  .ows-layout-controls {
+    @apply flex flex-col gap-2;
+  }
+
   .ows-stack {
     @apply flex flex-col gap-2;
   }
