@@ -49,8 +49,25 @@ npm run typecheck
 - `npm run dev`: start the local Vite server.
 - `npm run build`: create the production build in `docs/`.
 - `npm run preview`: preview the production build locally.
+- `npm run storybook`: start Storybook on port 6006.
+- `npm run build-storybook`: build static Storybook output.
 - `npm test`: run Vitest once.
 - `npm run typecheck`: run TypeScript without emitting files.
+
+## Storybook
+
+Storybook documents the React UI layer in isolation. Start it with:
+
+```bash
+npm run storybook
+```
+
+Initial stories live beside the UI components they document:
+
+- `src/shared/ui/*.stories.tsx`
+- `src/features/ribbon/*.stories.tsx`
+
+Use Storybook for component states, visual review, and UI experiments that do not require the spreadsheet canvas.
 
 ## Contribution Workflow
 

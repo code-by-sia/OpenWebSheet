@@ -71,6 +71,12 @@ Run unit tests:
 npm test
 ```
 
+Run Storybook for isolated UI development:
+
+```sh
+npm run storybook
+```
+
 ## Documentation
 
 Additional documentation is available in the [`docs/`](docs/) directory:

@@ -12,6 +12,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
+      "node",
       "vite/client",
       "vitest/globals"
     ],
@@ -30,6 +31,7 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
+    ".storybook/**/*.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
