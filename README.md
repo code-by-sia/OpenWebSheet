@@ -1,31 +1,17 @@
 # OpenWebSheet
 
-<<<<<<< HEAD
-[<img src=https://github.com/code-by-sia/OpenWebSheet/workflows/CI/badge.svg />](https://github.com/code-by-sia/OpenWebSheet/actions?query=workflow%3ACI)
-=======
-OpenWebSheet is an open-source, web-based spreadsheet application. It runs in the browser, can be installed as a Progressive Web App (PWA), and stores spreadsheet documents in the project’s `.ows` format.
->>>>>>> abec997 (docs: improve README documentation)
+OpenWebSheet is an open-source, web-based spreadsheet application. It runs in the browser, can be installed as a Progressive Web App (PWA), and stores spreadsheet documents in the project's `.ows` format.
 
-[<img src="https://github.com/SiamandMaroufi/OpenWebSheet/workflows/CI/badge.svg" alt="CI status" />](https://github.com/SiamandMaroufi/OpenWebSheet/actions?query=workflow%3ACI)
+[<img src="https://github.com/code-by-sia/OpenWebSheet/workflows/CI/badge.svg" alt="CI status" />](https://github.com/code-by-sia/OpenWebSheet/actions?query=workflow%3ACI)
 
-<<<<<<< HEAD
-<img src="https://code-by-sia.github.io/OpenWebSheet/demo.png" />
-=======
 ## Demo and PWA installation
->>>>>>> abec997 (docs: improve README documentation)
 
-<img src="https://siamandmaroufi.github.io/OpenWebSheet/demo.png" alt="OpenWebSheet demo" />
+<img src="https://code-by-sia.github.io/OpenWebSheet/demo.png" alt="OpenWebSheet demo" />
 
-<<<<<<< HEAD
-1. <a href="https://code-by-sia.github.io/OpenWebSheet/" >Install</a> the PWA application <br />
-2. <a href="https://code-by-sia.github.io/OpenWebSheet/demo/DEMO.ows" download="download" target="_blank" >Download</a>  the `demo.ows` sample  file
-3. click on load *Folder Icon* and load the sample file
-=======
-1. Open the hosted app: <https://siamandmaroufi.github.io/OpenWebSheet/>
+1. Open the hosted app: <https://code-by-sia.github.io/OpenWebSheet/>
 2. Install the PWA using the install icon in the browser address bar.
-3. Download the sample file: <https://siamandmaroufi.github.io/OpenWebSheet/demo/DEMO.ows>
+3. Download the sample file: <https://code-by-sia.github.io/OpenWebSheet/demo/DEMO.ows>
 4. Use the folder/load icon in the app to open the sample `.ows` file.
->>>>>>> abec997 (docs: improve README documentation)
 
 ## Features
 
@@ -103,4 +89,4 @@ Additional documentation is available in the [`docs/`](docs/) directory:
 
 ## License
 
-No license file is currently included in the repository. Add one before publishing or reusing the project in environments that require explicit licensing terms.
+OpenWebSheet is released under the [MIT License](LICENSE).
