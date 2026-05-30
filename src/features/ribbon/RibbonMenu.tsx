@@ -29,7 +29,9 @@ export function RibbonMenu(props: RibbonProps) {
         )),
       ),
       React.createElement(TabsContent, {value: 'home'}, React.createElement(HomeRibbon, props)),
-      React.createElement(TabsContent, {value: 'formulas'}, React.createElement(FormulaRibbon)),
+      React.createElement(TabsContent, {value: 'formulas'}, React.createElement(FormulaRibbon, {
+        onAction: props.onAction,
+      })),
       React.createElement(TabsContent, {value: 'data'}, React.createElement(DataRibbon)),
       React.createElement(TabsContent, {value: 'view'}, React.createElement(ViewRibbon)),
       React.createElement(TabsContent, {value: 'about'}, React.createElement(AboutRibbon)),

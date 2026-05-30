@@ -41,11 +41,18 @@ export default function App() {
     setFileMode(mode);
   };
 
-  const onAction = (action: AppAction) => action.actionName === 'save-ows'
-    ? saveDocument(uiRef.current)
-    : action.actionName === 'load-ows'
-      ? loadDocument(uiRef.current)
-      : uiRef.current && uiRef.current.execCmd(action.actionName, action.args);
+  const onAction = (action: AppAction) => {
+    if (action.actionName === 'save-ows') {
+      return saveDocument(uiRef.current);
+    }
+    if (action.actionName === 'load-ows') {
+      return loadDocument(uiRef.current);
+    }
+    if (action.actionName === 'formula-template') {
+      return setSheetState({...sheetState, value: action.args});
+    }
+    return uiRef.current && uiRef.current.execCmd(action.actionName, action.args);
+  };
 
   return React.createElement('div', {className: 'ows-app'},
     React.createElement(RibbonMenu, {appearance, fileMode, onAction, onModeChanged, state: sheetState}),
