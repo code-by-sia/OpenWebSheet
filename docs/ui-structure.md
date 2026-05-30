@@ -5,9 +5,10 @@ Issue 57 migrates the application shell to React while preserving the spreadshee
 ## React-owned layer
 
 - `src/main.ts` mounts the React application.
-- `src/react/App.tsx` coordinates file actions, local-storage mode, formula editing, and selection state.
-- `src/react/ribbon/` contains the React ribbon composition and small shadcn-style controls.
-- `src/react/styles.css` owns Tailwind component classes through `@apply`.
+- `src/app/` owns the React application shell, app state, global styles, and test setup.
+- `src/features/` groups user-facing feature areas such as the ribbon, formula bar, document I/O, and sheet surface.
+- `src/shared/ui/` contains small shadcn-style primitives shared by features.
+- `src/app/styles.css` owns Tailwind component classes through `@apply`.
 
 ## Framework-agnostic core
 

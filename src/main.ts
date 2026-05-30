@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './react/App';
+import App from './app/App';
 import './registerServiceWorker';
-import './react/styles.css';
+import './app/styles.css';
 
 ReactDOM.render(
   React.createElement(App),

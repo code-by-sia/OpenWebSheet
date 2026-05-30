@@ -1,9 +1,9 @@
 import React from 'react';
 import { Appearance, TextAlign } from '@/lib/core/Appearance';
-import { AppAction } from '../types';
-import { Button } from '../ui/Button';
-import { ControlGroup } from '../ui/ControlGroup';
-import { Field } from '../ui/Field';
+import { AppAction } from '@/app/types';
+import { Button } from '@/shared/ui/Button';
+import { ControlGroup } from '@/shared/ui/ControlGroup';
+import { Field } from '@/shared/ui/Field';
 
 interface FormatControlsProps {
   appearance: Appearance;

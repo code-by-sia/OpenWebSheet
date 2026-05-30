@@ -1,5 +1,5 @@
 import React from 'react';
-import { RibbonProps } from '../types';
+import { RibbonProps } from '@/app/types';
 import { CellControls } from './CellControls';
 import { DocumentControls } from './DocumentControls';
 import { FontControls } from './FontControls';

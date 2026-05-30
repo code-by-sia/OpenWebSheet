@@ -1,5 +1,5 @@
 import React from 'react';
-import { RibbonProps } from '../types';
+import { RibbonProps } from '@/app/types';
 import { AboutRibbon } from './AboutRibbon';
 import { HomeRibbon } from './HomeRibbon';
 import { PlaceholderRibbon } from './PlaceholderRibbon';

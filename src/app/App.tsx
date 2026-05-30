@@ -2,11 +2,11 @@ import React from 'react';
 import { OpenDocument } from '@/lib/core/Document';
 import { Appearance } from '@/lib/core/Appearance';
 import { UI } from '@/lib/UI';
-import { FormulaBar } from './formula/FormulaBar';
-import { RibbonMenu } from './ribbon/RibbonMenu';
-import { SpreadsheetSurface } from './sheet/SpreadsheetSurface';
+import { loadDocument, saveDocument } from '@/features/document-io/documentIO';
+import { FormulaBar } from '@/features/formula/FormulaBar';
+import { RibbonMenu } from '@/features/ribbon/RibbonMenu';
+import { SpreadsheetSurface } from '@/features/sheet/SpreadsheetSurface';
 import { AppAction, SheetState } from './types';
-import { loadDocument, saveDocument } from './documentIO';
 
 const defaultState: SheetState = {isMerged: false, label: 'A1', originalValue: '', value: ''};
 

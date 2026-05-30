@@ -1,5 +1,5 @@
 import React from 'react';
-import { ControlGroup } from '../ui/ControlGroup';
+import { ControlGroup } from '@/shared/ui/ControlGroup';
 
 interface PlaceholderRibbonProps {
   labels: string[];

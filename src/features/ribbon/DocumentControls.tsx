@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from '../ui/Button';
-import { ControlGroup } from '../ui/ControlGroup';
-import { AppAction } from '../types';
+import { AppAction } from '@/app/types';
+import { Button } from '@/shared/ui/Button';
+import { ControlGroup } from '@/shared/ui/ControlGroup';
 
 interface DocumentControlsProps {
   fileMode: 'file' | 'local';
