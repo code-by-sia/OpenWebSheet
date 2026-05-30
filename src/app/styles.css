@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .ows-app {
+    @apply flex flex-col h-screen min-h-screen text-sm text-gray-900 bg-white;
+  }
+
+  .ows-ribbon {
+    @apply flex flex-col border-b border-gray-300 bg-white;
+  }
+
+  .ows-tabs {
+    @apply w-full;
+  }
+
+  .ows-tabs-list {
+    @apply inline-flex h-10 items-center justify-center rounded-md bg-gray-100 p-1 text-gray-500;
+    @apply mx-2 mt-2;
+  }
+
+  .ows-tabs-trigger {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5;
+    @apply text-sm font-medium ring-offset-white transition-all;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .ows-tabs-trigger[data-state='active'] {
+    @apply bg-white text-gray-950 shadow-sm;
+  }
+
+  .ows-tabs-content {
+    @apply mt-2 ring-offset-white;
+  }
+
+  .ows-tabs-content:focus-visible {
+    @apply outline-none ring-2 ring-brand ring-offset-2;
+  }
+
+  .ows-ribbon-panel {
+    @apply flex items-stretch gap-2 h-24 p-2 overflow-x-auto bg-panel;
+  }
+
+  .ows-control-group {
+    @apply flex flex-col min-w-control bg-white border border-gray-300 rounded-sm shadow-sm overflow-hidden;
+  }
+
+  .ows-control-group-wide {
+    @apply flex-1;
+  }
+
+  .ows-control-content {
+    @apply flex flex-1 items-center justify-center px-3 pt-2;
+  }
+
+  .ows-control-label {
+    @apply h-5 leading-5 text-center text-xs font-bold uppercase text-gray-400 bg-gray-50;
+  }
+
+  .ows-button-row {
+    @apply flex items-center gap-1;
+  }
+
+  .ows-stack {
+    @apply flex flex-col gap-2;
+  }
+
+  .ows-button {
+    @apply inline-flex items-center justify-center gap-1 min-w-button h-7 px-2;
+    @apply text-xs border border-gray-300 rounded-sm bg-white text-gray-800;
+  }
+
+  .ows-button-active {
+    @apply bg-gray-300;
+  }
+
+  .ows-field {
+    @apply flex items-center gap-1 text-xs text-gray-500;
+  }
+
+  .ows-field select,
+  .ows-field input {
+    @apply h-7 border border-gray-300 rounded-sm bg-white text-gray-900;
+  }
+
+  .ows-formula-bar {
+    @apply flex items-center border-b border-t border-gray-300 bg-white;
+  }
+
+  .ows-cell-name {
+    @apply w-20 h-8 text-center border-0 text-xs text-gray-600;
+  }
+
+  .ows-formula-actions {
+    @apply flex items-center gap-2 h-8 px-3 border-l border-gray-300 text-gray-500;
+  }
+
+  .ows-formula-actions button {
+    @apply text-xs text-gray-500;
+  }
+
+  .ows-formula-active .ows-formula-actions button:first-child {
+    @apply text-red-700;
+  }
+
+  .ows-formula-active .ows-formula-actions button:nth-child(2) {
+    @apply text-green-700;
+  }
+
+  .ows-formula-input {
+    @apply flex-1 h-7 mx-1 border-l border-gray-300 px-2 outline-none;
+  }
+
+  .ows-sheet-surface {
+    @apply flex-1 relative min-h-0;
+  }
+
+  .ows-status-bar {
+    @apply h-6 px-3 leading-6 text-xs border-t border-gray-300 bg-gray-50 text-gray-500;
+  }
+
+  .ows-muted {
+    @apply text-xs uppercase text-gray-400;
+  }
+
+  .ows-about {
+    @apply flex flex-col gap-1 text-xs;
+  }
+
+  .ows-large-icon {
+    @apply text-3xl text-brand;
+  }
+
+  .ows-border-grid {
+    @apply grid grid-cols-5 gap-1 w-40;
+  }
+
+  .ows-border-tile {
+    @apply grid grid-cols-2 w-7 h-7 p-1 border border-gray-200 rounded-sm bg-white;
+  }
+
+  .ows-border-tile:hover {
+    @apply border-gray-900;
+  }
+
+  .ows-border-tile span {
+    @apply block border border-dotted border-gray-800;
+  }
+
+  .ows-border-tile span:nth-child(2),
+  .ows-border-tile span:nth-child(4) {
+    border-left: 0 !important;
+  }
+
+  .ows-border-tile span:nth-child(3),
+  .ows-border-tile span:nth-child(4) {
+    border-top: 0 !important;
+  }
+
+  .ows-border-all span:nth-child(1),
+  .ows-border-all span:nth-child(2),
+  .ows-border-outside span:nth-child(1),
+  .ows-border-outside span:nth-child(2),
+  .ows-border-top span:nth-child(1),
+  .ows-border-top span:nth-child(2) {
+    @apply border-t-2 border-t-gray-900;
+  }
+
+  .ows-border-all span:nth-child(3),
+  .ows-border-all span:nth-child(4),
+  .ows-border-outside span:nth-child(3),
+  .ows-border-outside span:nth-child(4),
+  .ows-border-bottom span:nth-child(3),
+  .ows-border-bottom span:nth-child(4) {
+    @apply border-b-2 border-b-gray-900;
+  }
+
+  .ows-border-all span:nth-child(1),
+  .ows-border-all span:nth-child(3),
+  .ows-border-outside span:nth-child(1),
+  .ows-border-outside span:nth-child(3),
+  .ows-border-left span:nth-child(1),
+  .ows-border-left span:nth-child(3) {
+    @apply border-l-2 border-l-gray-900;
+  }
+
+  .ows-border-all span:nth-child(2),
+  .ows-border-all span:nth-child(4),
+  .ows-border-outside span:nth-child(2),
+  .ows-border-outside span:nth-child(4),
+  .ows-border-right span:nth-child(2),
+  .ows-border-right span:nth-child(4) {
+    @apply border-r-2 border-r-gray-900;
+  }
+
+  .ows-border-all span:nth-child(1),
+  .ows-border-all span:nth-child(3),
+  .ows-border-inside span:nth-child(1),
+  .ows-border-inside span:nth-child(3),
+  .ows-border-vertical span:nth-child(1),
+  .ows-border-vertical span:nth-child(3) {
+    border-right-width: 2px !important;
+  }
+
+  .ows-border-all span:nth-child(1),
+  .ows-border-all span:nth-child(2),
+  .ows-border-horizontal span:nth-child(1),
+  .ows-border-horizontal span:nth-child(2),
+  .ows-border-inside span:nth-child(1),
+  .ows-border-inside span:nth-child(2) {
+    border-bottom-width: 2px !important;
+  }
+}

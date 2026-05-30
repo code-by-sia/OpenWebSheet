@@ -1,9 +1,11 @@
-import Vue from 'vue';
-import App from './App.vue';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './app/App';
 import './registerServiceWorker';
+import './app/styles.css';
 
-Vue.config.productionTip = false;
+const app = document.getElementById('app');
 
-new Vue({
-  render: (h) => h(App),
-}).$mount('#app');
+if (app) {
+  createRoot(app).render(React.createElement(App));
+}

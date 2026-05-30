@@ -4,7 +4,7 @@
 
 ```bash
 npm install
-npm run serve
+npm run dev
 ```
 
 ## Build
@@ -16,13 +16,13 @@ npm run build
 ## Testing
 
 ```bash
-npm run test:unit
+npm test
 ```
 
-## Linting
+## Type Checking
 
 ```bash
-npm run lint
+npm run typecheck
 ```
 
 ## Contribution Workflow
@@ -30,5 +30,5 @@ npm run lint
 1. Create an issue.
 2. Create a branch.
 3. Implement changes.
-4. Run tests and linting.
+4. Run tests and type checking.
 5. Open a pull request.
