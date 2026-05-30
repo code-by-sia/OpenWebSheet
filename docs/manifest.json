@@ -1,28 +1,49 @@
 {
-    "name": "Open Sheet",
+    "name": "OpenWebSheet",
     "short_name": "OpenWebSheet",
     "theme_color": "#00454d",
-    "background_color": "white",
+    "background_color": "#ffffff",
     "display": "standalone",
-    "Scope": "/OpenWebSheet/",
+    "scope": "/OpenWebSheet/",
     "start_url": "/OpenWebSheet/",
     "author": "Siamand (Cyaxares)",
     "description": "Open source spreadsheet",
     "icons": [
         {
+            "src": "img/icons/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
             "src": "img/icons/64x64.png",
             "sizes": "64x64",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
             "src": "img/icons/128x128.png",
             "sizes": "128x128",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "img/icons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
             "src": "img/icons/256x256.png",
             "sizes": "256x256",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "img/icons/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
         }
     ],
     "splash_pages": null
