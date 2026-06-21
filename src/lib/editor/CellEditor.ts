@@ -61,6 +61,12 @@ export class CellEditor {
 
   public initialize() {
     this.editorArea = document.createElement('div');
+    // The overlay math below assumes content-box sizing (the 2px selection border and
+    // the editor input border sit *outside* the declared width/height). A global
+    // `box-sizing: border-box` reset (such as Tailwind's preflight) would otherwise
+    // shrink the green selection box and the editor, so each element opts back into
+    // content-box explicitly.
+    this.editorArea.style.boxSizing = 'content-box';
     this.editorArea.style.position = 'absolute';
     this.editorArea.style.top = ColumnHeaderHeight + 'px';
     this.editorArea.style.left = RowHeaderWidth + 'px';
@@ -70,6 +76,7 @@ export class CellEditor {
     this.controler.renderer.Element.appendChild(this.editorArea);
 
     this.selectionElement = document.createElement('div');
+    this.selectionElement.style.boxSizing = 'content-box';
     this.selectionElement.style.position = 'absolute';
     this.selectionElement.style.border = `solid 2px ${COLOR_1}`;
     this.selectionElement.style.overflow = 'hidden';
@@ -79,6 +86,7 @@ export class CellEditor {
 
     this.editorElement = document.createElement('input');
     this.editorElement.type = 'text';
+    this.editorElement.style.boxSizing = 'content-box';
     this.editorElement.style.display = 'block';
     this.editorElement.style.zIndex = '10000';
     this.editorElement.style.position = 'absolute';
@@ -99,6 +107,7 @@ export class CellEditor {
     this.selectionElement.appendChild(this.editorElement);
 
     this.anchorElement = document.createElement('span');
+    this.anchorElement.style.boxSizing = 'content-box';
     this.anchorElement.style.position = 'absolute';
     this.anchorElement.style.right = '0';
     this.anchorElement.style.bottom = '0';

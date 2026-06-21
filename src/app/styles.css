@@ -114,6 +114,31 @@
     @apply h-7 border border-gray-300 rounded-sm bg-white text-gray-900;
   }
 
+  /* Compact color swatch instead of the bulky native color input. */
+  .ows-field input[type='color'] {
+    @apply h-6 w-8 p-0 rounded cursor-pointer shadow-sm;
+    border: 1px solid #c4c4c4;
+    background: transparent;
+  }
+
+  .ows-field input[type='color']:hover {
+    border-color: #00454d;
+  }
+
+  .ows-field input[type='color']::-webkit-color-swatch-wrapper {
+    padding: 2px;
+  }
+
+  .ows-field input[type='color']::-webkit-color-swatch {
+    @apply rounded-sm;
+    border: none;
+  }
+
+  .ows-field input[type='color']::-moz-color-swatch {
+    @apply rounded-sm;
+    border: none;
+  }
+
   .ows-formula-bar {
     @apply flex items-center border-b border-t border-gray-300 bg-white;
   }
