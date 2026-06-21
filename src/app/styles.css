@@ -9,44 +9,47 @@
   }
 
   .ows-ribbon {
-    @apply flex flex-col border-b border-gray-200 bg-white shadow-sm;
+    @apply flex flex-col border-b border-gray-300 bg-white;
   }
 
   .ows-tabs {
-    @apply w-full bg-white;
+    @apply w-full;
   }
 
   .ows-tabs-list {
-    @apply inline-flex min-h-10 items-center justify-start rounded-lg bg-gray-100 p-1 text-gray-500;
-    @apply mx-3 mt-3 max-w-[calc(100%-1.5rem)] overflow-x-auto;
+    @apply flex min-h-0 items-end justify-start gap-1.5 overflow-x-auto bg-brand px-5 pt-1.5;
   }
 
   .ows-tabs-trigger {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5;
-    @apply text-sm font-medium ring-offset-white transition-colors;
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2;
-    @apply disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-t px-3.5 py-1.5;
+    @apply text-sm font-bold text-white/90 transition-colors;
+    @apply hover:text-white focus-visible:outline-none;
   }
 
   .ows-tabs-trigger[data-state='active'] {
-    @apply bg-white text-gray-950 shadow-sm;
+    @apply bg-white text-brand;
   }
 
   .ows-tabs-content {
-    @apply mt-3 ring-offset-white;
+    @apply ring-offset-white;
   }
 
   .ows-tabs-content:focus-visible {
-    @apply outline-none ring-2 ring-brand ring-offset-2;
+    @apply outline-none;
   }
 
   .ows-ribbon-panel {
-    @apply flex items-stretch gap-3 min-h-28 p-3 pt-0 overflow-x-auto bg-white;
+    @apply flex items-stretch gap-2 min-h-28 p-2.5 overflow-x-auto;
+    background: linear-gradient(to top, #ece9e6, #ffffff);
     scrollbar-width: thin;
   }
 
   .ows-control-group {
-    @apply flex flex-col min-w-control rounded-lg border border-gray-200 bg-white shadow-sm;
+    @apply flex flex-col min-w-control overflow-hidden bg-white;
+    border-top: 1px solid #ccc;
+    border-left: 1px dotted #ccc;
+    border-radius: 3px;
+    box-shadow: 2px 2px 1px #cfcfcf;
   }
 
   .ows-control-group-wide {
@@ -54,11 +57,17 @@
   }
 
   .ows-control-content {
-    @apply flex flex-1 items-center justify-center px-3 pb-3;
+    @apply flex flex-1 flex-col items-center justify-center gap-2 px-3 py-2;
   }
 
   .ows-control-label {
-    @apply px-3 py-2 text-xs font-medium text-gray-500;
+    @apply text-center uppercase tracking-wide;
+    font-size: 10px;
+    line-height: 20px;
+    font-weight: bold;
+    color: #aaa;
+    text-shadow: 1px 1px 0 #fff;
+    background: linear-gradient(to top, #ece9e6, #ffffff);
   }
 
   .ows-button-row {
@@ -74,13 +83,26 @@
   }
 
   .ows-button {
-    @apply inline-flex items-center justify-center gap-1 min-w-button h-8 px-2.5;
-    @apply text-xs font-medium border border-gray-200 rounded-md bg-white text-gray-700 shadow-sm;
-    @apply hover:bg-gray-50 hover:text-gray-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand;
+    @apply inline-flex items-center justify-center gap-1 min-w-button h-7 px-2.5;
+    @apply text-xs font-medium rounded-sm text-gray-700;
+    border: 1px solid #ccc;
+    background: linear-gradient(to top, #ece9e6, #ffffff);
+    @apply focus-visible:outline-none;
+  }
+
+  .ows-button:hover {
+    @apply text-gray-900;
+    background: linear-gradient(to top, #dddddd, #ffffff);
   }
 
   .ows-button-active {
-    @apply border-gray-900 bg-gray-900 text-white hover:bg-gray-800 hover:text-white;
+    @apply text-gray-900;
+    border-color: #aaa;
+    background: linear-gradient(to top, #cccccc, #efefef);
+  }
+
+  .ows-button-active:hover {
+    background: linear-gradient(to top, #bcbcbc, #e6e6e6);
   }
 
   .ows-field {
@@ -129,7 +151,10 @@
   }
 
   .ows-status-bar {
-    @apply h-6 px-3 leading-6 text-xs border-t border-gray-300 bg-gray-50 text-gray-500;
+    @apply px-3 text-xs border-t border-gray-300 text-gray-500;
+    height: 28px;
+    line-height: 28px;
+    background: #ececec;
   }
 
   .ows-muted {
@@ -234,7 +259,7 @@
     }
 
     .ows-tabs-list {
-      @apply mx-2 mt-2 w-[calc(100%-1rem)];
+      @apply gap-1 px-2 w-full;
     }
 
     .ows-tabs-trigger {
