@@ -21,13 +21,14 @@
   }
 
   .ows-tabs-trigger {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-t px-3.5 py-1.5;
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-t-2xl px-4 py-1.5;
     @apply text-sm font-bold text-white/90 transition-colors;
-    @apply hover:text-white focus-visible:outline-none;
+    @apply hover:bg-white/10 hover:text-white focus-visible:outline-none;
   }
 
   .ows-tabs-trigger[data-state='active'] {
     @apply bg-white text-brand;
+    @apply hover:bg-white;
   }
 
   .ows-tabs-content {
