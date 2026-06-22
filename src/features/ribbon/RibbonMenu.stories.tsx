@@ -24,3 +24,13 @@ export const Default: Story = {
     state: {isMerged: false, label: 'A1', originalValue: '', value: ''},
   }),
 };
+
+export const LocalMergedCell: Story = {
+  render: () => React.createElement(RibbonMenu, {
+    appearance: new Appearance(),
+    fileMode: 'local',
+    onAction: () => undefined,
+    onModeChanged: () => undefined,
+    state: {isMerged: true, label: 'D4', originalValue: 'Merged', value: 'Merged'},
+  }),
+};

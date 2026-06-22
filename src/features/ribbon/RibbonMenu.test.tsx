@@ -4,12 +4,12 @@ import { Appearance } from '@/lib/core/Appearance';
 import { RibbonMenu } from './RibbonMenu';
 
 describe('RibbonMenu', () => {
-  function renderRibbon(onAction = vi.fn()) {
+  function renderRibbon(onAction = jest.fn()) {
     render(React.createElement(RibbonMenu, {
       appearance: new Appearance(),
       fileMode: 'file',
       onAction,
-      onModeChanged: vi.fn(),
+      onModeChanged: jest.fn(),
       state: {isMerged: false, label: 'A1', originalValue: '', value: ''},
     }));
 

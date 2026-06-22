@@ -4,9 +4,9 @@ import { FormulaBar } from './FormulaBar';
 
 describe('FormulaBar', () => {
   it('emits value changes and commit actions', () => {
-    const onAbort = vi.fn();
-    const onCommit = vi.fn();
-    const onValueChange = vi.fn();
+    const onAbort = jest.fn();
+    const onCommit = jest.fn();
+    const onValueChange = jest.fn();
 
     render(React.createElement(FormulaBar, {
       label: 'A1',
@@ -24,5 +24,25 @@ describe('FormulaBar', () => {
     expect(onValueChange).toHaveBeenCalledWith('=A1');
     expect(onCommit).toHaveBeenCalled();
     expect(onAbort).not.toHaveBeenCalled();
+  });
+
+  it('emits abort actions and marks the bar active while editing', () => {
+    const onAbort = jest.fn();
+
+    render(React.createElement(FormulaBar, {
+      label: 'B2',
+      onAbort,
+      onCommit: jest.fn(),
+      onValueChange: jest.fn(),
+      value: '42',
+    }));
+
+    const formulaInput = screen.getByDisplayValue('42');
+    fireEvent.focus(formulaInput);
+    expect(formulaInput.closest('.ows-formula-bar')).toHaveClass('ows-formula-active');
+
+    fireEvent.click(screen.getByTitle('Cancel'));
+
+    expect(onAbort).toHaveBeenCalledTimes(1);
   });
 });
