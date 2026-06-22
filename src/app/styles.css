@@ -17,18 +17,41 @@
   }
 
   .ows-tabs-list {
-    @apply flex min-h-0 items-end justify-start gap-1.5 overflow-x-auto bg-brand px-5 pt-1.5;
+    @apply flex min-h-0 items-end justify-start gap-0 overflow-x-auto bg-brand px-4 pt-1.5;
   }
 
   .ows-tabs-trigger {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-t-2xl px-4 py-1.5;
+    @apply relative inline-flex items-center justify-center whitespace-nowrap px-5 py-1.5;
     @apply text-sm font-bold text-white/90 transition-colors;
-    @apply hover:bg-white/10 hover:text-white focus-visible:outline-none;
+    @apply hover:text-white focus-visible:outline-none;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
   }
 
   .ows-tabs-trigger[data-state='active'] {
     @apply bg-white text-brand;
-    @apply hover:bg-white;
+    z-index: 1;
+  }
+
+  /* S-curve "ears": the active tab flares outward at the bottom, sweeping into
+     the teal bar like a classic browser/Excel ribbon tab. */
+  .ows-tabs-trigger[data-state='active']::before,
+  .ows-tabs-trigger[data-state='active']::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 9px;
+    height: 9px;
+  }
+
+  .ows-tabs-trigger[data-state='active']::before {
+    left: -9px;
+    background: radial-gradient(circle at top left, transparent 9px, #fff 9.5px);
+  }
+
+  .ows-tabs-trigger[data-state='active']::after {
+    right: -9px;
+    background: radial-gradient(circle at top right, transparent 9px, #fff 9.5px);
   }
 
   .ows-tabs-content {
